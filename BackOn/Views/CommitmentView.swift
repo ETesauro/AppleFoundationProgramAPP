@@ -60,9 +60,14 @@ struct CommitmentView: View {
                 VStack{
                     Avatar(image: commitment.userInfo.photo, size: 60)
                     Spacer()
-                    Text(self.commitment.userInfo.identity).font(.title).foregroundColor(Color(.systemGroupedBackground))
+                    
+                    Text(self.commitment.userInfo.identity)
+                    .font(.title)
+                    .foregroundColor(Color(.systemGroupedBackground))
                     Spacer()
-                    Text(self.commitment.title).foregroundColor(Color(.systemGroupedBackground))
+                    
+                    Text(self.commitment.title).foregroundColor(Color(
+                    .systemGroupedBackground))
                 }.offset(x: 0, y: -30)
             }
         }

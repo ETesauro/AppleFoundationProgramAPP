@@ -22,7 +22,8 @@ struct CommitmentDetailedView: View {
                         .frame(height: 515)
                     ZStack{
                         Image(systemName: "circle.fill")
-                            .font(.title).foregroundColor(Color(.systemGroupedBackground))
+                        .font(.title)
+                        .foregroundColor(Color(.systemGroupedBackground))
                         Button(action: {
                             self.shared.viewToShow = "HomeView"
                             }){
@@ -30,7 +31,8 @@ struct CommitmentDetailedView: View {
                                     .font(.largeTitle)
                                     .foregroundColor(Color(#colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.8, alpha: 1)))
                             }
-                        }.offset(x:173, y:-265)
+                        }
+                    .offset(x:173, y:-265)
                 }
                 HStack {
                     Spacer()
