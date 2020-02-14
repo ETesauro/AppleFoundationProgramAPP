@@ -18,6 +18,8 @@ struct ContentView: View {
                 HomeView()
 //                    .transition(.move(edge: .bottom))
 //                    .animation(.spring())
+            } else if shared.viewToShow == "LoginPageView"{
+                LoginPageView()
             } else if shared.viewToShow == "CommitmentDetailedView"{
                 CommitmentDetailedView()
 //                    .transition(.move(edge: .bottom))

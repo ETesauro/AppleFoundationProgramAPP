@@ -13,7 +13,7 @@ import MapKit
 class Shared: ObservableObject {
     @Published var activeView = "HomeView"
     @Published var authentication = false
-    @Published var viewToShow = "HomeView"
+    @Published var viewToShow = "LoginPageView"
     @Published var eta = 0.0
     @Published var locationManager = LocationManager()
     @Published var selectedCommitment = Commitment()
