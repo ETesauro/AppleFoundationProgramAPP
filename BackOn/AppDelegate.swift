@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         shared.viewToShow = "HomeView"
         
         print("*** User signed into Google ***\n")
-        
+        print("User ID: \(userId!)")
         print("Full name: \(fullName!)")
         print("Name: \(givenName!)")
         print("Cognome: \(familyName!)")
