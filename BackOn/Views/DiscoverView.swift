@@ -68,8 +68,8 @@ struct DiscoverRow_Previews: PreviewProvider {
 let me = UserInfo(photo: "tim", name: "Tim", surname: "Cook")
 
 let discoverData = [
-    Commitment(userInfo: me, title: "Titolo1", descr: "Descrizione di prova", date: Date(), position: CLLocation(latitude: 41.5, longitude: 44.3)),
-    Commitment(userInfo: me, title: "Titolo2", descr: "Descrizione di prova", date: Date(), position: CLLocation(latitude: 41.5, longitude: 44.3)),
-    Commitment(userInfo: me, title: "Titolo3", descr: "Descrizione di prova", date: Date(), position: CLLocation(latitude: 41.5, longitude: 44.3)),
-    Commitment(userInfo: me, title: "Titolo4", descr: "Descrizione di prova", date: Date(), position: CLLocation(latitude: 41.5, longitude: 44.3))
+    Commitment(userInfo: me, title: "Titolo1", descr: "Descrizione di prova", date: Date(), position: CLLocation(latitude: 40.675293, longitude: 14.772105)),
+    Commitment(userInfo: me, title: "Titolo2", descr: "Descrizione di prova", date: Date(), position: CLLocation(latitude: 40.675293, longitude: 14.772105)),
+    Commitment(userInfo: me, title: "Titolo3", descr: "Descrizione di prova", date: Date(), position: CLLocation(latitude: 40.675293, longitude: 14.772105)),
+    Commitment(userInfo: me, title: "Titolo4", descr: "Descrizione di prova", date: Date(), position: CLLocation(latitude: 40.675293, longitude: 14.772105))
 ]

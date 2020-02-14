@@ -42,6 +42,7 @@ struct MapView: UIViewRepresentable {
                 return nil
             }
             view.canShowCallout = true
+            view.displayPriority = .required
             return view
         }
         

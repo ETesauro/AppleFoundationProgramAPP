@@ -23,7 +23,7 @@ class Commitment {
         self.descr = "Default description"
         self.date = Date()
         ID = UUID()
-        position = CLLocation(latitude: 41.5, longitude: 44.3)
+        position = CLLocation(latitude: 40.675293, longitude: 14.772105)
     }
     
     init(userInfo: UserInfo, title: String, descr: String, date: Date, position: CLLocation) {
@@ -41,7 +41,7 @@ class Commitment {
         self.descr = descr
         self.date = date
         self.ID = ID
-        position = CLLocation(latitude: 41.5, longitude: 44.3)
+        position = CLLocation(latitude: 40.675293, longitude: 14.772105)
     }
 }
 
@@ -65,10 +65,10 @@ class Commitment {
 let sonoIo = UserInfo(photo: "tim", name: "Giancarlo", surname: "Sorrentino")
 
 let commitmentData = [
-    Commitment(userInfo: sonoIo, title: "Transporting groceries", descr: "It's about a simple transport of some groceries to my place, sadly there is no elevator in my building.\nThanks so much in advance!", date: Date(), position: CLLocation(latitude: 41.5, longitude: 44.3)),
-    Commitment(userInfo: sonoIo, title: "Titolo2", descr: "Descrizione di prova", date: Date(), position: CLLocation(latitude: 41.5, longitude: 44.3)),
-    Commitment(userInfo: sonoIo, title: "Titolo3", descr: "Descrizione di prova", date: Date(), position: CLLocation(latitude: 41.5, longitude: 44.3)),
-    Commitment(userInfo: sonoIo, title: "Titolo4", descr: "Descrizione di prova", date: Date(), position: CLLocation(latitude: 41.5, longitude: 44.3))
+    Commitment(userInfo: sonoIo, title: "Transporting groceries", descr: "It's about a simple transport of some groceries to my place, sadly there is no elevator in my building.\nThanks so much in advance!", date: Date(), position: CLLocation(latitude: 40.675293, longitude: 14.772105)),
+    Commitment(userInfo: sonoIo, title: "Titolo2", descr: "Descrizione di prova", date: Date(), position: CLLocation(latitude: 40.675293, longitude: 14.772105)),
+    Commitment(userInfo: sonoIo, title: "Titolo3", descr: "Descrizione di prova", date: Date(), position: CLLocation(latitude: 40.675293, longitude: 14.772105)),
+    Commitment(userInfo: sonoIo, title: "Titolo4", descr: "Descrizione di prova", date: Date(), position: CLLocation(latitude: 40.675293, longitude: 14.772105))
 ]
 
 let uuid1 = UUID()
