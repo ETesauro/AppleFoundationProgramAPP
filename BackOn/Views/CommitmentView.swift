@@ -47,21 +47,24 @@ struct CommitmentView: View {
                 .frame(height: 250)
             Button(action: {
                 withAnimation {
-                    let coordinate = CLLocationCoordinate2D(latitude: 60.5, longitude: 15.5)
                     let annotation = MKPointAnnotation()
                     annotation.title = "Nome"
                     annotation.subtitle = "Descrizione"
-                    annotation.coordinate = coordinate
+                    annotation.coordinate = self.commitment.position.coordinate
                     self.shared.getETA(annotation: annotation)
                     self.shared.selectedCommitment = self.commitment
                     self.shared.viewToShow = "CommitmentDetailedView"
 //                    CommitmentDetailedView.show(self.shared)
                 }
             }) {
-                Avatar(image: commitment.userInfo.photo, size: 60)
-                Text(commitment.ID.uuidString)
-            }.offset(x: 0, y: -30)
-            Spacer()
+                VStack{
+                    Avatar(image: commitment.userInfo.photo, size: 60)
+                    Spacer()
+                    Text(self.commitment.userInfo.identity).font(.title).foregroundColor(Color(.systemGroupedBackground))
+                    Spacer()
+                    Text(self.commitment.title).foregroundColor(Color(.systemGroupedBackground))
+                }.offset(x: 0, y: -30)
+            }
         }
         .frame(width: CGFloat(320), height: CGFloat(400))
         .background(Color.primary)

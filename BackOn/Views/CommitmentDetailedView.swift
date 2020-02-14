@@ -15,10 +15,23 @@ struct CommitmentDetailedView: View {
     var body: some View {
         VStack {
             VStack {
-                MapView(detailed: true, key: shared.selectedCommitment.ID)
-                    .statusBar(hidden: true)
-                    .edgesIgnoringSafeArea(.top)
-                    .frame(height: 500)
+                ZStack{
+                    MapView(detailed: true, key: shared.selectedCommitment.ID)
+                        .statusBar(hidden: true)
+                        .edgesIgnoringSafeArea(.top)
+                        .frame(height: 515)
+                    ZStack{
+                        Image(systemName: "circle.fill")
+                            .font(.title).foregroundColor(Color(.systemGroupedBackground))
+                        Button(action: {
+                            self.shared.viewToShow = "HomeView"
+                            }){
+                                Image(systemName: "xmark.circle.fill")
+                                    .font(.largeTitle)
+                                    .foregroundColor(Color(#colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.8, alpha: 1)))
+                            }
+                        }.offset(x:173, y:-265)
+                }
                 HStack {
                     Spacer()
                     Button(action: {
