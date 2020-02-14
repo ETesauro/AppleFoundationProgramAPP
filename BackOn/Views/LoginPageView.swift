@@ -20,7 +20,7 @@ struct LoginPageView: View {
                 HStack() {
                     Spacer()
                 }
-              Text("BackOn")
+              Text("BackOon")
                 .fontWeight(.bold).foregroundColor(.white)
                 .font(.title)
               .padding([.top, .bottom], 40)
