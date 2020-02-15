@@ -22,7 +22,6 @@
 		2F57602723F6B467001D97F6 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57601C23F6B467001D97F6 /* UserInfo.swift */; };
 		2F57602823F6B467001D97F6 /* UserPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57601D23F6B467001D97F6 /* UserPreview.swift */; };
 		2F57602923F6B467001D97F6 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57601E23F6B467001D97F6 /* Avatar.swift */; };
-		2F57602A23F6B467001D97F6 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57602023F6B467001D97F6 /* CustomView.swift */; };
 		2F57602C23F6B467001D97F6 /* CommitmentDetailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57602223F6B467001D97F6 /* CommitmentDetailedView.swift */; };
 		2F57602D23F6B467001D97F6 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57602323F6B467001D97F6 /* MapView.swift */; };
 		2F57602E23F6B467001D97F6 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57602423F6B467001D97F6 /* HomeView.swift */; };
@@ -54,7 +53,6 @@
 		2F57601C23F6B467001D97F6 /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		2F57601D23F6B467001D97F6 /* UserPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPreview.swift; sourceTree = "<group>"; };
 		2F57601E23F6B467001D97F6 /* Avatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
-		2F57602023F6B467001D97F6 /* CustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		2F57602223F6B467001D97F6 /* CommitmentDetailedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommitmentDetailedView.swift; sourceTree = "<group>"; };
 		2F57602323F6B467001D97F6 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		2F57602423F6B467001D97F6 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -163,7 +161,6 @@
 				14817F8423F82BB00051A89A /* AddNeedView.swift */,
 				14817F8523F82BB00051A89A /* NeederView.swift */,
 				2F575FFD23F686F7001D97F6 /* LoginPageView.swift */,
-				2F57602023F6B467001D97F6 /* CustomView.swift */,
 				2F57602223F6B467001D97F6 /* CommitmentDetailedView.swift */,
 				2F57602323F6B467001D97F6 /* MapView.swift */,
 				2F57602423F6B467001D97F6 /* HomeView.swift */,
@@ -347,7 +344,6 @@
 				2F57603023F6B467001D97F6 /* CommitmentView.swift in Sources */,
 				2F57602D23F6B467001D97F6 /* MapView.swift in Sources */,
 				2F57602823F6B467001D97F6 /* UserPreview.swift in Sources */,
-				2F57602A23F6B467001D97F6 /* CustomView.swift in Sources */,
 				2F575FFE23F686F7001D97F6 /* LoginPageView.swift in Sources */,
 				2F57601723F6A9A2001D97F6 /* SharedResources.swift in Sources */,
 				2F57602923F6B467001D97F6 /* Avatar.swift in Sources */,
