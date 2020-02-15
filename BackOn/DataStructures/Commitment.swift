@@ -87,3 +87,39 @@ let commitmentDict: [UUID:Commitment] = [
     uuid3: Commitment(userInfo: sonoIo, title: "Transporting groceries3", descr: "3", date: Date(), ID: uuid3),
     uuid4: Commitment(userInfo: sonoIo, title: "Transporting groceries4", descr: "4", date: Date(), ID: uuid4)
 ]
+
+
+ //  Questo metodo da un array di commitment restituisce il più imminente assumendo che:
+ //  l'array HA SOLO commitment futuri (non ancora implementata tale selezione) e NON è VUOTO
+ func getNextCommitment(data: [Commitment]) -> Commitment {
+     var toReturn = data[0]
+     for c in data {
+         if toReturn.date.compare(c.date) == ComparisonResult.orderedDescending {
+             toReturn = c
+         }
+     }
+     return toReturn
+ }
+ 
+ func getNextFive(dataDictionary: [UUID: Commitment]) -> [Commitment]{
+     let data = Array(dataDictionary.values)
+     var toReturn: [Commitment] = [data[0]]
+//   Mi serve a sapere se non ho ancora inserito i primi 5 elementi ordinatamente
+     var last = 0
+
+     for i in 1...data.count {
+         for j in stride(from: last < 5 ? last : 4, through: 0, by: -1) {
+             if toReturn[j].date.compare(data[i].date) == ComparisonResult.orderedDescending{
+                 let toShift = toReturn[j]
+                 toReturn[j] = data[i]
+                 toReturn[j + 1] = toShift
+             } else {
+                 if last < 5 {
+                    toReturn[last + 1] = data[i]
+                 }
+             }
+             last += 1
+         }
+     }
+     return toReturn
+ }

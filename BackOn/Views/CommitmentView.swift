@@ -53,8 +53,7 @@ struct CommitmentView: View {
                     annotation.coordinate = self.commitment.position.coordinate
                     self.shared.getETA(annotation: annotation)
                     self.shared.selectedCommitment = self.commitment
-                    self.shared.viewToShow = "CommitmentDetailedView"
-//                    CommitmentDetailedView.show(self.shared)
+                    CommitmentDetailedView.show(self.shared)
                 }
             }) {
                 VStack{

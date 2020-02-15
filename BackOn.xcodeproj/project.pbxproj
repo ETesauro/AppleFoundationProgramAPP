@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14817F8623F82BB00051A89A /* AddNeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14817F8423F82BB00051A89A /* AddNeedView.swift */; };
+		14817F8723F82BB00051A89A /* NeederView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14817F8523F82BB00051A89A /* NeederView.swift */; };
 		2F575FF723F686F7001D97F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F575FF623F686F7001D97F6 /* AppDelegate.swift */; };
 		2F575FF923F686F7001D97F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F575FF823F686F7001D97F6 /* SceneDelegate.swift */; };
 		2F575FFC23F686F7001D97F6 /* BackOn.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2F575FFA23F686F7001D97F6 /* BackOn.xcdatamodeld */; };
@@ -15,7 +17,6 @@
 		2F57600323F686F8001D97F6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F57600223F686F8001D97F6 /* Preview Assets.xcassets */; };
 		2F57600623F686F8001D97F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F57600423F686F8001D97F6 /* LaunchScreen.storyboard */; };
 		2F57600E23F687F4001D97F6 /* credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2F57600D23F687F4001D97F6 /* credentials.plist */; };
-		2F57601123F68FEB001D97F6 /* SecondPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57601023F68FEB001D97F6 /* SecondPageView.swift */; };
 		2F57601723F6A9A2001D97F6 /* SharedResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57601623F6A9A2001D97F6 /* SharedResources.swift */; };
 		2F57601A23F6B42D001D97F6 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57601923F6B42D001D97F6 /* LocationManager.swift */; };
 		2F57602723F6B467001D97F6 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57601C23F6B467001D97F6 /* UserInfo.swift */; };
@@ -36,6 +37,8 @@
 
 /* Begin PBXFileReference section */
 		01877A788D3892A7C4FC0E62 /* Pods-BackOn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BackOn.debug.xcconfig"; path = "Target Support Files/Pods-BackOn/Pods-BackOn.debug.xcconfig"; sourceTree = "<group>"; };
+		14817F8423F82BB00051A89A /* AddNeedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNeedView.swift; sourceTree = "<group>"; };
+		14817F8523F82BB00051A89A /* NeederView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeederView.swift; sourceTree = "<group>"; };
 		2F575FF323F686F7001D97F6 /* BackOn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BackOn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F575FF623F686F7001D97F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F575FF823F686F7001D97F6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -46,7 +49,6 @@
 		2F57600523F686F8001D97F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2F57600723F686F8001D97F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F57600D23F687F4001D97F6 /* credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = credentials.plist; sourceTree = "<group>"; };
-		2F57601023F68FEB001D97F6 /* SecondPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondPageView.swift; sourceTree = "<group>"; };
 		2F57601623F6A9A2001D97F6 /* SharedResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedResources.swift; sourceTree = "<group>"; };
 		2F57601923F6B42D001D97F6 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		2F57601C23F6B467001D97F6 /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
@@ -158,8 +160,9 @@
 		2F57601F23F6B467001D97F6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				14817F8423F82BB00051A89A /* AddNeedView.swift */,
+				14817F8523F82BB00051A89A /* NeederView.swift */,
 				2F575FFD23F686F7001D97F6 /* LoginPageView.swift */,
-				2F57601023F68FEB001D97F6 /* SecondPageView.swift */,
 				2F57602023F6B467001D97F6 /* CustomView.swift */,
 				2F57602223F6B467001D97F6 /* CommitmentDetailedView.swift */,
 				2F57602323F6B467001D97F6 /* MapView.swift */,
@@ -331,9 +334,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F57602C23F6B467001D97F6 /* CommitmentDetailedView.swift in Sources */,
-				2F57601123F68FEB001D97F6 /* SecondPageView.swift in Sources */,
 				2F575FF723F686F7001D97F6 /* AppDelegate.swift in Sources */,
+				14817F8723F82BB00051A89A /* NeederView.swift in Sources */,
 				2F57602E23F6B467001D97F6 /* HomeView.swift in Sources */,
+				14817F8623F82BB00051A89A /* AddNeedView.swift in Sources */,
 				2F57603723F6B4D1001D97F6 /* Commitment.swift in Sources */,
 				2F575FF923F686F7001D97F6 /* SceneDelegate.swift in Sources */,
 				2F57601A23F6B42D001D97F6 /* LocationManager.swift in Sources */,

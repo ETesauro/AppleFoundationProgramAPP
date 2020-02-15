@@ -25,7 +25,7 @@ struct CommitmentDetailedView: View {
                         .font(.title)
                         .foregroundColor(Color(.systemGroupedBackground))
                         Button(action: {
-                            self.shared.viewToShow = "HomeView"
+                            HomeView.show(self.shared)
                             }){
                                 Image(systemName: "xmark.circle.fill")
                                     .font(.largeTitle)

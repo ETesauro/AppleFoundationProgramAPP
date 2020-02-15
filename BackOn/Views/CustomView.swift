@@ -9,8 +9,7 @@
 import SwiftUI
 
 extension View {
-   
-    func show(_ shared: Shared) {
+    static func show(_ shared: Shared) {
         shared.viewToShow = String(describing: self)
     }
 }
