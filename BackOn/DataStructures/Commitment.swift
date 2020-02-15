@@ -43,6 +43,11 @@ class Commitment {
         self.ID = ID
         position = CLLocation(latitude: 40.675293, longitude: 14.772105)
     }
+    
+    func timeRemaining() -> TimeInterval {
+        return date.timeIntervalSinceNow
+    }
+    
 }
 
 //class CommitmentSet {
