@@ -16,6 +16,7 @@ class Commitment {
     let date: Date
     let ID: UUID
     var position: CLLocation
+    var textAddress: String?
     
        init() {
             self.userInfo = UserInfo(photo: "tim", name: "Tim", surname: "Cook")
