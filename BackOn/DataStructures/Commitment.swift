@@ -17,31 +17,40 @@ class Commitment {
     let ID: UUID
     var position: CLLocation
     
-    init() {
-        self.userInfo = UserInfo(photo: "tim", name: "Tim", surname: "Cook")
-        self.title = "Default title"
-        self.descr = "Default description"
-        self.date = Date()
-        ID = UUID()
-        position = CLLocation(latitude: 40.675293, longitude: 14.772105)
-    }
-    
-    init(userInfo: UserInfo, title: String, descr: String, date: Date, position: CLLocation) {
-        self.userInfo = userInfo
-        self.title = title
-        self.descr = descr
-        self.date = date
-        ID = UUID()
-        self.position = position
-    }
-    
-    init(userInfo: UserInfo, title: String, descr: String, date: Date, ID: UUID) {
-        self.userInfo = userInfo
-        self.title = title
-        self.descr = descr
-        self.date = date
-        self.ID = ID
-        position = CLLocation(latitude: 40.675293, longitude: 14.772105)
+       init() {
+            self.userInfo = UserInfo(photo: "tim", name: "Tim", surname: "Cook")
+            self.title = "Default title"
+            self.descr = "Default description"
+            self.date = Date()
+            ID = UUID()
+            position = CLLocation(latitude: 40.675293, longitude: 14.772105)
+        }
+        
+        init(userInfo: UserInfo, title: String, descr: String, date: Date, position: CLLocation) {
+            self.userInfo = userInfo
+            self.title = title
+            self.descr = descr
+            self.date = date
+            ID = UUID()
+            self.position = position
+        }
+        
+        init(userInfo: UserInfo, title: String, descr: String, date: Date, ID: UUID) {
+            self.userInfo = userInfo
+            self.title = title
+            self.descr = descr
+            self.date = date
+            self.ID = ID
+            position = CLLocation(latitude: 40.675293, longitude: 14.772105)
+        }
+        
+        init(userInfo: UserInfo, title: String, descr: String, date: Date, position: CLLocation, ID: UUID) {
+            self.userInfo = userInfo
+            self.title = title
+            self.descr = descr
+            self.date = date
+            self.ID = ID
+            self.position = position
     }
     
     func timeRemaining() -> TimeInterval {

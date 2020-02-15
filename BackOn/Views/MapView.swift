@@ -45,7 +45,6 @@ struct MapView: UIViewRepresentable {
             view.displayPriority = .required
             return view
         }
-        
     }
 
     func makeUIView(context: Context) -> MKMapView {
@@ -62,18 +61,43 @@ struct MapView: UIViewRepresentable {
     func updateUIView(_ uiView: MKMapView, context: Context) {
         let commitment = shared.commitmentSet[key]
         if commitment != nil {
-            let annotation = MKPointAnnotation()
-                annotation.title = commitment!.userInfo.name
-            annotation.subtitle = commitment!.title
-            annotation.coordinate = commitment!.position.coordinate
-            let span = MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
-            let region = MKCoordinateRegion(center: annotation.coordinate, span: span)
-            
-            uiView.addAnnotation(annotation)
-            uiView.setRegion(region, animated: true)
-            uiView.showsCompass = false
-            uiView.showsUserLocation = true
-        }
+                    let span = MKCoordinateSpan(latitudeDelta: 0.25, longitudeDelta: 0.25)
+                    let region = MKCoordinateRegion(center: commitment!.position.coordinate, span: span)
+                    if uiView.annotations.isEmpty{
+                        let annotation = MKPointAnnotation()
+                        annotation.title = commitment!.userInfo.name
+                        annotation.subtitle = commitment!.title
+                        annotation.coordinate = commitment!.position.coordinate
+                        uiView.addAnnotation(annotation)
+                    }
+        //            in case of troubles, see                              https://stackoverflow.com/questions/51010956/how-can-i-know-if-an-annotation-is-already-on-the-mapview
+                    uiView.setRegion(region, animated: true)
+                    uiView.showsCompass = false
+                    uiView.showsUserLocation = true
+                    
+        //            if uiView.overlays.isEmpty{
+        //                print("Niente Overlay!")
+        //            }
+                    
+                    if uiView.overlays.isEmpty{ //&& !shared.removeOverlay
+                        let request = MKDirections.Request()
+                        request.source = MKMapItem(placemark: MKPlacemark(coordinate: uiView.userLocation.coordinate, addressDictionary: nil))
+                        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: (commitment?.position.coordinate)!, addressDictionary: nil))
+                        request.requestsAlternateRoutes = false
+                        request.transportType = .automobile
+                        MKDirections(request: request).calculate { (response, error) in
+                        guard error == nil, let response = response else {return}
+
+                        for route in response.routes {
+                            uiView.addOverlay(route.polyline, level: .aboveRoads)
+                            }
+                        }
+                    }
+        //            else if shared.removeOverlay{
+        //                uiView.removeOverlays(uiView.overlays)
+        //            }
+        //            print(" Overlay alla fine dell'update: \(uiView.overlays), remove overlays: \(shared.removeOverlay)")
+               }
         else {
             print(key.uuidString)
             print(shared.commitmentSet)
