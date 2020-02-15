@@ -9,17 +9,26 @@
 import Foundation
 
 class UserInfo {
-    let photo: String
-    let name: String
-    let surname: String
+    var photo: String
+    var name: String
+    var surname: String
     var identity: String {
         return "\(name) \(surname)"
     }
-    let userID = UUID()
+    var userID = UUID()
+    var email: String?
     
     init(photo: String, name: String, surname: String) {
         self.photo = photo
         self.name = name
         self.surname = surname
+    }
+    
+//    Costruttore aggiuntivo utilizzato al momento dell'accesso con Google
+    init(photo: String, name: String, surname: String, email: String) {
+        self.photo = photo
+        self.name = name
+        self.surname = surname
+        self.email = email
     }
 }

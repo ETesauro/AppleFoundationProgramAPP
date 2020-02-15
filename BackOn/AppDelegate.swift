@@ -28,30 +28,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         }
         
         // Perform any operations on signed in user here.
-        let userId = user.userID                  // For client-side use only!
+        //let userId = user.userID                  // For client-side use only!
         //let idToken = user.authentication.idToken // Safe to send to the server
-        let fullName = user.profile.name
+        //let fullName = user.profile.name
         let givenName = user.profile.givenName
         let familyName = user.profile.familyName
         let email = user.profile.email
-        shared.viewToShow = "HomeView"
         
-        print("*** User signed into Google ***\n")
-        print("User ID: \(userId!)")
-        print("Full name: \(fullName!)")
-        print("Name: \(givenName!)")
-        print("Cognome: \(familyName!)")
-        print("E-mail: \(email!)")
+        let myUser: UserInfo = UserInfo(photo: "\(user.profile.imageURL(withDimension: 100))", name: givenName!, surname: familyName!, email: email!)
         
-        //...
+//        LO AGGIUNGO A CORE DATA
+        CoreDataController.shared.addUser(user: myUser)
         
-        
-        
-//        guard let authentication = user.authentication else {
-//            print("ciaoneeeee")
-//            return
-//        }
-        
+//        QUI CONTROLLO SE L'UTENTE HA EFFETTUATO L'ACCESSO
+        if !CoreDataController.shared.checkUser() {
+            shared.viewToShow = "LoginPageView"
+        } else {
+            shared.viewToShow = "HomeView"
+        }
     }
     
     
