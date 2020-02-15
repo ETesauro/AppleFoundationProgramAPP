@@ -14,39 +14,39 @@ struct LoginPageView: View {
     @EnvironmentObject var shared: Shared
     
     var body: some View {
-        
-        if shared.authentication == false {
-            return AnyView(VStack() {
-                HStack() {
-                    Spacer()
-                }
-              Text("BackOn")
-                .fontWeight(.bold).foregroundColor(.white)
-                .font(.title)
-              .padding([.top, .bottom], 40)
-                
-              Image("iosapptemplate")
-              .resizable()
-              .frame(width: 250, height: 250)
-              .clipShape(Circle())
-              .overlay(Circle().stroke(Color.white, lineWidth: 4))
-              .shadow(radius: 10)
-                
-                Spacer()
-                GoogleButton().frame(width: 200, height: 30, alignment: .center)
-                    .padding(.bottom, 20)
-                
-                MyAppleIDButton().frame(width: 200, height: 30, alignment: .center)
-                .padding(.bottom, 20)
-                
+        VStack {
+            HStack() {
                 Spacer()
             }
-                .background(LinearGradient(gradient: Gradient(colors: [.purple, .blue]), startPoint: .top, endPoint: .bottom)
-                  .edgesIgnoringSafeArea(.all))
-            )
-        } else {
-            return AnyView(SecondPageView())
+            Text("BackOn")
+                .fontWeight(.bold).foregroundColor(.white)
+                .font(.title)
+                .padding([.top, .bottom], 40)
+            
+            Image("iosapptemplate")
+                .resizable()
+                .frame(width: 250, height: 250)
+                .clipShape(Circle())
+                .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                .shadow(radius: 10)
+            
+            Spacer()
+            GoogleButton()
+                .frame(width: 200, height: 30, alignment: .center)
+                .padding(.bottom, 20)
+            Button(action: {
+                self.shared.viewToShow = "HomeView"
+            }) {
+                Text("Home")
+                    .bold()
+                    .foregroundColor(.black)
+            }
+//          MyAppleIDButton().frame(width: 200, height: 30, alignment: .center)
+//              .padding(.bottom, 20)
+            Spacer()
         }
+        .background(LinearGradient(gradient: Gradient(colors: [.purple, .blue]), startPoint: .top, endPoint: .bottom)
+        .edgesIgnoringSafeArea(.all))
     }
 }
 
@@ -71,16 +71,16 @@ struct GoogleButton: UIViewRepresentable {
     }
 }
 
-struct MyAppleIDButton: UIViewRepresentable {
-    
-    func makeUIView(context: UIViewRepresentableContext<MyAppleIDButton>) -> ASAuthorizationAppleIDButton {
-        let appleButton = ASAuthorizationAppleIDButton()
-        appleButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        return appleButton
-    }
-    
-    func updateUIView(_ uiView: MyAppleIDButton.UIViewType, context: UIViewRepresentableContext<MyAppleIDButton>) {
-        
-    }
-}
+//struct MyAppleIDButton: UIViewRepresentable {
+//
+//    func makeUIView(context: UIViewRepresentableContext<MyAppleIDButton>) -> ASAuthorizationAppleIDButton {
+//        let appleButton = ASAuthorizationAppleIDButton()
+//        appleButton.translatesAutoresizingMaskIntoConstraints = false
+//
+//        return appleButton
+//    }
+//
+//    func updateUIView(_ uiView: MyAppleIDButton.UIViewType, context: UIViewRepresentableContext<MyAppleIDButton>) {
+//
+//    }
+//}

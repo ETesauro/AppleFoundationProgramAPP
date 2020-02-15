@@ -31,7 +31,7 @@ struct CommitmentDetailedView: View {
                                     .font(.largeTitle)
                                     .foregroundColor(Color(#colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.8, alpha: 1)))
                             }
-                        }
+                    }
                     .offset(x:173, y:-265)
                 }
                 HStack {
