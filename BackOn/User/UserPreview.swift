@@ -11,15 +11,24 @@ import SwiftUI
 struct UserPreview: View {
     var user: UserInfo
     var descr: String
-    
-    init(user: UserInfo, description descr: String) {
-        self.user = user
-        self.descr = descr
+    var whiteText: Bool
+    var textColor: Color{
+        get {
+            return whiteText ? Color.white : Color.black
+        }
     }
     
-    init(user: UserInfo) {
+    init(user: UserInfo, description descr: String, whiteText: Bool) {
+        self.user = user
+        self.descr = descr
+        self.whiteText = whiteText
+    }
+    
+    init(user: UserInfo, whiteText: Bool) {
         self.user = user
         descr = ""
+        self.whiteText = whiteText
+
     }
     
     var body: some View {
@@ -29,13 +38,13 @@ struct UserPreview: View {
                 Text(user.identity)
                     .font(.title)
                     .fontWeight(.regular)
-                    .foregroundColor(Color.black)
+                    .foregroundColor(textColor)
                     .offset(x: 0, y: -3)
                 if descr != "" {
                     Text(descr)
                         .font(.subheadline)
                         .fontWeight(.light)
-                        .foregroundColor(Color.black)
+                        .foregroundColor(textColor)
                         .offset(x: 0, y: 1)
                 }
             
@@ -48,6 +57,6 @@ struct UserPreview: View {
 
 struct UserPreview_Previews: PreviewProvider {
     static var previews: some View {
-        UserPreview(user: UserInfo(photo: "tim", name: "Giancarlo", surname: "Sorrentino"),description: "5 mins from you")
+        UserPreview(user: UserInfo(photo: "tim", name: "Giancarlo", surname: "Sorrentino"),description: "5 mins from you", whiteText: true)
     }
 }

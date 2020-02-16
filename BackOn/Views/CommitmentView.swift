@@ -47,11 +47,7 @@ struct CommitmentView: View {
                 .frame(height: 250)
             Button(action: {
                 withAnimation {
-                    let annotation = MKPointAnnotation()
-                    annotation.title = "Nome"
-                    annotation.subtitle = "Descrizione"
-                    annotation.coordinate = self.commitment.position.coordinate
-                    self.shared.getETA(annotation: annotation)
+                    self.shared.getETA(destination: self.commitment.position.coordinate)
                     self.shared.selectedCommitment = self.commitment
                     CommitmentDetailedView.show(self.shared)
                 }
@@ -68,7 +64,7 @@ struct CommitmentView: View {
                     Text(self.commitment.title).foregroundColor(Color(
                     .systemGroupedBackground))
                 }.offset(x: 0, y: -30)
-            }
+            }.buttonStyle(PlainButtonStyle())
         }
         .frame(width: CGFloat(320), height: CGFloat(400))
         .background(Color.primary)
