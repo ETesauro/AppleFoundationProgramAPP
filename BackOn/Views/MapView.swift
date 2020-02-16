@@ -52,6 +52,7 @@ struct MapView: UIViewRepresentable {
         }
         let mapView = MKMapView(frame: UIScreen.main.bounds)
         mapView.delegate = context.coordinator
+        mapView.showsUserLocation = true
         mapView.showsCompass = false
         MapView.mapViewStore[key] = mapView
         return mapView
@@ -82,7 +83,6 @@ struct MapView: UIViewRepresentable {
                 uiView.addAnnotation(annotation)
             }
             if shared.viewToShow == "CommitmentDetailedView" && uiView.overlays.isEmpty {
-                uiView.showsUserLocation = true
                 let request = MKDirections.Request()
                 request.source = MKMapItem(placemark: MKPlacemark(coordinate: uiView.userLocation.coordinate, addressDictionary: nil))
                 request.destination = MKMapItem(placemark: MKPlacemark(coordinate: commitment!.position.coordinate, addressDictionary: nil))
@@ -97,7 +97,6 @@ struct MapView: UIViewRepresentable {
                         }
                     }
                     uiView.addOverlay(fastestRoute.polyline, level: .aboveRoads)
-                    print("\(uiView.overlays)")
                 }
             } else {
 //                uiView.removeOverlays(uiView.overlays)
