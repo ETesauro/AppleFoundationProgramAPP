@@ -43,7 +43,7 @@ struct CommitmentView: View {
         
     var body: some View {
          VStack {
-            MapView(detailed: false, key: commitment.ID)
+            MapView(key: commitment.ID)
                 .frame(height: 250)
             Button(action: {
                 withAnimation {

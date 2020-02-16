@@ -16,7 +16,7 @@ struct CommitmentDetailedView: View {
         VStack {
             VStack {
                 ZStack{
-                    MapView(detailed: true, key: shared.selectedCommitment.ID)
+                    MapView(key: shared.selectedCommitment.ID)
                         .statusBar(hidden: true)
                         .edgesIgnoringSafeArea(.top)
                         .frame(height: 515)
