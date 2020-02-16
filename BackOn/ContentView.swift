@@ -7,7 +7,12 @@
 //
 
 import SwiftUI
-import Foundation
+
+extension View {
+    static func show(_ shared: Shared) {
+        shared.viewToShow = String(describing: self)
+    }
+}
 
 struct ContentView: View {
     @EnvironmentObject var shared: Shared

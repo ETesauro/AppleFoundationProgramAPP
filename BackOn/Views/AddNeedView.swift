@@ -9,11 +9,8 @@
 import SwiftUI
 
 struct AddNeedView: View {
-    var commitment = commitmentData[0]
-    
     var body: some View {
         VStack {
-            
             VStack (alignment: .leading, spacing: 10){
                 Text("Add Need")
                     .font(.largeTitle)
@@ -21,10 +18,8 @@ struct AddNeedView: View {
                 Text("What kind of help you need?")
                     .font(.body)
                     .fontWeight(.medium)
-                
-                
                 Spacer()
-                ConfirmAddNeedButton()
+//                ConfirmAddNeedButton()
             }.padding()
         }
     }

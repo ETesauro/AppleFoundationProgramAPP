@@ -35,7 +35,7 @@ struct LoginPageView: View {
                 .frame(width: 200, height: 30, alignment: .center)
                 .padding(.bottom, 20)
             Button(action: {
-                self.shared.viewToShow = "HomeView"
+                HomeView.show(self.shared)
             }) {
                 Text("Home")
                     .bold()

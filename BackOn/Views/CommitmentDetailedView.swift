@@ -16,7 +16,7 @@ struct CommitmentDetailedView: View {
         VStack {
             VStack {
                 ZStack{
-                    MapView(detailed: true, key: shared.selectedCommitment.ID)
+                    MapView(key: shared.selectedCommitment.ID)
                         .statusBar(hidden: true)
                         .edgesIgnoringSafeArea(.top)
                         .frame(height: 515)
@@ -25,7 +25,7 @@ struct CommitmentDetailedView: View {
                         .font(.title)
                         .foregroundColor(Color(.systemGroupedBackground))
                         Button(action: {
-                            self.shared.viewToShow = "HomeView"
+                            HomeView.show(self.shared)
                             }){
                                 Image(systemName: "xmark.circle.fill")
                                     .font(.largeTitle)
@@ -38,9 +38,11 @@ struct CommitmentDetailedView: View {
                     Spacer()
                     Button(action: {
                         let request = MKDirections.Request()
-                        request.source = MKMapItem(placemark: MKPlacemark(coordinate: self.shared.locationManager.lastLocation!.coordinate ))
-                        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: self.shared.selectedCommitment.position.coordinate))
-                        let regionSpan = MKCoordinateRegion(center: self.shared.selectedCommitment.position.coordinate, latitudinalMeters: 10000, longitudinalMeters: 10000)
+                        request.source = MKMapItem(placemark: MKPlacemark(coordinate: self.shared.locationManager.lastLocation!.coordinate))
+                        let destination = MKMapItem(placemark: MKPlacemark(coordinate: self.shared.selectedCommitment.position.coordinate))
+                        destination.name = "\(self.shared.selectedCommitment.userInfo.name)'s request: \(self.shared.selectedCommitment.title)"
+                        request.destination = destination
+                        let regionSpan = MKCoordinateRegion(center: self.shared.selectedCommitment.position.coordinate, latitudinalMeters: 50, longitudinalMeters: 50)
                         _ = [
                             MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
                             MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)

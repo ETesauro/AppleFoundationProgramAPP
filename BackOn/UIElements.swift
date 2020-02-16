@@ -27,8 +27,7 @@ struct DoItButton: View {
             Spacer()
             Button(action: {
                 print("I'll do it")
-                self.shared.viewToShow = "HomeView"
-//                HomeView.show(self.shared)
+                HomeView.show(self.shared)
             }) {
                 HStack{
                     Text("I'll do it ")

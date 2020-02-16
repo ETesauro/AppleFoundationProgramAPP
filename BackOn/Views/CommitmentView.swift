@@ -43,7 +43,7 @@ struct CommitmentView: View {
         
     var body: some View {
          VStack {
-            MapView(detailed: false, key: commitment.ID)
+            MapView(key: commitment.ID)
                 .frame(height: 250)
             Button(action: {
                 withAnimation {
@@ -53,8 +53,7 @@ struct CommitmentView: View {
                     annotation.coordinate = self.commitment.position.coordinate
                     self.shared.getETA(annotation: annotation)
                     self.shared.selectedCommitment = self.commitment
-                    self.shared.viewToShow = "CommitmentDetailedView"
-//                    CommitmentDetailedView.show(self.shared)
+                    CommitmentDetailedView.show(self.shared)
                 }
             }) {
                 VStack{
