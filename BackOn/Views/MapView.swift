@@ -28,8 +28,8 @@ struct MapView: UIViewRepresentable {
         
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
             let renderer = MKPolylineRenderer(overlay: overlay)
-            renderer.strokeColor = .systemBlue
-            renderer.lineWidth = 4.0
+            renderer.strokeColor = UIScreen.main.traitCollection.userInterfaceStyle != .dark ? #colorLiteral(red: 0, green: 0.6529515386, blue: 1, alpha: 1) : #colorLiteral(red: 0.2057153285, green: 0.5236110687, blue: 0.8851857781, alpha: 1)
+            renderer.lineWidth = 6.0
             return renderer
         }
         
@@ -82,7 +82,7 @@ struct MapView: UIViewRepresentable {
                 })
                 uiView.addAnnotation(annotation)
             }
-            if shared.viewToShow == "CommitmentDetailedView" && uiView.overlays.isEmpty {
+            if shared.viewToShow == "CommitmentDetailedView" && uiView.overlays.isEmpty{
                 let request = MKDirections.Request()
                 request.source = MKMapItem(placemark: MKPlacemark(coordinate: uiView.userLocation.coordinate, addressDictionary: nil))
                 request.destination = MKMapItem(placemark: MKPlacemark(coordinate: commitment!.position.coordinate, addressDictionary: nil))
@@ -98,12 +98,12 @@ struct MapView: UIViewRepresentable {
                     }
                     uiView.addOverlay(fastestRoute.polyline, level: .aboveRoads)
                 }
-            } else {
+            } else{
 //                uiView.removeOverlays(uiView.overlays)
             }
             let span = MKCoordinateSpan(latitudeDelta: 0.25, longitudeDelta: 0.25)
             let region = MKCoordinateRegion(center: commitment!.position.coordinate, span: span)
-            uiView.setRegion(region, animated: false)
+            uiView.setRegion(region, animated: true)
         } else {
             print(key.uuidString)
             print(shared.commitmentSet)

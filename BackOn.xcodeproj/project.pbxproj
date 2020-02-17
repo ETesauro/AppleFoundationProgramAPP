@@ -32,6 +32,7 @@
 		2F57603723F6B4D1001D97F6 /* Commitment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57603623F6B4D1001D97F6 /* Commitment.swift */; };
 		2FE9A31123F6E69300E3419A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FE9A31023F6E69300E3419A /* CloudKit.framework */; };
 		2FEAAF1723F820A000225F13 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEAAF1623F820A000225F13 /* CoreDataController.swift */; };
+		81A0C4B923F9C6F00065CC87 /* DiscoverDetailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A0C4B823F9C6F00065CC87 /* DiscoverDetailedView.swift */; };
 		A8E9F2EDA35F7780FFA72898 /* Pods_BackOn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E0E97CC42E41EFEE4BC567 /* Pods_BackOn.framework */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,7 @@
 		2FEAAF1623F820A000225F13 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		55E0E97CC42E41EFEE4BC567 /* Pods_BackOn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BackOn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6084146565045BDB2AE4E5F0 /* Pods-BackOn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BackOn.release.xcconfig"; path = "Target Support Files/Pods-BackOn/Pods-BackOn.release.xcconfig"; sourceTree = "<group>"; };
+		81A0C4B823F9C6F00065CC87 /* DiscoverDetailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverDetailedView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 			children = (
 				14817F8423F82BB00051A89A /* AddNeedView.swift */,
 				14817F8523F82BB00051A89A /* NeederView.swift */,
+				81A0C4B823F9C6F00065CC87 /* DiscoverDetailedView.swift */,
 				2F575FFD23F686F7001D97F6 /* LoginPageView.swift */,
 				2F57602223F6B467001D97F6 /* CommitmentDetailedView.swift */,
 				2F57602323F6B467001D97F6 /* MapView.swift */,
@@ -342,7 +345,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F57602C23F6B467001D97F6 /* CommitmentDetailedView.swift in Sources */,
-				2F57601123F68FEB001D97F6 /* SecondPageView.swift in Sources */,
 				2FEAAF1723F820A000225F13 /* CoreDataController.swift in Sources */,
 				2F575FF723F686F7001D97F6 /* AppDelegate.swift in Sources */,
 				14817F8723F82BB00051A89A /* NeederView.swift in Sources */,
@@ -359,6 +361,7 @@
 				2F57602823F6B467001D97F6 /* UserPreview.swift in Sources */,
 				2F575FFE23F686F7001D97F6 /* LoginPageView.swift in Sources */,
 				2F57601723F6A9A2001D97F6 /* SharedResources.swift in Sources */,
+				81A0C4B923F9C6F00065CC87 /* DiscoverDetailedView.swift in Sources */,
 				2F57602923F6B467001D97F6 /* Avatar.swift in Sources */,
 				2F57603223F6B495001D97F6 /* UIElements.swift in Sources */,
 				2F575FFC23F686F7001D97F6 /* BackOn.xcdatamodeld in Sources */,

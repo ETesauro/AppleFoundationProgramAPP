@@ -15,21 +15,42 @@ class Shared: ObservableObject {
     @Published var authentication = false
     @Published var viewToShow = "LoginPageView"
     @Published var eta = 0.0
+    var darkMode: Bool{
+        get{
+            return UIScreen.main.traitCollection.userInterfaceStyle == .dark
+        }
+    }
+    
+    var textEta: String {
+        get{
+            let hour = eta>7200 ? "hours" : "hour"
+            if eta > 3600{
+                return "\(Int(eta/3600)) \(hour) and \(Int((Int(eta)%3600)/60)) mins"
+            } else{
+                return "\(Int(eta/60)) mins"
+            }
+        }
+    }
     @Published var locationManager = LocationManager()
     @Published var selectedCommitment = Commitment()
     @Published var commitmentSet: [UUID:Commitment] = commitmentDict
 
-       func getETA(annotation: MKAnnotation) {
+       func getETA(destination: CLLocationCoordinate2D) {
            let request = MKDirections.Request()
-           request.source = MKMapItem(placemark: MKPlacemark(coordinate: locationManager.lastLocation!.coordinate, addressDictionary: nil))
-           request.destination = MKMapItem(placemark: MKPlacemark(coordinate: annotation.coordinate, addressDictionary: nil))
+        request.source = MKMapItem(placemark: MKPlacemark(coordinate: locationManager.lastLocation!.coordinate))
+           request.destination = MKMapItem(placemark: MKPlacemark(coordinate: destination))
            request.requestsAlternateRoutes = false
            request.transportType = .walking
            let directions = MKDirections(request: request)
            directions.calculateETA { (res, error) in
                guard error == nil else {print("error");return}
                print(res!.expectedTravelTime)
-               self.eta = res!.expectedTravelTime
+            self.eta = res!.expectedTravelTime
+//            if self.eta > 3600{
+//                self.textEta  = "\(Int(self.eta/3600)) hours and \(Int((Int(self.eta)%3600)/60)) mins"
+//            } else{
+//                self.textEta = "\(Int(self.eta/60)) mins"
+//            }
            }
        }
 

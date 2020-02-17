@@ -38,14 +38,46 @@ struct DoItButton: View {
 
                 }
                 .padding(20)
-                .background(Color.blue)
+                .background(Color(.systemBlue))
                 .cornerRadius(40)
                 .foregroundColor(.white)
                 .overlay(
                 RoundedRectangle(cornerRadius: 40)
-                    .stroke(Color.blue, lineWidth: 1).foregroundColor(Color.blue)
+                    .stroke(Color(.systemBlue), lineWidth: 0).foregroundColor(Color(.systemBlue))
                 )
-            }
+            }.buttonStyle(PlainButtonStyle())
+            Spacer()
+        }
+    }
+}
+
+struct CantDoItButton: View {
+    @EnvironmentObject var shared: Shared
+    
+    var body: some View {
+        HStack{
+            Spacer()
+            Button(action: {
+                print("Can't do it")
+                HomeView.show(self.shared)
+            }) {
+                HStack{
+                    Text("Can't do it ")
+                        .fontWeight(.regular)
+                        .font(.title)
+                    Image(systemName: "hand.raised.slash")
+                        .font(.title)
+
+                }
+                .padding(20)
+                .background(Color(.systemRed))
+                .cornerRadius(40)
+                .foregroundColor(.white)
+                .overlay(
+                RoundedRectangle(cornerRadius: 40)
+                    .stroke(Color(.systemRed), lineWidth: 0).foregroundColor(Color(.systemRed))
+                )
+            }.buttonStyle(PlainButtonStyle())
             Spacer()
         }
     }

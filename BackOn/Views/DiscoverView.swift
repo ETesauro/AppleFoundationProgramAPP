@@ -10,21 +10,39 @@ import SwiftUI
 import CoreLocation
 struct DiscoverView: View {
     var commitment: Commitment
+    @EnvironmentObject var shared: Shared
+
     
     var body: some View {
         VStack (alignment: .leading, spacing: 5){
-            UserPreview(user: commitment.userInfo).padding(.top, 15)
-            Text(commitment.title)
-                .foregroundColor(.white)
-                .fontWeight(.medium)
-                .padding([.horizontal])
-            Text(commitment.descr)
-                .foregroundColor(.white)
-                .padding([.horizontal])
-            Spacer()
-            Text("1km from you")
-                .foregroundColor(.white)
-                .padding([.horizontal,.bottom])
+            Button(action: {
+                           withAnimation {
+                               self.shared.getETA(destination: self.commitment.position.coordinate)
+                               self.shared.selectedCommitment = self.commitment
+                               DiscoverDetailedView.show(self.shared)
+                           }
+                       }) {
+                        VStack{
+                            HStack{
+                                VStack (alignment: .leading, spacing: 5){
+                                    UserPreview(user: shared.selectedCommitment.userInfo, description: "\(shared.textEta) from you", whiteText: !shared.darkMode)
+                                    Text(shared.selectedCommitment.title)
+                                        .font(.headline)
+                                        .fontWeight(.regular)
+                                        .foregroundColor(.primary).colorInvert()
+                                    Text(shared.selectedCommitment.descr)
+                                        .font(.subheadline)
+                                        .fontWeight(.light)
+                                        .bold()
+                                        .foregroundColor(.primary).colorInvert()
+                                        .frame(width: .none, height: 60, alignment: .leading)
+                                }.padding([.horizontal,.bottom]).offset(x: 0, y: -10)
+                            }
+                           }
+                }.buttonStyle(PlainButtonStyle())
+                .padding(.vertical, 20)
+            
+            
         }
         .frame(width: CGFloat(320), height: CGFloat(230))
         .background(Color.primary)
