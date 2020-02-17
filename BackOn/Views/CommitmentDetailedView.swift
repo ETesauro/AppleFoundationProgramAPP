@@ -62,7 +62,10 @@ struct CommitmentDetailedView: View {
             }.padding([.horizontal,.bottom]).offset(x: 0, y: -10)
             CantDoItButton()
         }.onAppear {
-            self.selectedCommitment.requestETA(source: self.shared.locationManager.lastLocation!)
+            if self.shared.locationManager.lastLocation != nil {
+                self.selectedCommitment.requestETA(source: self.shared.locationManager.lastLocation!)
+            }
+
         }
     }
 }

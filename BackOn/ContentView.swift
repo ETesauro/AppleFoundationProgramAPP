@@ -42,7 +42,8 @@ struct ContentView: View {
                     .fontWeight(.regular)
                     .foregroundColor(.primary)
             }
-        }.alert(isPresented: $shared.locationManager.showAlert){locAlert}
+        }
+        .alert(isPresented: $shared.locationManager.showAlert){locAlert}
     }
 }
 

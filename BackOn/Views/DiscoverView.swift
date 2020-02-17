@@ -42,7 +42,9 @@ struct DiscoverView: View {
         .cornerRadius(10)
         .shadow(radius: 10)
         .onAppear(perform: {
-            self.commitment.requestETA(source: self.shared.locationManager.lastLocation!)
+            if self.shared.locationManager.lastLocation != nil {
+                self.commitment.requestETA(source: self.shared.locationManager.lastLocation!)
+            }
         })
     }
 }
