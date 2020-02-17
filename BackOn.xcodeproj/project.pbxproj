@@ -34,7 +34,6 @@
 		2FEAAF1723F820A000225F13 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEAAF1623F820A000225F13 /* CoreDataController.swift */; };
 		81A0C4B923F9C6F00065CC87 /* DiscoverDetailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A0C4B823F9C6F00065CC87 /* DiscoverDetailedView.swift */; };
 		81F8982723FAEC3500F41BC4 /* MapViewDiscover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F8982623FAEC3500F41BC4 /* MapViewDiscover.swift */; };
-		81F8982B23FB1CC800F41BC4 /* AnnotationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F8982A23FB1CC800F41BC4 /* AnnotationHandler.swift */; };
 		A8E9F2EDA35F7780FFA72898 /* Pods_BackOn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E0E97CC42E41EFEE4BC567 /* Pods_BackOn.framework */; };
 /* End PBXBuildFile section */
 
@@ -72,7 +71,6 @@
 		6084146565045BDB2AE4E5F0 /* Pods-BackOn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BackOn.release.xcconfig"; path = "Target Support Files/Pods-BackOn/Pods-BackOn.release.xcconfig"; sourceTree = "<group>"; };
 		81A0C4B823F9C6F00065CC87 /* DiscoverDetailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverDetailedView.swift; sourceTree = "<group>"; };
 		81F8982623FAEC3500F41BC4 /* MapViewDiscover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewDiscover.swift; sourceTree = "<group>"; };
-		81F8982A23FB1CC800F41BC4 /* AnnotationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,7 +147,6 @@
 			isa = PBXGroup;
 			children = (
 				2F57601923F6B42D001D97F6 /* LocationManager.swift */,
-				81F8982A23FB1CC800F41BC4 /* AnnotationHandler.swift */,
 			);
 			path = Backend;
 			sourceTree = "<group>";
@@ -353,7 +350,6 @@
 				2F57602C23F6B467001D97F6 /* CommitmentDetailedView.swift in Sources */,
 				2FEAAF1723F820A000225F13 /* CoreDataController.swift in Sources */,
 				2F575FF723F686F7001D97F6 /* AppDelegate.swift in Sources */,
-				81F8982B23FB1CC800F41BC4 /* AnnotationHandler.swift in Sources */,
 				14817F8723F82BB00051A89A /* NeederView.swift in Sources */,
 				2F57602E23F6B467001D97F6 /* HomeView.swift in Sources */,
 				81F8982723FAEC3500F41BC4 /* MapViewDiscover.swift in Sources */,
