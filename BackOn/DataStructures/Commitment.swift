@@ -116,10 +116,10 @@ let uuid7 = UUID()
 let uuid8 = UUID()
 
 let commitmentDict: [UUID:Commitment] = [
-    uuid1: Commitment(userInfo: me1, title: "Spesa1", descr: "Descrizione di spesa1", date: Date(), position: CLLocation(latitude: 41.775293, longitude: 14.572105), ID: uuid1),
-    uuid2: Commitment(userInfo: me2, title: "Pulizie1", descr: "Descrizione di pulizie1", date: Date(), position: CLLocation(latitude: 41.275293, longitude: 14.572105), ID: uuid2),
-    uuid3: Commitment(userInfo: me3, title: "Soldi1", descr: "Descrizione di soldi1", date: Date(), position: CLLocation(latitude: 41.275293, longitude: 15.572105), ID: uuid3),
-    uuid4: Commitment(userInfo: me4, title: "Uscita1", descr: "Descrizione di uscita1", date: Date(), position: CLLocation(latitude: 41.075293, longitude: 15.172105), ID: uuid4)
+    uuid1: Commitment(userInfo: me1, title: "Spesa1", descr: "Descrizione di spesa1", date: Date().addingTimeInterval(TimeInterval(29*60), position: CLLocation(latitude: 41.775293, longitude: 14.572105), ID: uuid1),
+    uuid2: Commitment(userInfo: me2, title: "Pulizie1", descr: "Descrizione di pulizie1", date: Date().addingTimeInterval(TimeInterval(31*60), position: CLLocation(latitude: 41.275293, longitude: 14.572105), ID: uuid2),
+    uuid3: Commitment(userInfo: me3, title: "Soldi1", descr: "Descrizione di soldi1", date: Date().addingTimeInterval(TimeInterval(31*60), position: CLLocation(latitude: 41.275293, longitude: 15.572105), ID: uuid3),
+    uuid4: Commitment(userInfo: me4, title: "Uscita1", descr: "Descrizione di uscita1", date: Date().addingTimeInterval(TimeInterval(31*60), position: CLLocation(latitude: 41.075293, longitude: 15.172105), ID: uuid4)
 ]
 
 let discoverDict: [UUID:Commitment] = [
@@ -129,38 +129,59 @@ let discoverDict: [UUID:Commitment] = [
     uuid8: Commitment(userInfo: me4, title: "Uscita", descr: "Descrizione di uscita", date: Date(), position: CLLocation(latitude: 41.275293, longitude: 15.172105), ID: uuid8)
 ]
 
-
 //  Questo metodo da un array di commitment restituisce il più imminente assumendo che:
-//  l'array HA SOLO commitment futuri (non ancora implementata tale selezione) e NON è VUOTO
-func getNextCommitment(data: [Commitment]) -> Commitment {
-    var toReturn = data[0]
-    for c in data {
-        if toReturn.date.compare(c.date) == ComparisonResult.orderedDescending {
+func getNextCommitment(dataDictionary: [UUID:Commitment]) -> Commitment? {
+    if(dataDictionary.count == 0){
+        return nil
+    }
+     let data = Array(dataDictionary.values)
+     var toReturn = data[0]
+     for c in data {
+         if toReturn.date.compare(c.date) == ComparisonResult.orderedDescending {
             toReturn = c
-        }
-    }
-    return toReturn
-}
+         }
+     }
+     return toReturn
+ }
 
-func getNextFive(dataDictionary: [UUID: Commitment]) -> [Commitment]{
-    let data = Array(dataDictionary.values)
-    var toReturn: [Commitment] = [data[0]]
-    //   Mi serve a sapere se non ho ancora inserito i primi 5 elementi ordinatamente
-    var last = 0
+func getNextNotificableCommitment(dataDictionary: [UUID:Commitment]) -> Commitment? {
+    if(dataDictionary.count == 0){
+        return nil
+    }
+     var data = Array(dataDictionary.values)
+    var toReturn: Commitment?
+    repeat{
+        let i = data.removeFirst()
+        if(i.timeRemaining() > TimeInterval(30*60)){
+            toReturn = toReturn == nil ? i : toReturn
+            if(toReturn!.timeRemaining() > i.timeRemaining()){
+                toReturn = i
+    } 
     
-    for i in 1...data.count {
-        for j in stride(from: last < 5 ? last : 4, through: 0, by: -1) {
-            if toReturn[j].date.compare(data[i].date) == ComparisonResult.orderedDescending{
-                let toShift = toReturn[j]
-                toReturn[j] = data[i]
-                toReturn[j + 1] = toShift
-            } else {
-                if last < 5 {
-                    toReturn[last + 1] = data[i]
-                }
-            }
-            last += 1
-        }
+        } while data.count>0
     }
     return toReturn
 }
+ 
+ func getNextFive(dataDictionary: [UUID: Commitment]) -> [Commitment]{
+      let data = Array(dataDictionary.values)
+      var toReturn: [Commitment] = [data[0]]
+ //   Mi serve a sapere se non ho ancora inserito i primi 5 elementi ordinatamente
+      var last = 0
+
+      for i in 1...data.count {
+          for j in stride(from: last < 5 ? last : 4, through: 0, by: -1) {
+              if toReturn[j].date.compare(data[i].date) == ComparisonResult.orderedDescending{
+                  let toShift = toReturn[j]
+                  toReturn[j] = data[i]
+                  toReturn[j + 1] = toShift
+              } else {
+                  if last < 5 {
+                     toReturn[last + 1] = data[i]
+                  }
+              }
+              last += 1
+          }
+      }
+      return toReturn
+  }
