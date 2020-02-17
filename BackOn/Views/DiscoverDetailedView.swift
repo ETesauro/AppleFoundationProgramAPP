@@ -9,7 +9,7 @@
 import SwiftUI
 import MapKit
 
-struct CommitmentDetailedView: View {
+struct DiscoverDetailedView: View {
     @EnvironmentObject var shared: Shared
     
     var body: some View {
@@ -64,13 +64,13 @@ struct CommitmentDetailedView: View {
                     .bold()
                     .frame(width: .none, height: 60, alignment: .leading)
             }.padding([.horizontal,.bottom]).offset(x: 0, y: -10)
-            CantDoItButton()
+            DoItButton()
         }
     }
 }
 
 
-struct CommitmentDetailedView_Previews: PreviewProvider {
+struct DiscoverDetailedView_Previews: PreviewProvider {
     static var previews: some View {
         CommitmentDetailedView()
     }

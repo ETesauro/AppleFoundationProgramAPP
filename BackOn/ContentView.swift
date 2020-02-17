@@ -29,7 +29,10 @@ struct ContentView: View {
                 CommitmentDetailedView()
 //                    .transition(.move(edge: .bottom))
 //                    .animation(.spring())
-            } else {
+            } else if shared.viewToShow == "DiscoverDetailedView"{
+                DiscoverDetailedView()
+            }
+            else {
                 Text("Vista sbagliata :(")
                     .font(.title)
                     .fontWeight(.regular)
