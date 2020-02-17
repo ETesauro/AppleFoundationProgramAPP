@@ -10,10 +10,24 @@ import SwiftUI
 import MapKit
 
 struct MapView: UIViewRepresentable {
-    @EnvironmentObject var shared: Shared
+    @EnvironmentObject static var shared: Shared
     var key: UUID
     private static var mapViewStore = [UUID : MKMapView]()
-   
+    
+    static func getEta(destination: CLLocationCoordinate2D) -> Double {
+        let request = MKDirections.Request()
+        var toReturn = 0.0
+        request.source = MKMapItem(placemark: MKPlacemark(coordinate: self.shared.locationManager.lastLocation!.coordinate))
+        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: destination))
+        request.requestsAlternateRoutes = false
+        request.transportType = .walking
+        let directions = MKDirections(request: request)
+        directions.calculateETA { (res, error) in
+            guard error == nil else {print("error");return}
+            toReturn = res!.expectedTravelTime
+        }
+        return toReturn
+    }
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -60,7 +74,7 @@ struct MapView: UIViewRepresentable {
 
     func updateUIView(_ uiView: MKMapView, context: Context) {
 
-        let commitment = shared.commitmentSet[key]
+        let commitment = MapView.shared.commitmentSet[key]
         if commitment != nil {
             //https://stackoverflow.com/questions/51010956/how-can-i-know-if-an-annotation-is-already-on-the-mapview
             if uiView.annotations.isEmpty {
@@ -82,7 +96,7 @@ struct MapView: UIViewRepresentable {
                 })
                 uiView.addAnnotation(annotation)
             }
-            if shared.viewToShow == "CommitmentDetailedView" && uiView.overlays.isEmpty{
+            if MapView.shared.viewToShow == "CommitmentDetailedView" && uiView.overlays.isEmpty{
                 let request = MKDirections.Request()
                 request.source = MKMapItem(placemark: MKPlacemark(coordinate: uiView.userLocation.coordinate, addressDictionary: nil))
                 request.destination = MKMapItem(placemark: MKPlacemark(coordinate: commitment!.position.coordinate, addressDictionary: nil))
@@ -106,8 +120,6 @@ struct MapView: UIViewRepresentable {
             uiView.setRegion(region, animated: true)
         } else {
             print(key.uuidString)
-            print(shared.commitmentSet)
-            print("\(shared.commitmentSet)")
         }
     }
     

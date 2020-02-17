@@ -17,6 +17,17 @@ class Commitment {
     let ID: UUID
     var position: CLLocation
     var textAddress: String?
+    var eta: Double
+    var textEta: String {
+           get{
+               let hour = eta>7200 ? "hours" : "hour"
+               if eta > 3600{
+                   return "\(Int(eta/3600)) \(hour) and \(Int((Int(eta)%3600)/60)) mins"
+               } else{
+                   return "\(Int(eta/60)) mins"
+               }
+           }
+       }
     
        init() {
             self.userInfo = UserInfo(photo: "tim", name: "Tim", surname: "Cook")
@@ -25,6 +36,8 @@ class Commitment {
             self.date = Date()
             ID = UUID()
             position = CLLocation(latitude: 40.675293, longitude: 14.772105)
+            eta = MapView.getEta(destination: position.coordinate)
+            
         }
         
         init(userInfo: UserInfo, title: String, descr: String, date: Date, position: CLLocation) {
@@ -34,6 +47,7 @@ class Commitment {
             self.date = date
             ID = UUID()
             self.position = position
+            eta = MapView.getEta(destination: position.coordinate)
         }
         
         init(userInfo: UserInfo, title: String, descr: String, date: Date, ID: UUID) {
@@ -43,6 +57,7 @@ class Commitment {
             self.date = date
             self.ID = ID
             position = CLLocation(latitude: 40.675293, longitude: 14.772105)
+            eta = MapView.getEta(destination: position.coordinate)
         }
         
         init(userInfo: UserInfo, title: String, descr: String, date: Date, position: CLLocation, ID: UUID) {
@@ -52,6 +67,8 @@ class Commitment {
             self.date = date
             self.ID = ID
             self.position = position
+            eta = MapView.getEta(destination: position.coordinate)
+
     }
     
     func timeRemaining() -> TimeInterval {

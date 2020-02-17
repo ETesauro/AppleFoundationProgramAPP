@@ -20,8 +20,10 @@ struct CommitmentRow: View {
    var body: some View {
       VStack (alignment: .leading){
          Text("Your commitments")
-            .fontWeight(.heavy)
+            .fontWeight(.bold)
             .padding(.leading)
+            .font(.title)
+            
 
          ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 20) {
@@ -58,16 +60,16 @@ struct CommitmentView: View {
                     
                     Text(self.commitment.userInfo.identity)
                     .font(.title)
-                    .foregroundColor(Color(.systemGroupedBackground))
+                        .foregroundColor(Color(.black))
                     Spacer()
                     
                     Text(self.commitment.title).foregroundColor(Color(
-                    .systemGroupedBackground))
+                    .black))
                 }.offset(x: 0, y: -30)
             }.buttonStyle(PlainButtonStyle())
         }
         .frame(width: CGFloat(320), height: CGFloat(400))
-        .background(Color.primary)
+         .background(Color.primary.colorInvert())
         .cornerRadius(10)
         .shadow(radius: 10)
     }

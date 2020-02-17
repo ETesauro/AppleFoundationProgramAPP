@@ -43,6 +43,8 @@ struct HomeView: View {
                 DiscoverRow()
             }
         }
+        .background(Color("background"))
+        .edgesIgnoringSafeArea(.all)
     }
 }
 

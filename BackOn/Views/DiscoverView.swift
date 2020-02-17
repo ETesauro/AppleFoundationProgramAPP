@@ -25,16 +25,16 @@ struct DiscoverView: View {
                         VStack{
                             HStack{
                                 VStack (alignment: .leading, spacing: 5){
-                                    UserPreview(user: shared.selectedCommitment.userInfo, description: "\(shared.textEta) from you", whiteText: !shared.darkMode)
+                                    UserPreview(user: shared.selectedCommitment.userInfo, description: "\(shared.textEta) from you", whiteText: shared.darkMode)
                                     Text(shared.selectedCommitment.title)
                                         .font(.headline)
                                         .fontWeight(.regular)
-                                        .foregroundColor(.primary).colorInvert()
+                                        .foregroundColor(.primary)
                                     Text(shared.selectedCommitment.descr)
                                         .font(.subheadline)
                                         .fontWeight(.light)
                                         .bold()
-                                        .foregroundColor(.primary).colorInvert()
+                                        .foregroundColor(.black)
                                         .frame(width: .none, height: 60, alignment: .leading)
                                 }.padding([.horizontal,.bottom]).offset(x: 0, y: -10)
                             }
@@ -45,7 +45,7 @@ struct DiscoverView: View {
             
         }
         .frame(width: CGFloat(320), height: CGFloat(230))
-        .background(Color.primary)
+        .background(Color.primary.colorInvert())
         .cornerRadius(10)
         .shadow(radius: 10)
     }
@@ -58,8 +58,9 @@ struct DiscoverRow: View {
    var body: some View {
     VStack (alignment: .leading) {
         Text("Around you")
-            .fontWeight(.heavy)
+            .fontWeight(.bold)
             .padding(.leading)
+            .font(.title)
 
          ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 20) {

@@ -34,27 +34,21 @@ class Shared: ObservableObject {
     @Published var locationManager = LocationManager()
     @Published var selectedCommitment = Commitment()
     @Published var commitmentSet: [UUID:Commitment] = commitmentDict
-
-       func getETA(destination: CLLocationCoordinate2D) {
-           let request = MKDirections.Request()
+    
+    func getETA(destination: CLLocationCoordinate2D) {
+        let request = MKDirections.Request()
         request.source = MKMapItem(placemark: MKPlacemark(coordinate: locationManager.lastLocation!.coordinate))
-           request.destination = MKMapItem(placemark: MKPlacemark(coordinate: destination))
-           request.requestsAlternateRoutes = false
-           request.transportType = .walking
-           let directions = MKDirections(request: request)
-           directions.calculateETA { (res, error) in
-               guard error == nil else {print("error");return}
-               print(res!.expectedTravelTime)
+        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: destination))
+        request.requestsAlternateRoutes = false
+        request.transportType = .walking
+        let directions = MKDirections(request: request)
+        directions.calculateETA { (res, error) in
+            guard error == nil else {print("error");return}
             self.eta = res!.expectedTravelTime
-//            if self.eta > 3600{
-//                self.textEta  = "\(Int(self.eta/3600)) hours and \(Int((Int(self.eta)%3600)/60)) mins"
-//            } else{
-//                self.textEta = "\(Int(self.eta/60)) mins"
-//            }
-           }
-       }
-
-       func commitmentArray() -> [Commitment] {
-           return Array(commitmentSet.values)
-       }
+        }
+    }
+    
+    func commitmentArray() -> [Commitment] {
+        return Array(commitmentSet.values)
+    }
 }
