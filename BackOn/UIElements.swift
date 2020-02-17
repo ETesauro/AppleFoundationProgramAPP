@@ -88,3 +88,79 @@ struct DoItButton_Previews: PreviewProvider {
         DoItButton()
     }
 }
+
+struct AddNeedButton: View {
+    @EnvironmentObject var shared: Shared
+    
+    var body: some View {
+        HStack{
+            Spacer()
+            Button(action: {
+                print("Need help!")
+                AddNeedView.show(self.shared)
+            }) {
+                HStack{
+                    Text("Add Need ")
+                        .fontWeight(.regular)
+                        .font(.title)
+                    Image(systemName: "person.2")
+                        .font(.title)
+
+                }
+                .padding(20)
+                .background(Color.blue)
+                .cornerRadius(40)
+                .foregroundColor(.white)
+                .overlay(
+                RoundedRectangle(cornerRadius: 40)
+                    .stroke(Color.blue, lineWidth: 1).foregroundColor(Color.blue)
+                )
+            }
+            Spacer()
+        }
+    }
+}
+
+struct AddNeedButton_Previews: PreviewProvider {
+    static var previews: some View {
+        AddNeedButton()
+    }
+}
+
+struct ConfirmAddNeedButton: View {
+    @EnvironmentObject var shared: Shared
+    
+    var body: some View {
+        HStack{
+            Spacer()
+            Button(action: {
+                print("Add need!")
+//                IMPORTANTE SALVA NEED E INVIALO AL SERVER
+                NeederView.show(self.shared)
+            }) {
+                HStack{
+                    Text("Confirm ")
+                        .fontWeight(.regular)
+                    Image(systemName: "hand.thumbsup")
+                }
+                .font(.title)
+                .padding(20)
+                .background(Color.blue)
+                .cornerRadius(40)
+                .foregroundColor(.white)
+                .overlay(
+                RoundedRectangle(cornerRadius: 40)
+                    .stroke(Color.blue, lineWidth: 1).foregroundColor(Color.blue)
+                )
+            }
+            Spacer()
+        }
+    }
+}
+
+struct ConfirmAddNeedButton_Previews: PreviewProvider {
+    static var previews: some View {
+        ConfirmAddNeedButton()
+    }
+}
+
