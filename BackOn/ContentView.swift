@@ -26,11 +26,11 @@ struct ContentView: View {
             } else if shared.viewToShow == "LoginPageView"{
                 LoginPageView()
             } else if shared.viewToShow == "CommitmentDetailedView"{
-                CommitmentDetailedView()
+                CommitmentDetailedView(selectedCommitment: shared.selectedCommitment)
 //                    .transition(.move(edge: .bottom))
 //                    .animation(.spring())
             } else if shared.viewToShow == "DiscoverDetailedView"{
-                DiscoverDetailedView()
+                DiscoverDetailedView(selectedCommitment: shared.selectedCommitment)
             }
             else {
                 Text("Vista sbagliata :(")

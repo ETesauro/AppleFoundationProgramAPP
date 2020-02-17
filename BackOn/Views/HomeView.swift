@@ -25,7 +25,7 @@ struct HomeView: View {
                 }
     //          Bottone per notificare il prossimo commitment
                 Button("Schedule Notification") {
-                    let nextCommitment = getNextCommitment(data: commitmentData)
+                    let nextCommitment = getNextCommitment(data: [Commitment()])
                     let notification = UNMutableNotificationContent()
                     notification.title = nextCommitment.title
                     notification.subtitle = nextCommitment.descr

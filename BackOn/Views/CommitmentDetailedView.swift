@@ -11,12 +11,13 @@ import MapKit
 
 struct CommitmentDetailedView: View {
     @EnvironmentObject var shared: Shared
+    @ObservedObject var selectedCommitment: Commitment
     
     var body: some View {
         VStack {
             VStack {
                 ZStack{
-                    MapView(key: shared.selectedCommitment.ID)
+                    MapViewCommitment(key: selectedCommitment.ID)
                         .statusBar(hidden: true)
                         .edgesIgnoringSafeArea(.top)
                         .frame(height: 515)
@@ -40,38 +41,35 @@ struct CommitmentDetailedView: View {
                     Button(action: {
                         let request = MKDirections.Request()
                         request.source = MKMapItem(placemark: MKPlacemark(coordinate: self.shared.locationManager.lastLocation!.coordinate))
-                        let destination = MKMapItem(placemark: MKPlacemark(coordinate: self.shared.selectedCommitment.position.coordinate))
-                        destination.name = "\(self.shared.selectedCommitment.userInfo.name)'s request: \(self.shared.selectedCommitment.title)"
+                        let destination = MKMapItem(placemark: MKPlacemark(coordinate: self.selectedCommitment.position.coordinate))
+                        destination.name = "\(self.selectedCommitment.userInfo.name)'s request: \(self.selectedCommitment.title)"
                         request.destination = destination
-//                        let regionSpan = MKCoordinateRegion(center: self.shared.selectedCommitment.position.coordinate, latitudinalMeters: 50, longitudinalMeters: 50)
-//                        _ = [
-//                            MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
-//                            MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
-//                        ]
                         request.destination?.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeWalking])
                         }, label: {
                             Text("Open in Maps").fontWeight(.light)})
                 }.padding(.horizontal)
             }
             VStack (alignment: .leading, spacing: 5){
-                UserPreview(user: shared.selectedCommitment.userInfo, description: "\(shared.textEta) from you", whiteText: shared.darkMode)
-                Text(shared.selectedCommitment.title)
+                UserPreview(user: selectedCommitment.userInfo, description: selectedCommitment.etaText, whiteText: shared.darkMode)
+                Text(selectedCommitment.title)
                     .font(.headline)
                     .fontWeight(.regular)
-                Text(shared.selectedCommitment.descr)
+                Text(selectedCommitment.descr)
                     .font(.subheadline)
                     .fontWeight(.light)
                     .bold()
                     .frame(width: .none, height: 60, alignment: .leading)
             }.padding([.horizontal,.bottom]).offset(x: 0, y: -10)
             CantDoItButton()
+        }.onAppear {
+            self.selectedCommitment.requestETA(source: self.shared.locationManager.lastLocation!)
         }
     }
 }
 
 
-struct CommitmentDetailedView_Previews: PreviewProvider {
-    static var previews: some View {
-        CommitmentDetailedView()
-    }
-}
+//struct CommitmentDetailedView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CommitmentDetailedView()
+//    }
+//}

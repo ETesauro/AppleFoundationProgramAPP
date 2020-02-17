@@ -8,16 +8,16 @@
 
 import SwiftUI
 import CoreLocation
-struct DiscoverView: View {
-    var commitment: Commitment
-    @EnvironmentObject var shared: Shared
+import MapKit
 
+struct DiscoverView: View {
+    @ObservedObject var commitment: Commitment
+    @EnvironmentObject var shared: Shared
     
     var body: some View {
         VStack (alignment: .leading, spacing: 5){
             Button(action: {
                            withAnimation {
-                               self.shared.getETA(destination: self.commitment.position.coordinate)
                                self.shared.selectedCommitment = self.commitment
                                DiscoverDetailedView.show(self.shared)
                            }
@@ -25,12 +25,13 @@ struct DiscoverView: View {
                         VStack{
                             HStack{
                                 VStack (alignment: .leading, spacing: 5){
-                                    UserPreview(user: shared.selectedCommitment.userInfo, description: "\(shared.textEta) from you", whiteText: shared.darkMode)
-                                    Text(shared.selectedCommitment.title)
+                                    
+                                    UserPreview(user: commitment.userInfo, description: "\(commitment.etaText)", whiteText: shared.darkMode)
+                                    Text(commitment.title)
                                         .font(.headline)
                                         .fontWeight(.regular)
                                         .foregroundColor(.primary)
-                                    Text(shared.selectedCommitment.descr)
+                                    Text(commitment.descr)
                                         .font(.subheadline)
                                         .fontWeight(.light)
                                         .bold()
@@ -42,20 +43,21 @@ struct DiscoverView: View {
                 }.buttonStyle(PlainButtonStyle())
                 .padding(.vertical, 20)
             
-            
-        }
+            }
         .frame(width: CGFloat(320), height: CGFloat(230))
         .background(Color.primary.colorInvert())
         .cornerRadius(10)
         .shadow(radius: 10)
+    .onAppear(perform: {
+        self.commitment.requestETA(source: self.shared.locationManager.lastLocation!)
+    })
     }
 }
 
 struct DiscoverRow: View {
+    @EnvironmentObject var shared: Shared
 
-   var aroundme = discoverData
-
-   var body: some View {
+    var body: some View {
     VStack (alignment: .leading) {
         Text("Around you")
             .fontWeight(.bold)
@@ -64,8 +66,8 @@ struct DiscoverRow: View {
 
          ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 20) {
-                ForEach(aroundme, id: \.ID) { currentCommitment in
-                  DiscoverView(commitment: currentCommitment)
+                ForEach(shared.discoverArray(), id: \.ID) { currentDiscover in
+                  DiscoverView(commitment: currentDiscover)
                }
             }
             .padding(20)
@@ -82,13 +84,3 @@ struct DiscoverRow_Previews: PreviewProvider {
    }
 }
 #endif
-
-
-let me = UserInfo(photo: "tim", name: "Tim", surname: "Cook")
-
-let discoverData = [
-    Commitment(userInfo: me, title: "Titolo1", descr: "Descrizione di prova", date: Date(), position: CLLocation(latitude: 40.675293, longitude: 14.772105)),
-    Commitment(userInfo: me, title: "Titolo2", descr: "Descrizione di prova", date: Date(), position: CLLocation(latitude: 40.675293, longitude: 14.772105)),
-    Commitment(userInfo: me, title: "Titolo3", descr: "Descrizione di prova", date: Date(), position: CLLocation(latitude: 40.675293, longitude: 14.772105)),
-    Commitment(userInfo: me, title: "Titolo4", descr: "Descrizione di prova", date: Date(), position: CLLocation(latitude: 40.675293, longitude: 14.772105))
-]
