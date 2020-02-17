@@ -12,7 +12,6 @@ import GoogleSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
-    
      var shared = Shared()
     
     //Metodo di accesso
@@ -39,13 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
 //        LO AGGIUNGO A CORE DATA
         CoreDataController.shared.addUser(user: myUser)
-        
-//        QUI CONTROLLO SE L'UTENTE HA EFFETTUATO L'ACCESSO
-        if !CoreDataController.shared.checkUser() {
-            shared.viewToShow = "LoginPageView"
-        } else {
-            shared.viewToShow = "HomeView"
-        }
+        HomeView.show(self.shared)
     }
     
     
@@ -65,7 +58,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
          return GIDSignIn.sharedInstance().handle(url)
        }
        
-       
        func application(_ application: UIApplication,
                         open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
          return GIDSignIn.sharedInstance().handle(url)
@@ -75,15 +67,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
         // Initialize sign-in
         GIDSignIn.sharedInstance().clientID = "445586099169-q07rg5bbaa4p5ajhe3gfitikj35ige1h.apps.googleusercontent.com"
         GIDSignIn.sharedInstance().delegate = self
-        
         return true
     }
-    
-    
     
 
     // MARK: UISceneSession Lifecycle
@@ -91,7 +79,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
-        
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
 

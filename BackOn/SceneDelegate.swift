@@ -27,10 +27,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let shared = appDelegate.shared
         
 //        QUI CONTROLLO SE L'UTENTE HA EFFETTUATO L'ACCESSO
-        if !CoreDataController.shared.checkUser() {
-            shared.viewToShow = "LoginPageView"
-        } else {
-            shared.viewToShow = "HomeView"
+        if !CoreDataController.shared.userIsLogged() {
+            LoginPageView.show(shared)
         }
         
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.

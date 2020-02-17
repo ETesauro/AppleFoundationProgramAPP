@@ -13,7 +13,7 @@ import MapKit
 class Shared: ObservableObject {
     @Published var activeView = "HomeView"
     @Published var authentication = false
-    @Published var viewToShow = "LoginPageView"
+    @Published var viewToShow = "HomeView"
     @Published var eta = 0.0
     var darkMode: Bool{
         get{
