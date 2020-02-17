@@ -79,12 +79,12 @@ class Commitment {
 
 let sonoIo = UserInfo(photo: "tim", name: "Giancarlo", surname: "Sorrentino")
 
-let commitmentData = [
-    Commitment(userInfo: sonoIo, title: "Transporting groceries", descr: "It's about a simple transport of some groceries to my place, sadly there is no elevator in my building.\nThanks so much in advance!", date: Date(), position: CLLocation(latitude: 40.675293, longitude: 14.772105)),
-    Commitment(userInfo: sonoIo, title: "Titolo2", descr: "Descrizione di prova", date: Date(), position: CLLocation(latitude: 40.675293, longitude: 14.772105)),
-    Commitment(userInfo: sonoIo, title: "Titolo3", descr: "Descrizione di prova", date: Date(), position: CLLocation(latitude: 40.675293, longitude: 14.772105)),
-    Commitment(userInfo: sonoIo, title: "Titolo4", descr: "Descrizione di prova", date: Date(), position: CLLocation(latitude: 40.675293, longitude: 14.772105))
-]
+//let commitmentData = [
+//    Commitment(userInfo: sonoIo, title: "Transporting groceries", descr: "It's about a simple transport of some groceries to my place, sadly there is no elevator in my building.\nThanks so much in advance!", date: Date(), position: CLLocation(latitude: 40.675293, longitude: 14.772105)),
+//    Commitment(userInfo: sonoIo, title: "Titolo2", descr: "Descrizione di prova", date: Date(), position: CLLocation(latitude: 40.675293, longitude: 14.772105)),
+//    Commitment(userInfo: sonoIo, title: "Titolo3", descr: "Descrizione di prova", date: Date(), position: CLLocation(latitude: 40.675293, longitude: 14.772105)),
+//    Commitment(userInfo: sonoIo, title: "Titolo4", descr: "Descrizione di prova", date: Date(), position: CLLocation(latitude: 40.675293, longitude: 14.772105))
+//]
 
 let uuid1 = UUID()
 let uuid2 = UUID()
@@ -92,24 +92,46 @@ let uuid3 = UUID()
 let uuid4 = UUID()
 
 let commitmentDict: [UUID:Commitment] = [
-    uuid1: Commitment(userInfo: sonoIo, title: "Transporting groceries", descr: "It's about a simple transport of some groceries to my place, sadly there is no elevator in my building.\nThanks so much in advance!", date: Date(), ID: uuid1),
-    uuid2: Commitment(userInfo: sonoIo, title: "Transporting groceries2", descr: "2", date: Date(), ID: uuid2),
-    uuid3: Commitment(userInfo: sonoIo, title: "Transporting groceries3", descr: "3", date: Date(), ID: uuid3),
-    uuid4: Commitment(userInfo: sonoIo, title: "Transporting groceries4", descr: "4", date: Date(), ID: uuid4)
+    uuid1: Commitment(userInfo: sonoIo, title: "Transporting groceries", descr: "It's about a simple transport of some groceries to my place, sadly there is no elevator in my building.\nThanks so much in advance!", date: Date().addingTimeInterval(TimeInterval(29*60)), ID: uuid1),
+    uuid2: Commitment(userInfo: sonoIo, title: "Transporting groceries2", descr: "2", date: Date().addingTimeInterval(TimeInterval(31*60)), ID: uuid2),
+    uuid3: Commitment(userInfo: sonoIo, title: "Transporting groceries3", descr: "3", date: Date().addingTimeInterval(TimeInterval(31*60)), ID: uuid3),
+    uuid4: Commitment(userInfo: sonoIo, title: "Transporting groceries4", descr: "4", date: Date().addingTimeInterval(TimeInterval(31*60)), ID: uuid4)
 ]
 
 
  //  Questo metodo da un array di commitment restituisce il più imminente assumendo che:
- //  l'array HA SOLO commitment futuri (non ancora implementata tale selezione) e NON è VUOTO
- func getNextCommitment(data: [Commitment]) -> Commitment {
+func getNextCommitment(dataDictionary: [UUID:Commitment]) -> Commitment? {
+    if(dataDictionary.count == 0){
+        return nil
+    }
+     let data = Array(dataDictionary.values)
      var toReturn = data[0]
      for c in data {
          if toReturn.date.compare(c.date) == ComparisonResult.orderedDescending {
-             toReturn = c
+            toReturn = c
          }
      }
      return toReturn
  }
+
+func getNextNotificableCommitment(dataDictionary: [UUID:Commitment]) -> Commitment? {
+    if(dataDictionary.count == 0){
+        return nil
+    }
+     var data = Array(dataDictionary.values)
+    var toReturn: Commitment?
+    repeat{
+        let i = data.removeFirst()
+        if(i.timeRemaining() > TimeInterval(30*60)){
+            toReturn = toReturn == nil ? i : toReturn
+            if(toReturn!.timeRemaining() > i.timeRemaining()){
+                toReturn = i
+            }
+        }
+    } while data.count>0
+    
+    return toReturn
+}
  
  func getNextFive(dataDictionary: [UUID: Commitment]) -> [Commitment]{
      let data = Array(dataDictionary.values)
