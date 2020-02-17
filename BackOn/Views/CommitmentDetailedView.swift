@@ -19,8 +19,8 @@ struct CommitmentDetailedView: View {
                 ZStack{
                     MapViewCommitment(key: selectedCommitment.ID)
                         .statusBar(hidden: true)
-                        .edgesIgnoringSafeArea(.top)
-                        .frame(height: 515)
+                        .edgesIgnoringSafeArea(.all)
+                        .frame(height: 530)
                     ZStack{
                         Image(systemName: "circle.fill")
                         .font(.title)

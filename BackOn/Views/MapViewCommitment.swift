@@ -11,7 +11,7 @@ import MapKit
 
 struct MapViewCommitment: UIViewRepresentable {
     @EnvironmentObject var shared: Shared
-    @State var alreadyAdded = false
+    
     var key: UUID
 //    private static var mapViewStore = [UUID : MKMapView]()
     
@@ -60,9 +60,6 @@ struct MapViewCommitment: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: MKMapView, context: Context) {
-        if shared.viewToShow == "CommitmentView" {
-        
-        }
         let commitment = shared.commitmentSet[key]
         if commitment != nil{
             //https://stackoverflow.com/questions/51010956/how-can-i-know-if-an-annotation-is-already-on-the-mapview

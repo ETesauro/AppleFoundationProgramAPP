@@ -116,10 +116,10 @@ let uuid7 = UUID()
 let uuid8 = UUID()
 
 let commitmentDict: [UUID:Commitment] = [
-    uuid1: Commitment(userInfo: me1, title: "Spesa1", descr: "Descrizione di spesa1", date: Date().addingTimeInterval(TimeInterval(29*60), position: CLLocation(latitude: 41.775293, longitude: 14.572105), ID: uuid1),
-    uuid2: Commitment(userInfo: me2, title: "Pulizie1", descr: "Descrizione di pulizie1", date: Date().addingTimeInterval(TimeInterval(31*60), position: CLLocation(latitude: 41.275293, longitude: 14.572105), ID: uuid2),
-    uuid3: Commitment(userInfo: me3, title: "Soldi1", descr: "Descrizione di soldi1", date: Date().addingTimeInterval(TimeInterval(31*60), position: CLLocation(latitude: 41.275293, longitude: 15.572105), ID: uuid3),
-    uuid4: Commitment(userInfo: me4, title: "Uscita1", descr: "Descrizione di uscita1", date: Date().addingTimeInterval(TimeInterval(31*60), position: CLLocation(latitude: 41.075293, longitude: 15.172105), ID: uuid4)
+    uuid1: Commitment(userInfo: me1, title: "Spesa1", descr: "Descrizione di spesa1", date: Date().addingTimeInterval(TimeInterval(29*60)), position: CLLocation(latitude: 41.775293, longitude: 14.572105), ID: uuid1),
+    uuid2: Commitment(userInfo: me2, title: "Pulizie1", descr: "Descrizione di pulizie1", date: Date().addingTimeInterval(TimeInterval(31*60)), position: CLLocation(latitude: 41.275293, longitude: 14.572105), ID: uuid2),
+    uuid3: Commitment(userInfo: me3, title: "Soldi1", descr: "Descrizione di soldi1", date: Date().addingTimeInterval(TimeInterval(31*60)), position: CLLocation(latitude: 41.275293, longitude: 15.572105), ID: uuid3),
+    uuid4: Commitment(userInfo: me4, title: "Uscita1", descr: "Descrizione di uscita1", date: Date().addingTimeInterval(TimeInterval(31*60)), position: CLLocation(latitude: 41.075293, longitude: 15.172105), ID: uuid4)
 ]
 
 let discoverDict: [UUID:Commitment] = [
@@ -156,10 +156,8 @@ func getNextNotificableCommitment(dataDictionary: [UUID:Commitment]) -> Commitme
             toReturn = toReturn == nil ? i : toReturn
             if(toReturn!.timeRemaining() > i.timeRemaining()){
                 toReturn = i
-    } 
-    
-        } while data.count>0
-    }
+            }
+        }} while data.count>0
     return toReturn
 }
  

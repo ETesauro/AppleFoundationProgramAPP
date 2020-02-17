@@ -47,7 +47,6 @@ struct HomeView: View {
             }
         }
         .background(Color("background"))
-        .edgesIgnoringSafeArea(.all)
     }
 }
 
