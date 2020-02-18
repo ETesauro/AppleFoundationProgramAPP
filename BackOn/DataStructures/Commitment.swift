@@ -91,6 +91,8 @@ let uuid2 = UUID()
 let uuid3 = UUID()
 let uuid4 = UUID()
 
+let needsTitles = ["Carrying things", "Taking the dog for a walk", "Going home", "Withdrawing cash"]
+
 let commitmentDict: [UUID:Commitment] = [
     uuid1: Commitment(userInfo: sonoIo, title: "Transporting groceries", descr: "It's about a simple transport of some groceries to my place, sadly there is no elevator in my building.\nThanks so much in advance!", date: Date().addingTimeInterval(TimeInterval(29*60)), ID: uuid1),
     uuid2: Commitment(userInfo: sonoIo, title: "Transporting groceries2", descr: "2", date: Date().addingTimeInterval(TimeInterval(31*60)), ID: uuid2),

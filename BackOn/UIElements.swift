@@ -27,7 +27,7 @@ struct DoItButton: View {
             Spacer()
             Button(action: {
                 print("I'll do it")
-                HomeView.show(self.shared)
+                NeederView.show(self.shared)
             }) {
                 HStack{
                     Text("I'll do it ")
@@ -59,7 +59,7 @@ struct CantDoItButton: View {
             Spacer()
             Button(action: {
                 print("Can't do it")
-                HomeView.show(self.shared)
+                AddNeedView.show(self.shared)
             }) {
                 HStack{
                     Text("Can't do it ")

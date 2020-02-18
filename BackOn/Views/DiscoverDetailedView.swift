@@ -26,7 +26,8 @@ struct DiscoverDetailedView: View {
                         .foregroundColor(Color(.systemGroupedBackground))
                         Button(action: {
                             withAnimation{
-                                HomeView.show(self.shared)
+                                NeederView.show(self.shared)
+                                print("CI ENTROOOOO\n\n\n")
                             }}){
                                 Image(systemName: "xmark.circle.fill")
                                     .font(.largeTitle)

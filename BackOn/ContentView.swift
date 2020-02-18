@@ -31,6 +31,10 @@ struct ContentView: View {
 //                    .animation(.spring())
             } else if shared.viewToShow == "DiscoverDetailedView"{
                 DiscoverDetailedView()
+            } else if shared.viewToShow == "AddNeedView"{
+                AddNeedView()
+            } else if shared.viewToShow == "NeederView"{
+                NeederView()
             }
             else {
                 Text("Vista sbagliata :(")
