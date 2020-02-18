@@ -35,6 +35,8 @@ struct HomeView: View {
                 }
                 CommitmentRow()
                 DiscoverRow().offset(x: 0, y: -20)
+                NeederButton()
+                Spacer()
             }
         }
         .padding(.top, 40)

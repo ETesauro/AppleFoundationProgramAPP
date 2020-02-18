@@ -39,6 +39,22 @@ struct CloseButton: View {
     }
 }
 
+struct NeederButton: View {
+    @EnvironmentObject var shared: Shared
+    
+    var body: some View {
+            Button(action: {
+                withAnimation{
+                    NeederView.show(self.shared)
+                }}){
+                    Image(systemName: "person")
+                        .font(.largeTitle)
+                        .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+            }
+        
+    }
+}
+
 struct DoItButton: View {
     @EnvironmentObject var shared: Shared
     
