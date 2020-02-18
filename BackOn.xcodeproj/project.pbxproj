@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		12F3808E23FBE6AA00B35497 /* AddNeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F3808D23FBE6AA00B35497 /* AddNeedView.swift */; };
 		14817F8723F82BB00051A89A /* NeederView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14817F8523F82BB00051A89A /* NeederView.swift */; };
 		2F0AA70323FBD53E008DA6E3 /* DatabaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AA70223FBD53E008DA6E3 /* DatabaseController.swift */; };
 		2F575FF723F686F7001D97F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F575FF623F686F7001D97F6 /* AppDelegate.swift */; };
@@ -24,7 +23,6 @@
 		2F57602823F6B467001D97F6 /* UserPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57601D23F6B467001D97F6 /* UserPreview.swift */; };
 		2F57602923F6B467001D97F6 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57601E23F6B467001D97F6 /* Avatar.swift */; };
 		2F57602C23F6B467001D97F6 /* CommitmentDetailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57602223F6B467001D97F6 /* CommitmentDetailedView.swift */; };
-		2F57602D23F6B467001D97F6 /* MapViewCommitment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57602323F6B467001D97F6 /* MapViewCommitment.swift */; };
 		2F57602E23F6B467001D97F6 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57602423F6B467001D97F6 /* HomeView.swift */; };
 		2F57602F23F6B467001D97F6 /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57602523F6B467001D97F6 /* DiscoverView.swift */; };
 		2F57603023F6B467001D97F6 /* CommitmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57602623F6B467001D97F6 /* CommitmentView.swift */; };
@@ -33,14 +31,17 @@
 		2F57603723F6B4D1001D97F6 /* Commitment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57603623F6B4D1001D97F6 /* Commitment.swift */; };
 		2FE9A31123F6E69300E3419A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FE9A31023F6E69300E3419A /* CloudKit.framework */; };
 		2FEAAF1723F820A000225F13 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEAAF1623F820A000225F13 /* CoreDataController.swift */; };
+		81460C9423FC534800EB6372 /* AddNeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81460C9323FC534700EB6372 /* AddNeedView.swift */; };
+		81571FBF23FC46EA00FAF25A /* MapViewDiscoverDetailed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81571FBB23FC46EA00FAF25A /* MapViewDiscoverDetailed.swift */; };
+		81571FC023FC46EA00FAF25A /* MapViewDiscover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81571FBC23FC46EA00FAF25A /* MapViewDiscover.swift */; };
+		81571FC123FC46EA00FAF25A /* MapViewCommitmentDetailed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81571FBD23FC46EA00FAF25A /* MapViewCommitmentDetailed.swift */; };
+		81571FC223FC46EA00FAF25A /* MapViewCommitment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81571FBE23FC46EA00FAF25A /* MapViewCommitment.swift */; };
 		81A0C4B923F9C6F00065CC87 /* DiscoverDetailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A0C4B823F9C6F00065CC87 /* DiscoverDetailedView.swift */; };
-		81F8982723FAEC3500F41BC4 /* MapViewDiscover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F8982623FAEC3500F41BC4 /* MapViewDiscover.swift */; };
 		A8E9F2EDA35F7780FFA72898 /* Pods_BackOn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E0E97CC42E41EFEE4BC567 /* Pods_BackOn.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		01877A788D3892A7C4FC0E62 /* Pods-BackOn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BackOn.debug.xcconfig"; path = "Target Support Files/Pods-BackOn/Pods-BackOn.debug.xcconfig"; sourceTree = "<group>"; };
-		12F3808D23FBE6AA00B35497 /* AddNeedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNeedView.swift; sourceTree = "<group>"; };
 		14817F8523F82BB00051A89A /* NeederView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeederView.swift; sourceTree = "<group>"; };
 		2F0AA70223FBD53E008DA6E3 /* DatabaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseController.swift; sourceTree = "<group>"; };
 		2F575FF323F686F7001D97F6 /* BackOn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BackOn.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,7 +60,6 @@
 		2F57601D23F6B467001D97F6 /* UserPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPreview.swift; sourceTree = "<group>"; };
 		2F57601E23F6B467001D97F6 /* Avatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
 		2F57602223F6B467001D97F6 /* CommitmentDetailedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommitmentDetailedView.swift; sourceTree = "<group>"; };
-		2F57602323F6B467001D97F6 /* MapViewCommitment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewCommitment.swift; sourceTree = "<group>"; };
 		2F57602423F6B467001D97F6 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		2F57602523F6B467001D97F6 /* DiscoverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
 		2F57602623F6B467001D97F6 /* CommitmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommitmentView.swift; sourceTree = "<group>"; };
@@ -71,8 +71,12 @@
 		2FEAAF1623F820A000225F13 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		55E0E97CC42E41EFEE4BC567 /* Pods_BackOn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BackOn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6084146565045BDB2AE4E5F0 /* Pods-BackOn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BackOn.release.xcconfig"; path = "Target Support Files/Pods-BackOn/Pods-BackOn.release.xcconfig"; sourceTree = "<group>"; };
+		81460C9323FC534700EB6372 /* AddNeedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNeedView.swift; sourceTree = "<group>"; };
+		81571FBB23FC46EA00FAF25A /* MapViewDiscoverDetailed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewDiscoverDetailed.swift; sourceTree = "<group>"; };
+		81571FBC23FC46EA00FAF25A /* MapViewDiscover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewDiscover.swift; sourceTree = "<group>"; };
+		81571FBD23FC46EA00FAF25A /* MapViewCommitmentDetailed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewCommitmentDetailed.swift; sourceTree = "<group>"; };
+		81571FBE23FC46EA00FAF25A /* MapViewCommitment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewCommitment.swift; sourceTree = "<group>"; };
 		81A0C4B823F9C6F00065CC87 /* DiscoverDetailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverDetailedView.swift; sourceTree = "<group>"; };
-		81F8982623FAEC3500F41BC4 /* MapViewDiscover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewDiscover.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,15 +171,14 @@
 		2F57601F23F6B467001D97F6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				12F3808D23FBE6AA00B35497 /* AddNeedView.swift */,
+				81571FBA23FC46EA00FAF25A /* MapViews */,
 				2F57602223F6B467001D97F6 /* CommitmentDetailedView.swift */,
+				81460C9323FC534700EB6372 /* AddNeedView.swift */,
 				2F57602623F6B467001D97F6 /* CommitmentView.swift */,
 				81A0C4B823F9C6F00065CC87 /* DiscoverDetailedView.swift */,
 				2F57602523F6B467001D97F6 /* DiscoverView.swift */,
 				2F57602423F6B467001D97F6 /* HomeView.swift */,
 				2F575FFD23F686F7001D97F6 /* LoginPageView.swift */,
-				2F57602323F6B467001D97F6 /* MapViewCommitment.swift */,
-				81F8982623FAEC3500F41BC4 /* MapViewDiscover.swift */,
 				14817F8523F82BB00051A89A /* NeederView.swift */,
 			);
 			path = Views;
@@ -196,6 +199,17 @@
 				2FEAAF1623F820A000225F13 /* CoreDataController.swift */,
 			);
 			path = CoreDataController;
+			sourceTree = "<group>";
+		};
+		81571FBA23FC46EA00FAF25A /* MapViews */ = {
+			isa = PBXGroup;
+			children = (
+				81571FBB23FC46EA00FAF25A /* MapViewDiscoverDetailed.swift */,
+				81571FBC23FC46EA00FAF25A /* MapViewDiscover.swift */,
+				81571FBD23FC46EA00FAF25A /* MapViewCommitmentDetailed.swift */,
+				81571FBE23FC46EA00FAF25A /* MapViewCommitment.swift */,
+			);
+			path = MapViews;
 			sourceTree = "<group>";
 		};
 		935A672D2B2BFADE3813914A /* Pods */ = {
@@ -350,13 +364,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81571FC023FC46EA00FAF25A /* MapViewDiscover.swift in Sources */,
 				2F57602C23F6B467001D97F6 /* CommitmentDetailedView.swift in Sources */,
+				81460C9423FC534800EB6372 /* AddNeedView.swift in Sources */,
 				2FEAAF1723F820A000225F13 /* CoreDataController.swift in Sources */,
 				2F575FF723F686F7001D97F6 /* AppDelegate.swift in Sources */,
+				81571FC223FC46EA00FAF25A /* MapViewCommitment.swift in Sources */,
 				14817F8723F82BB00051A89A /* NeederView.swift in Sources */,
+				81571FBF23FC46EA00FAF25A /* MapViewDiscoverDetailed.swift in Sources */,
+				81571FC123FC46EA00FAF25A /* MapViewCommitmentDetailed.swift in Sources */,
 				2F0AA70323FBD53E008DA6E3 /* DatabaseController.swift in Sources */,
 				2F57602E23F6B467001D97F6 /* HomeView.swift in Sources */,
-				81F8982723FAEC3500F41BC4 /* MapViewDiscover.swift in Sources */,
 				2F57603723F6B4D1001D97F6 /* Commitment.swift in Sources */,
 				2F575FF923F686F7001D97F6 /* SceneDelegate.swift in Sources */,
 				2F57601A23F6B42D001D97F6 /* LocationManager.swift in Sources */,
@@ -364,9 +382,7 @@
 				2F57602F23F6B467001D97F6 /* DiscoverView.swift in Sources */,
 				2F57603423F6B4AC001D97F6 /* ContentView.swift in Sources */,
 				2F57603023F6B467001D97F6 /* CommitmentView.swift in Sources */,
-				2F57602D23F6B467001D97F6 /* MapViewCommitment.swift in Sources */,
 				2F57602823F6B467001D97F6 /* UserPreview.swift in Sources */,
-				12F3808E23FBE6AA00B35497 /* AddNeedView.swift in Sources */,
 				2F575FFE23F686F7001D97F6 /* LoginPageView.swift in Sources */,
 				2F57601723F6A9A2001D97F6 /* SharedResources.swift in Sources */,
 				81A0C4B923F9C6F00065CC87 /* DiscoverDetailedView.swift in Sources */,

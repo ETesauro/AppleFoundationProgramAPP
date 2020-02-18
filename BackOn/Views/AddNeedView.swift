@@ -12,22 +12,26 @@ struct AddNeedView: View {
     @State var present = false
     @State var present2 = false
     
-    @State var selection = 0.0
-    @State var date = Date()
-    var array = [0.1, 0.3, 4.0, 5, 7.9]
+    class Pickerelection: ObservableObject {
+        @Published var selection = 0
+    }
     
-    //        var formattedDate: String {
-    //            let formatter = DateFormatter()
-    //            formatter.dateStyle = .long
-    //            return formatter.string(from: date)
-    //        }
+    @State var date = Date()
+    var array = ["Select your need", "b", "c", "d", "e", "f"]
+    @ObservedObject var needTitlePicker = Pickerelection()
+
     
     private let heightFormat = "%.0f cm"
     private let weightFormat = "%.1f kg"
     @State private var pickerType = 0
     
+//    @Published var toggleOn = false
+    
     @State private var heightCm = 0.0
     @State private var weightKg = 0.0
+    
+    @State var temp: String = ""
+    @State var needDescription: String = ""
     
     var body: some View {
         HStack{
@@ -36,10 +40,13 @@ struct AddNeedView: View {
                 Text("Add Need")
                     .font(.title)
                     .fontWeight(.bold)
+                    .padding(.bottom, 10)
                 
+                Text("Title")
+                    .font(.headline)
                 
-                Text("What kind of help do you need?")
-                Text("Select the kind of need")
+                TextField("\(self.array[Int(self.needTitlePicker.selection)])", text: $temp)
+                    .disabled(true)
                     .onTapGesture { self.present.toggle() }
                     .alert(isPresented: $present, contents: {
                         
@@ -47,28 +54,54 @@ struct AddNeedView: View {
                             Spacer()
                             HStack {
                                 Spacer()
-                                Picker("", selection: self.$selection) {
-                                    ForEach(self.array, id: \.self) { item in
-                                        Text(String(item))
+                                Picker("Il Picker maledetto", selection: self.$needTitlePicker.selection) {
+//                                    ForEach(self.array, id: \.self) { item in
+//                                        Text(item)
+//                                    }
+                                    ForEach(1 ..< self.array.count) {
+                                       Text(self.array[$0])
                                     }
                                 }
                                 .labelsHidden()
-                                Spacer()
                             }
                             .background(BlurView(style: .light).blendMode(.plusLighter))
                             
                         }
                     }) {
                         withAnimation(.easeInOut) {
+                            print("Mi apro \n\n")
                             self.present = false
+                            self.needTitlePicker.selection = self.needTitlePicker.selection + 1
+                            print(self.needTitlePicker.selection)
+                            print("\n")
                         }
                 }
                 
+            
+                
+                HStack{
+                Text("Description")
+                    .font(.headline)
+                Text(" Optional")
+                    .font(.caption)
+                }
+                
+                TextField("", text: self.$needDescription)
+                    .background(Color(.systemGray5))
+                    .font(.callout)
+//
+//                Toggle(isOn: $toggleOn) {
+//                    Text("@State Toggle: \(String(toggleOn))")
+//                }
+//                Toggle(isOn: $data.toggleOn) {
+//                    Text("@Published Toggle: \(String(data.toggleOn))")
+//                }
                 
                 Spacer()
-                
             }
             Spacer()
+            
+            
         }.padding()
     }
 }

@@ -52,7 +52,7 @@ class CoreDataController {
         }
     }
     
-    func getLoggedUser() -> (String, UserInfo){
+    func getLoggedUser() -> (String, UserInfo) {
         let fetchRequest: NSFetchRequest<PUser> = PUser.fetchRequest()
         do {
             let array = try self.context.fetch(fetchRequest)
@@ -60,7 +60,8 @@ class CoreDataController {
                 print("User not logged yet")
                 return ("Nil", UserInfo(photo: URL(string: "")!, name: "", surname: "", email: ""))
             }
-            let myUser = UserInfo(photo: array[0].photo!, name: array[0].name!, surname: array[0].surname!, email: array[0].email!)
+            
+            let myUser = UserInfo(photo: array[0].photo!.absoluteString, name: array[0].name!, surname: array[0].surname!, email: array[0].email!, url: array[0].photo!)
             print("Utente: \(myUser.name), \(myUser.surname), \(myUser.email!), \(myUser.photo)")
             return ("OK", myUser)
         } catch let error {

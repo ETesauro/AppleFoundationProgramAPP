@@ -25,7 +25,7 @@ class UserInfo {
         self.surname = surname
     }
     
-//    Costruttore aggiuntivo utilizzato al momento dell'accesso con Google
+    //    Costruttore aggiuntivo utilizzato al momento dell'accesso con Google
     init(photo: URL, name: String, surname: String, email: String) {
         self.photo = photo
         self.name = name
@@ -34,14 +34,12 @@ class UserInfo {
     }
     
     init(photo: String, name: String, surname: String, email: String, url: URL) {
-           self.photo = photo
-           self.name = name
-           self.surname = surname
-           self.email = email
-           do{
-               profilePic = try Image(uiImage: UIImage(data: Data(contentsOf: url))!)
-           }
-           catch{
-           }
-       }
+        self.photo = url
+        self.name = name
+        self.surname = surname
+        self.email = email
+        do {
+            profilePic = try Image(uiImage: UIImage(data: Data(contentsOf: url))!)
+        } catch {}
+    }
 }
