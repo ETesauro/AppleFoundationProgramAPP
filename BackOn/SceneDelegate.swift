@@ -12,8 +12,6 @@ import SwiftUI
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
-   
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -30,6 +28,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if !CoreDataController.shared.userIsLogged() {
             LoginPageView.show(shared)
         }
+        
+//              HO SCELTO AUTORIZZAZIONE AD ALERT, BADGE E NOTIFICATION SOUND
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+            if success {
+                print("Notification permission set!")
+            } else if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+        
         
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.

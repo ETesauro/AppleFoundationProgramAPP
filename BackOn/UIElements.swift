@@ -19,6 +19,26 @@ var locAlert = Alert(
     secondaryButton: .cancel()
 )
 
+struct CloseButton: View {
+    @EnvironmentObject var shared: Shared
+    
+    var body: some View {
+        ZStack{
+            Image(systemName: "circle.fill")
+                .font(.title)
+                .foregroundColor(Color(.systemGroupedBackground))
+            Button(action: {
+                withAnimation{
+                    HomeView.show(self.shared)
+                }}){
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.largeTitle)
+                        .foregroundColor(Color(#colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.8, alpha: 1)))
+            }
+        }
+    }
+}
+
 struct DoItButton: View {
     @EnvironmentObject var shared: Shared
     
@@ -35,7 +55,6 @@ struct DoItButton: View {
                         .font(.title)
                     Image(systemName: "hand.raised")
                         .font(.title)
-
                 }
                 .padding(20)
                 .background(Color(.systemBlue))
@@ -67,7 +86,6 @@ struct CantDoItButton: View {
                         .font(.title)
                     Image(systemName: "hand.raised.slash")
                         .font(.title)
-
                 }
                 .padding(20)
                 .background(Color(.systemRed))

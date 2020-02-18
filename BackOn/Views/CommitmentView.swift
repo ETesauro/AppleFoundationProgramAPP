@@ -9,45 +9,16 @@
 import SwiftUI
 import MapKit
 
-struct CommitmentRow: View {
-    @EnvironmentObject var shared: Shared
-//    var commitments = [Commitment]()
-//    
-//    init() {
-//        commitments = commitmentData
-//    }
-
-   var body: some View {
-      VStack (alignment: .leading){
-         Text("Your commitments")
-            .fontWeight(.heavy)
-            .padding(.leading)
-
-         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 20) {
-                ForEach(shared.commitmentArray(), id: \.ID) { currentCommitment in
-                    CommitmentView(commitment: currentCommitment)
-                }
-            }
-            .padding(20)
-            .padding(.leading, 10)
-         }
-      }
-   }
-}
-
-
 struct CommitmentView: View {
     @EnvironmentObject var shared: Shared
     var commitment: Commitment
-        
+    
     var body: some View {
-         VStack {
-            MapView(key: commitment.ID)
+        VStack {
+            MapViewCommitment(key: commitment.ID)
                 .frame(height: 250)
             Button(action: {
                 withAnimation {
-                    self.shared.getETA(destination: self.commitment.position.coordinate)
                     self.shared.selectedCommitment = self.commitment
                     CommitmentDetailedView.show(self.shared)
                 }
@@ -55,31 +26,99 @@ struct CommitmentView: View {
                 VStack{
                     Avatar(image: commitment.userInfo.photo, size: 60)
                     Spacer()
-                    
                     Text(self.commitment.userInfo.identity)
-                    .font(.title)
-                    .foregroundColor(Color(.systemGroupedBackground))
+                        .font(.title)
+                        .foregroundColor(Color.primary)
                     Spacer()
-                    
-                    Text(self.commitment.title).foregroundColor(Color(
-                    .systemGroupedBackground))
+                    Text(self.commitment.title).foregroundColor(Color.primary)
                 }.offset(x: 0, y: -30)
             }.buttonStyle(PlainButtonStyle())
         }
         .frame(width: CGFloat(320), height: CGFloat(400))
-        .background(Color.primary)
+        .background(Color.primary.colorInvert())
         .cornerRadius(10)
         .shadow(radius: 10)
     }
 }
 
+struct CommitmentRow: View {
+    @EnvironmentObject var shared: Shared
+    
+    var body: some View {
+        VStack (alignment: .leading){
+            Button(action: {
+                withAnimation{
+                    CommitmentsListView.show(self.shared)
+                }
+            }) {
+                HStack {
+                    Text("Your commitments")
+                        .fontWeight(.bold)
+                        .font(.title)
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .font(.headline)
+                        .foregroundColor(Color(UIColor.systemBlue))
+                }.padding(.horizontal, 20)
+            }.buttonStyle(PlainButtonStyle())
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 20) {
+                    ForEach(shared.commitmentArray(), id: \.ID) { currentCommitment in
+                        CommitmentView(commitment: currentCommitment)
+                    }
+                }
+                .padding(20)
+            }.offset(x: 0, y: -20)
+        }
+    }
+}
+
+
+struct CommitmentsListView: View {
+    @EnvironmentObject var shared: Shared
+    
+    var body: some View {
+        VStack (alignment: .leading, spacing: 10){
+            HStack {
+                Text("Your commitments")
+                    .fontWeight(.bold)
+                    .font(.title)
+                Spacer()
+                CloseButton()
+            }.padding([.top,.horizontal])
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack (alignment: .center, spacing: 25){
+                    ForEach(shared.commitmentArray(), id: \.ID) { currentCommitment in
+                        Button(action: {
+                            self.shared.selectedCommitment = currentCommitment
+                            CommitmentDetailedView.show(self.shared)
+                        }) {
+                            HStack {
+                                UserPreview(user: currentCommitment.userInfo, description: currentCommitment.title, whiteText: self.shared.darkMode)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .font(.headline)
+                                    .foregroundColor(Color(UIColor.systemBlue))
+                            }.padding(.horizontal, 15)
+                        }.buttonStyle(PlainButtonStyle())
+                    }
+                }.padding(.top,20)
+            }
+            Spacer()
+        }
+        .padding(.top, 40)
+        .background(Color("background"))
+        .edgesIgnoringSafeArea(.all)
+    }
+}
 
 
 #if DEBUG
 struct CommitmentRow_Previews: PreviewProvider {
-   static var previews: some View {
-      CommitmentRow()
-   }
+    static var previews: some View {
+        CommitmentRow()
+    }
 }
 #endif
 

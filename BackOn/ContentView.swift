@@ -26,11 +26,15 @@ struct ContentView: View {
             } else if shared.viewToShow == "LoginPageView"{
                 LoginPageView()
             } else if shared.viewToShow == "CommitmentDetailedView"{
-                CommitmentDetailedView()
+                CommitmentDetailedView(selectedCommitment: shared.selectedCommitment)
 //                    .transition(.move(edge: .bottom))
 //                    .animation(.spring())
             } else if shared.viewToShow == "DiscoverDetailedView"{
-                DiscoverDetailedView()
+                DiscoverDetailedView(selectedCommitment: shared.selectedCommitment)
+//            } else if shared.viewToShow == "DiscoverListView"{
+//                DiscoverListView()
+            } else if shared.viewToShow == "CommitmentsListView"{
+                CommitmentsListView()
             } else if shared.viewToShow == "AddNeedView"{
                 AddNeedView()
             } else if shared.viewToShow == "NeederView"{
@@ -42,7 +46,8 @@ struct ContentView: View {
                     .fontWeight(.regular)
                     .foregroundColor(.primary)
             }
-        }.alert(isPresented: $shared.locationManager.showAlert){locAlert}
+        }
+        .alert(isPresented: $shared.locationManager.showAlert){locAlert}
     }
 }
 
