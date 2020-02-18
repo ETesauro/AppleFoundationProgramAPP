@@ -11,17 +11,18 @@ import SwiftUI
 struct NeederView: View {
     var body: some View {
         VStack(alignment: .leading){
-            Text("Ciao Andy!")
+            Text("Hi Andy!")
                 .font(.largeTitle)
                 .bold()
                 .fontWeight(.heavy)
                 .padding(20)
-                
-            CommitmentRow()
+            DiscoverRow()
             Spacer()
             AddNeedButton()
             Spacer()
-        }
+        }.padding(.top, 40)
+        .background(Color("background"))
+        .edgesIgnoringSafeArea(.all)
     }
 }
 

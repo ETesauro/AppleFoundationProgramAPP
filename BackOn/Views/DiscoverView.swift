@@ -61,7 +61,7 @@ struct DiscoverRow: View {
                 }
             }) {
                 HStack {
-                    Text("Around you")
+                    Text(shared.viewToShow == "HomeView" ? "Around you" : "Your requests")
                         .fontWeight(.bold)
                         .font(.title)
                     Spacer()
