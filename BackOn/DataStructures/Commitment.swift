@@ -70,7 +70,7 @@ class Commitment: ObservableObject{
         request.transportType = .walking
         let directions = MKDirections(request: request)
         directions.calculateETA { (res, error) in
-            guard error == nil else {print("error");return}
+            guard error == nil else {print("Error while getting ETA");return}
             self.eta = res!.expectedTravelTime
             let hour = self.eta>7200 ? "hrs" : "hr"
             if self.eta > 3600{

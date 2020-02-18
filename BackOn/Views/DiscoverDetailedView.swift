@@ -17,7 +17,7 @@ struct DiscoverDetailedView: View {
         VStack {
             VStack {
                 ZStack {
-                    MapViewCommitment(key: selectedCommitment.ID)
+                    MapViewDiscover(key: selectedCommitment.ID)
                         .statusBar(hidden: true)
                         .edgesIgnoringSafeArea(.all)
                         .frame(height: 515)
