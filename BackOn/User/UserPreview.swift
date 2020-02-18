@@ -40,18 +40,18 @@ struct UserPreview: View {
                     .fontWeight(.regular)
                     .foregroundColor(textColor)
                     .offset(x: 0, y: -3)
+                    .lineLimit(1)
                 if descr != "" {
                     Text(descr)
                         .font(.subheadline)
                         .fontWeight(.light)
                         .foregroundColor(textColor)
                         .offset(x: 0, y: 1)
+                        .lineLimit(1)
                 }
-            
-            }.padding(.leading)
+            }.padding(.leading, 5)
             Spacer()
         }
-        .padding([.horizontal, .bottom])
     }
 }
 

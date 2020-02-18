@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		14817F8623F82BB00051A89A /* AddNeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14817F8423F82BB00051A89A /* AddNeedView.swift */; };
+		12F3808E23FBE6AA00B35497 /* AddNeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F3808D23FBE6AA00B35497 /* AddNeedView.swift */; };
 		14817F8723F82BB00051A89A /* NeederView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14817F8523F82BB00051A89A /* NeederView.swift */; };
+		2F0AA70323FBD53E008DA6E3 /* DatabaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AA70223FBD53E008DA6E3 /* DatabaseController.swift */; };
 		2F575FF723F686F7001D97F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F575FF623F686F7001D97F6 /* AppDelegate.swift */; };
 		2F575FF923F686F7001D97F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F575FF823F686F7001D97F6 /* SceneDelegate.swift */; };
 		2F575FFC23F686F7001D97F6 /* BackOn.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2F575FFA23F686F7001D97F6 /* BackOn.xcdatamodeld */; };
@@ -23,7 +24,7 @@
 		2F57602823F6B467001D97F6 /* UserPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57601D23F6B467001D97F6 /* UserPreview.swift */; };
 		2F57602923F6B467001D97F6 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57601E23F6B467001D97F6 /* Avatar.swift */; };
 		2F57602C23F6B467001D97F6 /* CommitmentDetailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57602223F6B467001D97F6 /* CommitmentDetailedView.swift */; };
-		2F57602D23F6B467001D97F6 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57602323F6B467001D97F6 /* MapView.swift */; };
+		2F57602D23F6B467001D97F6 /* MapViewCommitment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57602323F6B467001D97F6 /* MapViewCommitment.swift */; };
 		2F57602E23F6B467001D97F6 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57602423F6B467001D97F6 /* HomeView.swift */; };
 		2F57602F23F6B467001D97F6 /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57602523F6B467001D97F6 /* DiscoverView.swift */; };
 		2F57603023F6B467001D97F6 /* CommitmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F57602623F6B467001D97F6 /* CommitmentView.swift */; };
@@ -33,13 +34,15 @@
 		2FE9A31123F6E69300E3419A /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FE9A31023F6E69300E3419A /* CloudKit.framework */; };
 		2FEAAF1723F820A000225F13 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEAAF1623F820A000225F13 /* CoreDataController.swift */; };
 		81A0C4B923F9C6F00065CC87 /* DiscoverDetailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A0C4B823F9C6F00065CC87 /* DiscoverDetailedView.swift */; };
+		81F8982723FAEC3500F41BC4 /* MapViewDiscover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F8982623FAEC3500F41BC4 /* MapViewDiscover.swift */; };
 		A8E9F2EDA35F7780FFA72898 /* Pods_BackOn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E0E97CC42E41EFEE4BC567 /* Pods_BackOn.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		01877A788D3892A7C4FC0E62 /* Pods-BackOn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BackOn.debug.xcconfig"; path = "Target Support Files/Pods-BackOn/Pods-BackOn.debug.xcconfig"; sourceTree = "<group>"; };
-		14817F8423F82BB00051A89A /* AddNeedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNeedView.swift; sourceTree = "<group>"; };
+		12F3808D23FBE6AA00B35497 /* AddNeedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNeedView.swift; sourceTree = "<group>"; };
 		14817F8523F82BB00051A89A /* NeederView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeederView.swift; sourceTree = "<group>"; };
+		2F0AA70223FBD53E008DA6E3 /* DatabaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseController.swift; sourceTree = "<group>"; };
 		2F575FF323F686F7001D97F6 /* BackOn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BackOn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F575FF623F686F7001D97F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F575FF823F686F7001D97F6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,7 +59,7 @@
 		2F57601D23F6B467001D97F6 /* UserPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPreview.swift; sourceTree = "<group>"; };
 		2F57601E23F6B467001D97F6 /* Avatar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
 		2F57602223F6B467001D97F6 /* CommitmentDetailedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommitmentDetailedView.swift; sourceTree = "<group>"; };
-		2F57602323F6B467001D97F6 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		2F57602323F6B467001D97F6 /* MapViewCommitment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewCommitment.swift; sourceTree = "<group>"; };
 		2F57602423F6B467001D97F6 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		2F57602523F6B467001D97F6 /* DiscoverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
 		2F57602623F6B467001D97F6 /* CommitmentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommitmentView.swift; sourceTree = "<group>"; };
@@ -69,6 +72,7 @@
 		55E0E97CC42E41EFEE4BC567 /* Pods_BackOn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BackOn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6084146565045BDB2AE4E5F0 /* Pods-BackOn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BackOn.release.xcconfig"; path = "Target Support Files/Pods-BackOn/Pods-BackOn.release.xcconfig"; sourceTree = "<group>"; };
 		81A0C4B823F9C6F00065CC87 /* DiscoverDetailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverDetailedView.swift; sourceTree = "<group>"; };
+		81F8982623FAEC3500F41BC4 /* MapViewDiscover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewDiscover.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +148,7 @@
 		2F57601823F6B403001D97F6 /* Backend */ = {
 			isa = PBXGroup;
 			children = (
+				2F0AA70223FBD53E008DA6E3 /* DatabaseController.swift */,
 				2F57601923F6B42D001D97F6 /* LocationManager.swift */,
 			);
 			path = Backend;
@@ -162,15 +167,19 @@
 		2F57601F23F6B467001D97F6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				14817F8423F82BB00051A89A /* AddNeedView.swift */,
+				12F3808D23FBE6AA00B35497 /* AddNeedView.swift */,
 				14817F8523F82BB00051A89A /* NeederView.swift */,
 				81A0C4B823F9C6F00065CC87 /* DiscoverDetailedView.swift */,
 				2F575FFD23F686F7001D97F6 /* LoginPageView.swift */,
 				2F57602223F6B467001D97F6 /* CommitmentDetailedView.swift */,
-				2F57602323F6B467001D97F6 /* MapView.swift */,
-				2F57602423F6B467001D97F6 /* HomeView.swift */,
-				2F57602523F6B467001D97F6 /* DiscoverView.swift */,
 				2F57602623F6B467001D97F6 /* CommitmentView.swift */,
+				81A0C4B823F9C6F00065CC87 /* DiscoverDetailedView.swift */,
+				2F57602523F6B467001D97F6 /* DiscoverView.swift */,
+				2F57602423F6B467001D97F6 /* HomeView.swift */,
+				2F575FFD23F686F7001D97F6 /* LoginPageView.swift */,
+				2F57602323F6B467001D97F6 /* MapViewCommitment.swift */,
+				81F8982623FAEC3500F41BC4 /* MapViewDiscover.swift */,
+				14817F8523F82BB00051A89A /* NeederView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -348,7 +357,9 @@
 				2FEAAF1723F820A000225F13 /* CoreDataController.swift in Sources */,
 				2F575FF723F686F7001D97F6 /* AppDelegate.swift in Sources */,
 				14817F8723F82BB00051A89A /* NeederView.swift in Sources */,
+				2F0AA70323FBD53E008DA6E3 /* DatabaseController.swift in Sources */,
 				2F57602E23F6B467001D97F6 /* HomeView.swift in Sources */,
+				81F8982723FAEC3500F41BC4 /* MapViewDiscover.swift in Sources */,
 				14817F8623F82BB00051A89A /* AddNeedView.swift in Sources */,
 				2F57603723F6B4D1001D97F6 /* Commitment.swift in Sources */,
 				2F575FF923F686F7001D97F6 /* SceneDelegate.swift in Sources */,
@@ -357,8 +368,9 @@
 				2F57602F23F6B467001D97F6 /* DiscoverView.swift in Sources */,
 				2F57603423F6B4AC001D97F6 /* ContentView.swift in Sources */,
 				2F57603023F6B467001D97F6 /* CommitmentView.swift in Sources */,
-				2F57602D23F6B467001D97F6 /* MapView.swift in Sources */,
+				2F57602D23F6B467001D97F6 /* MapViewCommitment.swift in Sources */,
 				2F57602823F6B467001D97F6 /* UserPreview.swift in Sources */,
+				12F3808E23FBE6AA00B35497 /* AddNeedView.swift in Sources */,
 				2F575FFE23F686F7001D97F6 /* LoginPageView.swift in Sources */,
 				2F57601723F6A9A2001D97F6 /* SharedResources.swift in Sources */,
 				81A0C4B923F9C6F00065CC87 /* DiscoverDetailedView.swift in Sources */,

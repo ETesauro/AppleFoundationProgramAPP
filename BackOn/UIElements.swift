@@ -19,6 +19,42 @@ var locAlert = Alert(
     secondaryButton: .cancel()
 )
 
+struct CloseButton: View {
+    @EnvironmentObject var shared: Shared
+    
+    var body: some View {
+        ZStack{
+            Image(systemName: "circle.fill")
+                .font(.title)
+                .foregroundColor(Color(.systemGroupedBackground))
+            Button(action: {
+                withAnimation{
+                    HomeView.show(self.shared)
+                }}){
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.largeTitle)
+                        .foregroundColor(Color(#colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.8, alpha: 1)))
+            }
+        }
+    }
+}
+
+struct NeederButton: View {
+    @EnvironmentObject var shared: Shared
+    
+    var body: some View {
+            Button(action: {
+                withAnimation{
+                    NeederView.show(self.shared)
+                }}){
+                    Image(systemName: "person")
+                        .font(.largeTitle)
+                        .foregroundColor(Color(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)))
+            }
+        
+    }
+}
+
 struct DoItButton: View {
     @EnvironmentObject var shared: Shared
     
@@ -27,7 +63,7 @@ struct DoItButton: View {
             Spacer()
             Button(action: {
                 print("I'll do it")
-                HomeView.show(self.shared)
+                NeederView.show(self.shared)
             }) {
                 HStack{
                     Text("I'll do it ")
@@ -35,7 +71,6 @@ struct DoItButton: View {
                         .font(.title)
                     Image(systemName: "hand.raised")
                         .font(.title)
-
                 }
                 .padding(20)
                 .background(Color(.systemBlue))
@@ -59,7 +94,7 @@ struct CantDoItButton: View {
             Spacer()
             Button(action: {
                 print("Can't do it")
-                HomeView.show(self.shared)
+                AddNeedView.show(self.shared)
             }) {
                 HStack{
                     Text("Can't do it ")
@@ -67,7 +102,6 @@ struct CantDoItButton: View {
                         .font(.title)
                     Image(systemName: "hand.raised.slash")
                         .font(.title)
-
                 }
                 .padding(20)
                 .background(Color(.systemRed))
@@ -88,3 +122,79 @@ struct DoItButton_Previews: PreviewProvider {
         DoItButton()
     }
 }
+
+struct AddNeedButton: View {
+    @EnvironmentObject var shared: Shared
+    
+    var body: some View {
+        HStack{
+            Spacer()
+            Button(action: {
+                print("Need help!")
+                AddNeedView.show(self.shared)
+            }) {
+                HStack{
+                    Text("Add Need ")
+                        .fontWeight(.regular)
+                        .font(.title)
+                    Image(systemName: "person.2")
+                        .font(.title)
+
+                }
+                .padding(20)
+                .background(Color.blue)
+                .cornerRadius(40)
+                .foregroundColor(.white)
+                .overlay(
+                RoundedRectangle(cornerRadius: 40)
+                    .stroke(Color.blue, lineWidth: 1).foregroundColor(Color.blue)
+                )
+            }
+            Spacer()
+        }
+    }
+}
+
+struct AddNeedButton_Previews: PreviewProvider {
+    static var previews: some View {
+        AddNeedButton()
+    }
+}
+
+struct ConfirmAddNeedButton: View {
+    @EnvironmentObject var shared: Shared
+    
+    var body: some View {
+        HStack{
+            Spacer()
+            Button(action: {
+                print("Add need!")
+//                IMPORTANTE SALVA NEED E INVIALO AL SERVER
+                NeederView.show(self.shared)
+            }) {
+                HStack{
+                    Text("Confirm ")
+                        .fontWeight(.regular)
+                    Image(systemName: "hand.thumbsup")
+                }
+                .font(.title)
+                .padding(20)
+                .background(Color.blue)
+                .cornerRadius(40)
+                .foregroundColor(.white)
+                .overlay(
+                RoundedRectangle(cornerRadius: 40)
+                    .stroke(Color.blue, lineWidth: 1).foregroundColor(Color.blue)
+                )
+            }
+            Spacer()
+        }
+    }
+}
+
+struct ConfirmAddNeedButton_Previews: PreviewProvider {
+    static var previews: some View {
+        ConfirmAddNeedButton()
+    }
+}
+
