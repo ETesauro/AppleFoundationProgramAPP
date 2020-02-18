@@ -9,20 +9,19 @@
 import SwiftUI
 import MapKit
 
-struct MapView: UIViewRepresentable {
+struct MapViewDiscover: UIViewRepresentable {
     @EnvironmentObject var shared: Shared
     var key: UUID
     private static var mapViewStore = [UUID : MKMapView]()
-   
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
     
     class Coordinator: NSObject, MKMapViewDelegate {
-        var parent: MapView
+        var parent: MapViewDiscover
 
-        init(_ parent: MapView) {
+        init(_ parent: MapViewDiscover) {
             self.parent = parent
         }
         
@@ -47,23 +46,24 @@ struct MapView: UIViewRepresentable {
     }
 
     func makeUIView(context: Context) -> MKMapView {
-        if let mapView = MapView.mapViewStore[key] {
+        if let mapView = MapViewDiscover.mapViewStore[key] {
            return mapView
         }
         let mapView = MKMapView(frame: UIScreen.main.bounds)
         mapView.delegate = context.coordinator
         mapView.showsUserLocation = true
         mapView.showsCompass = false
-        MapView.mapViewStore[key] = mapView
+        MapViewDiscover.mapViewStore[key] = mapView
+        print(mapView)
         return mapView
     }
 
     func updateUIView(_ uiView: MKMapView, context: Context) {
 
-        let commitment = shared.commitmentSet[key]
+        let commitment = shared.discoverSet[key]
         if commitment != nil {
             //https://stackoverflow.com/questions/51010956/how-can-i-know-if-an-annotation-is-already-on-the-mapview
-            if uiView.annotations.isEmpty {
+//            if uiView.annotations.isEmpty {
                 let annotation = MKPointAnnotation()
                 annotation.title = commitment!.userInfo.name
                 annotation.subtitle = commitment!.title
@@ -81,8 +81,8 @@ struct MapView: UIViewRepresentable {
                     }
                 })
                 uiView.addAnnotation(annotation)
-            }
-            if shared.viewToShow == "CommitmentDetailedView" && uiView.overlays.isEmpty{
+//            }
+            if shared.viewToShow == "DiscoverDetailedView" && uiView.overlays.isEmpty{
                 let request = MKDirections.Request()
                 request.source = MKMapItem(placemark: MKPlacemark(coordinate: uiView.userLocation.coordinate, addressDictionary: nil))
                 request.destination = MKMapItem(placemark: MKPlacemark(coordinate: commitment!.position.coordinate, addressDictionary: nil))
@@ -98,16 +98,15 @@ struct MapView: UIViewRepresentable {
                     }
                     uiView.addOverlay(fastestRoute.polyline, level: .aboveRoads)
                 }
-            } else{
-//                uiView.removeOverlays(uiView.overlays)
             }
+//            else{
+//                uiView.removeOverlays(uiView.overlays)
+//            }
             let span = MKCoordinateSpan(latitudeDelta: 0.25, longitudeDelta: 0.25)
             let region = MKCoordinateRegion(center: commitment!.position.coordinate, span: span)
             uiView.setRegion(region, animated: true)
         } else {
             print(key.uuidString)
-            print(shared.commitmentSet)
-            print("\(shared.commitmentSet)")
         }
     }
     
