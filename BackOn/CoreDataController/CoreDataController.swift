@@ -24,7 +24,8 @@ class CoreDataController {
         let newUser = PUser(entity: entity!, insertInto: self.context)
         newUser.name = user.name
         newUser.surname = user.surname
-        newUser.userID = user.userID
+        newUser.email = user.email
+        newUser.photo = user.photo
         
         do {
             try self.context.save()
@@ -57,14 +58,31 @@ class CoreDataController {
             let array = try self.context.fetch(fetchRequest)
             guard array.count > 0 else {
                 print("User not logged yet")
-                return ("Nil", UserInfo(photo: "", name: "", surname: ""))
+                return ("Nil", UserInfo(photo: URL(string: "")!, name: "", surname: "", email: ""))
             }
-            //            photo = "" va cambiato
-            let myUser = UserInfo(photo: "", name: array[0].name!, surname: array[0].surname!)
+            let myUser = UserInfo(photo: array[0].photo!, name: array[0].name!, surname: array[0].surname!, email: array[0].email!)
+            print("Utente: \(myUser.name), \(myUser.surname), \(myUser.email!), \(myUser.photo)")
             return ("OK", myUser)
         } catch let error {
             print("Error while getting logged user: \(error.localizedDescription)")
-            return ("Nil", UserInfo(photo: "", name: "", surname: ""))
+            return ("Nil", UserInfo(photo: URL(string: "")!, name: "", surname: "", email: ""))
+        }
+    }
+    
+    func deleteUser(user: UserInfo) {
+        let fetchRequest: NSFetchRequest<PUser> = PUser.fetchRequest()
+        if let result = try? context.fetch(fetchRequest) {
+            for object in result {
+                if object.email! == user.email {
+                    context.delete(object)
+                }
+            }
+            do {
+                try context.save()
+            }
+            catch let error as NSError{
+                print("Errore nel salvataggio del contesto: \(error.code)")
+            }
         }
     }
     

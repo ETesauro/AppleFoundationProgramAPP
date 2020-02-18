@@ -2,7 +2,7 @@
 //  PUser+CoreDataProperties.swift
 //  
 //
-//  Created by Emmanuel Tesauro on 15/02/2020.
+//  Created by Emmanuel Tesauro on 18/02/2020.
 //
 //
 
@@ -17,8 +17,8 @@ extension PUser {
     }
 
     @NSManaged public var name: String?
-    @NSManaged public var surname: String?
     @NSManaged public var photo: URL?
-    @NSManaged public var userID: UUID?
+    @NSManaged public var surname: String?
+    @NSManaged public var email: String?
 
 }

@@ -24,7 +24,7 @@ struct CommitmentView: View {
                 }
             }) {
                 VStack{
-                    Avatar(image: commitment.userInfo.photo, size: 60)
+                    Avatar(image: "\(commitment.userInfo.photo)", size: 60)
                     Spacer()
                     Text(self.commitment.userInfo.identity)
                         .font(.title)

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import GoogleSignIn
 
 struct HomeView: View {
     @EnvironmentObject var shared: Shared
@@ -32,6 +33,15 @@ struct HomeView: View {
                             }
                         }
                     }
+                }
+                Spacer()
+                Button(action: {
+                    print("Logout!")
+                    GIDSignIn.sharedInstance()?.disconnect()
+                }) {
+                    Text("Logout")
+                        .bold()
+                        .foregroundColor(.black)
                 }
                 CommitmentRow()
                 DiscoverRow().offset(x: 0, y: -20)
