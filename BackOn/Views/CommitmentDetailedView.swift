@@ -16,25 +16,13 @@ struct CommitmentDetailedView: View {
     var body: some View {
         VStack {
             VStack {
-                ZStack{
+                ZStack {
                     MapViewCommitment(key: selectedCommitment.ID)
                         .statusBar(hidden: true)
                         .edgesIgnoringSafeArea(.all)
-                        .frame(height: 530)
-                    ZStack{
-                        Image(systemName: "circle.fill")
-                        .font(.title)
-                        .foregroundColor(Color(.systemGroupedBackground))
-                        Button(action: {
-                            withAnimation{
-                                HomeView.show(self.shared)
-                            }}){
-                                Image(systemName: "xmark.circle.fill")
-                                    .font(.largeTitle)
-                                    .foregroundColor(Color(#colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.8, alpha: 1)))
-                            }
-                    }
-                    .offset(x:173, y:-265)
+                        .frame(height: 515)
+                    CloseButton()
+                        .offset(x:173, y:-265)
                 }
                 HStack {
                     Spacer()
@@ -49,8 +37,9 @@ struct CommitmentDetailedView: View {
                             Text("Open in Maps").fontWeight(.light)})
                 }.padding(.horizontal)
             }
-            VStack (alignment: .leading, spacing: 5){
+            VStack (alignment: .leading, spacing: 10){
                 UserPreview(user: selectedCommitment.userInfo, description: selectedCommitment.etaText, whiteText: shared.darkMode)
+                    .offset(x: 0, y: -10)
                 Text(selectedCommitment.title)
                     .font(.headline)
                     .fontWeight(.regular)
@@ -58,14 +47,14 @@ struct CommitmentDetailedView: View {
                     .font(.subheadline)
                     .fontWeight(.light)
                     .bold()
-                    .frame(width: .none, height: 60, alignment: .leading)
-            }.padding([.horizontal,.bottom]).offset(x: 0, y: -10)
-            CantDoItButton()
+//                    .frame(width: .none, height: 60, alignment: .leading)
+                Spacer()
+                CantDoItButton()
+            }.padding(.horizontal)
         }.onAppear {
             if self.shared.locationManager.lastLocation != nil {
                 self.selectedCommitment.requestETA(source: self.shared.locationManager.lastLocation!)
             }
-
         }
     }
 }

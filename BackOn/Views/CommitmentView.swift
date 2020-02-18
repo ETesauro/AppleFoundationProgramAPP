@@ -28,9 +28,9 @@ struct CommitmentView: View {
                     Spacer()
                     Text(self.commitment.userInfo.identity)
                         .font(.title)
-                        .foregroundColor(Color(.black))
+                        .foregroundColor(Color.primary)
                     Spacer()
-                    Text(self.commitment.title).foregroundColor(Color(.black))
+                    Text(self.commitment.title).foregroundColor(Color.primary)
                 }.offset(x: 0, y: -30)
             }.buttonStyle(PlainButtonStyle())
         }
@@ -95,7 +95,7 @@ struct CommitmentsListView: View {
                             CommitmentDetailedView.show(self.shared)
                         }) {
                             HStack {
-                                UserPreview(user: currentCommitment.userInfo, description: currentCommitment.title, whiteText: false)
+                                UserPreview(user: currentCommitment.userInfo, description: currentCommitment.title, whiteText: self.shared.darkMode)
                                 Spacer()
                                 Image(systemName: "chevron.right")
                                     .font(.headline)
