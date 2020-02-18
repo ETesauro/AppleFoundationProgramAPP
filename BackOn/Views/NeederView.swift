@@ -18,7 +18,7 @@ struct NeederView: View {
                 .padding(2)
             CommitmentRow()
             Spacer()
-//            AddNeedButton()
+            AddNeedButton()
             Spacer()
         }
     }

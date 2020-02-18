@@ -52,7 +52,7 @@ struct MapViewCommitment: UIViewRepresentable {
 //        }
         let mapView = MKMapView(frame: UIScreen.main.bounds)
         mapView.delegate = context.coordinator
-        mapView.showsUserLocation = true
+        mapView.showsUserLocation = false
         mapView.showsCompass = false
 //        MapViewCommitment.mapViewStore[key] = mapView
 //        print(mapView)
@@ -61,9 +61,12 @@ struct MapViewCommitment: UIViewRepresentable {
 
     func updateUIView(_ uiView: MKMapView, context: Context) {
         let commitment = shared.commitmentSet[key]
-        if commitment != nil{
+        if commitment != nil {
             //https://stackoverflow.com/questions/51010956/how-can-i-know-if-an-annotation-is-already-on-the-mapview
-//            if uiView.annotations.isEmpty {
+            if shared.viewToShow == "CommitmentDetailedView" {
+                uiView.showsUserLocation = true
+            }
+            if uiView.annotations.isEmpty {
                 let annotation = MKPointAnnotation()
                 annotation.title = commitment!.userInfo.name
                 annotation.subtitle = commitment!.title
@@ -81,7 +84,7 @@ struct MapViewCommitment: UIViewRepresentable {
                     }
                 })
                 uiView.addAnnotation(annotation)
-//            }
+            }
             if shared.viewToShow == "CommitmentDetailedView" && uiView.overlays.isEmpty{
                 let request = MKDirections.Request()
                 request.source = MKMapItem(placemark: MKPlacemark(coordinate: uiView.userLocation.coordinate, addressDictionary: nil))
