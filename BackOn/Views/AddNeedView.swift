@@ -19,7 +19,7 @@ struct AddNeedView: View {
                     .font(.body)
                     .fontWeight(.medium)
                 Spacer()
-//                ConfirmAddNeedButton()
+                ConfirmAddNeedButton()
             }.padding()
         }
     }
