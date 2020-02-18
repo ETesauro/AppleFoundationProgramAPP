@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             if (error as NSError).code == GIDSignInErrorCode.hasNoAuthInKeychain.rawValue {
                 print("The user has not signed in before or they have since signed out.")
             } else {
-                print("\(error.localizedDescription)")
+                print("Sign error: \(error.localizedDescription)")
             }
             return
         }
@@ -33,8 +33,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         let givenName = user.profile.givenName
         let familyName = user.profile.familyName
         let email = user.profile.email
+        let image = user.profile.imageURL(withDimension: 100)
         
-        let myUser: UserInfo = UserInfo(photo: "\(user.profile.imageURL(withDimension: 100)!)", name: givenName!, surname: familyName!, email: email!)
+        let myUser: UserInfo = UserInfo(photo: image!, name: givenName!, surname: familyName!, email: email!)
+        
+        shared.image = image!
         
 //        FUNZIONE CHE REGISTRA L'UTENTE NEL DATABASE LOCALE (IMPORTANTE AGGIORNARE L'INDIRIZZO IP)
         DatabaseController.registerUser(user: myUser)
@@ -51,7 +54,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // ...
         
         print("*** User disconnected ***\n")
-        Shared.init().authentication = false
+        let coreDatacontroller = CoreDataController()
+        coreDatacontroller.deleteUser(user: coreDatacontroller.getLoggedUser().1)
+        LoginPageView.show(self.shared)
+        shared.authentication = false
     }
     
     

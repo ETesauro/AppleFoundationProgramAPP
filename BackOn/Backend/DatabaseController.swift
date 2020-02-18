@@ -15,7 +15,7 @@ class DatabaseController {
         print("registerUser")
         //declare parameter as a dictionary which contains string as key and value combination. considering inputs are valid
         
-        let parameters: [String: String] = ["id": "\(user.userID)", "name": user.name, "surname": user.surname, "email" : user.email!, "photo": user.photo]
+        let parameters: [String: String] = ["name": user.name, "surname": user.surname, "email" : user.email!, "photo": "\(user.photo)"]
                 
         //create the url with URL
         let url = URL(string: "http://172.19.186.161:8080/NewBackOn-0.0.1-SNAPSHOT/RegisterUser")! //change the url
@@ -53,7 +53,7 @@ class DatabaseController {
         let parameters: [String: String] = ["id": "\(id)"]
         
         //create the url with URL
-        let url = URL(string: "http://10.24.48.197:8080/NewBackOn-0.0.1-SNAPSHOT/GetUserByUUID")! //change the url
+        let url = URL(string: "http://172.19.216.105:8080/NewBackOn-0.0.1-SNAPSHOT/GetUserByUUID")! //change the url
         
         //now create the URLRequest object using the url object
         var request = URLRequest(url: url)
@@ -78,7 +78,7 @@ class DatabaseController {
                     let json = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? Dictionary<String, String>
                     if json != nil {
                         if json!.count > 0 {
-                            myUser = UserInfo(photo: json!["photo"]!, name: json!["name"]!, surname: json!["surname"]!, email: json!["email"]!)
+                            myUser = UserInfo(photo: URL(string: json!["photo"]!)!, name: json!["name"]!, surname: json!["surname"]!, email: json!["email"]!)
                         }
                     }
                 }

@@ -33,7 +33,7 @@ struct UserPreview: View {
     
     var body: some View {
         HStack {
-            Avatar(image: user.photo, size: 60)
+            Avatar(image: "\(user.photo)", size: 60)
             VStack (alignment: .leading){
                 Text(user.identity)
                     .font(.title)
@@ -57,6 +57,6 @@ struct UserPreview: View {
 
 struct UserPreview_Previews: PreviewProvider {
     static var previews: some View {
-        UserPreview(user: UserInfo(photo: "tim", name: "Giancarlo", surname: "Sorrentino"),description: "5 mins from you", whiteText: true)
+        UserPreview(user: UserInfo(photo: URL(string: "tim")!, name: "Giancarlo", surname: "Sorrentino"),description: "5 mins from you", whiteText: true)
     }
 }

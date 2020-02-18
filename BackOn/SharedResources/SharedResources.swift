@@ -21,6 +21,8 @@ class Shared: ObservableObject {
     @Published var discoverSet: [UUID:Commitment] = discoverDict
     @Published var helperMode = true
     
+    @Published var image: URL? = URL(string: "")
+    
     var darkMode: Bool{
         get{
             return UIScreen.main.traitCollection.userInterfaceStyle == .dark
