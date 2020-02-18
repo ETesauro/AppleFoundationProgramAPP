@@ -13,17 +13,6 @@ struct HomeView: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack{
-                //          Bottone per chiedere il permesso alle notifiche
-                Button("Request Permission") {
-                    //              HO SCELTO AUTORIZZAZIONE AD ALERT, BADGE E NOTIFICATION SOUND
-                    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-                        if success {
-                            print("All set!")
-                        } else if let error = error {
-                            print(error.localizedDescription)
-                        }
-                    }
-                }
                 //          Bottone per notificare il prossimo commitment
                 Button("Schedule Notification") {
                     let nextCommitment = getNextNotificableCommitment(dataDictionary: self.shared.commitmentSet)

@@ -31,6 +31,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             LoginPageView.show(shared)
         }
         
+//              HO SCELTO AUTORIZZAZIONE AD ALERT, BADGE E NOTIFICATION SOUND
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+            if success {
+                print("Notification permission set!")
+            } else if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+        
+        
         // Create the SwiftUI view and set the context as the value for the managedObjectContext environment keyPath.
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
         let contentView = ContentView().environment(\.managedObjectContext, context)
