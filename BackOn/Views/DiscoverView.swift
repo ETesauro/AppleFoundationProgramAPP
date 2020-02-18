@@ -22,7 +22,7 @@ struct DiscoverView: View {
             }
         }) {
             VStack (alignment: .leading, spacing: 5){
-                UserPreview(user: commitment.userInfo, description: "\(commitment.etaText)", whiteText: shared.darkMode)
+                UserPreview(user: commitment.userInfo, description: shared.locationManager.lastLocation != nil ? commitment.etaText : "Location services disabled", whiteText: shared.darkMode)
                 Text(commitment.title)
                     .font(.headline)
                     .fontWeight(.regular)
@@ -57,11 +57,11 @@ struct DiscoverRow: View {
         VStack (alignment: .leading) {
             Button(action: {
                 withAnimation {
-                    CommitmentsListView.show(self.shared)
+                    FullDiscoverView.show(self.shared)
                 }
             }) {
                 HStack {
-                    Text(shared.viewToShow == "HomeView" ? "Around you" : "Your requests")
+                    Text(self.shared.helperMode ? "Around you" : "Your requests")
                         .fontWeight(.bold)
                         .font(.title)
                     Spacer()
@@ -79,6 +79,45 @@ struct DiscoverRow: View {
                 }.padding(20)
             }.offset(x: 0, y: -20)
         }
+    }
+}
+
+struct FullDiscoverView: View {
+    @EnvironmentObject var shared: Shared
+    
+    var body: some View {
+        VStack (alignment: .leading, spacing: 10){
+            HStack {
+                Text("Around you")
+                    .fontWeight(.bold)
+                    .font(.title)
+                Spacer()
+                CloseButton()
+            }.padding([.top,.horizontal])
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack (alignment: .center, spacing: 25){
+                    ForEach(shared.discoverArray(), id: \.ID) { currentDiscover in
+                        Button(action: {
+                            self.shared.selectedCommitment = currentDiscover
+                            DiscoverDetailedView.show(self.shared)
+                        }) {
+                            HStack {
+                                UserPreview(user: currentDiscover.userInfo, description: currentDiscover.title, whiteText: self.shared.darkMode)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .font(.headline)
+                                    .foregroundColor(Color(UIColor.systemBlue))
+                            }.padding(.horizontal, 15)
+                        }.buttonStyle(PlainButtonStyle())
+                    }
+                }.padding(.top,20)
+            }
+            Spacer()
+            MapViewDiscover()
+        }
+        .padding(.top, 40)
+        .background(Color("background"))
+        .edgesIgnoringSafeArea(.all)
     }
 }
 

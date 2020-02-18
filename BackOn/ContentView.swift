@@ -39,6 +39,8 @@ struct ContentView: View {
                 AddNeedView()
             } else if shared.viewToShow == "NeederView"{
                 NeederView()
+            } else if shared.viewToShow == "FullDiscoverView"{
+                FullDiscoverView()
             }
             else {
                 Text("Vista sbagliata :(")

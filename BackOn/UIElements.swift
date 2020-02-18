@@ -46,6 +46,7 @@ struct NeederButton: View {
             Button(action: {
                 withAnimation{
                     NeederView.show(self.shared)
+                    self.shared.helperMode = false
                 }}){
                     Image(systemName: "person")
                         .font(.largeTitle)

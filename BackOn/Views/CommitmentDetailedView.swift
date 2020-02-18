@@ -17,7 +17,7 @@ struct CommitmentDetailedView: View {
         VStack {
             VStack {
                 ZStack {
-                    MapViewCommitment(key: selectedCommitment.ID)
+                    MapViewCommitmentDetailed(key: selectedCommitment.ID)
                         .statusBar(hidden: true)
                         .edgesIgnoringSafeArea(.all)
                         .frame(height: 515)
@@ -38,7 +38,7 @@ struct CommitmentDetailedView: View {
                 }.padding(.horizontal)
             }
             VStack (alignment: .leading, spacing: 10){
-                UserPreview(user: selectedCommitment.userInfo, description: selectedCommitment.etaText, whiteText: shared.darkMode)
+                UserPreview(user: selectedCommitment.userInfo, description: shared.locationManager.lastLocation != nil ? selectedCommitment.etaText : "Location services disabled" , whiteText: shared.darkMode)
                     .offset(x: 0, y: -10)
                 Text(selectedCommitment.title)
                     .font(.headline)

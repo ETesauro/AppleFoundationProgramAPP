@@ -10,6 +10,7 @@ import Foundation
 import CoreLocation
 import MapKit
 
+
 class Shared: ObservableObject {
     @Published var activeView = "HomeView"
     @Published var authentication = false
@@ -18,6 +19,7 @@ class Shared: ObservableObject {
     @Published var selectedCommitment = Commitment()
     @Published var commitmentSet: [UUID:Commitment] = commitmentDict
     @Published var discoverSet: [UUID:Commitment] = discoverDict
+    @Published var helperMode = true
     
     var darkMode: Bool{
         get{

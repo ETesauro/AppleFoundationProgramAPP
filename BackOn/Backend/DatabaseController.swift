@@ -18,7 +18,7 @@ class DatabaseController {
         let parameters: [String: String] = ["id": "\(user.userID)", "name": user.name, "surname": user.surname, "email" : user.email!, "photo": user.photo]
                 
         //create the url with URL
-        let url = URL(string: "http://10.24.48.197:8080/NewBackOn-0.0.1-SNAPSHOT/RegisterUser")! //change the url
+        let url = URL(string: "http://172.19.186.161:8080/NewBackOn-0.0.1-SNAPSHOT/RegisterUser")! //change the url
         
         //now create the URLRequest object using the url object
         var request = URLRequest(url: url)

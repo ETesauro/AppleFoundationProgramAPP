@@ -106,6 +106,7 @@ struct CommitmentsListView: View {
                 }.padding(.top,20)
             }
             Spacer()
+//            MapViewDiscover()
         }
         .padding(.top, 40)
         .background(Color("background"))

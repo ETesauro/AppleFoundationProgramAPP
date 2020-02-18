@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         let myUser: UserInfo = UserInfo(photo: "\(user.profile.imageURL(withDimension: 100)!)", name: givenName!, surname: familyName!, email: email!)
         
 //        FUNZIONE CHE REGISTRA L'UTENTE NEL DATABASE LOCALE (IMPORTANTE AGGIORNARE L'INDIRIZZO IP)
-        //DatabaseController.registerUser(user: myUser)
+        DatabaseController.registerUser(user: myUser)
         
 //        LO AGGIUNGO ANCHE A CORE DATA PER DELLE RICHIESTE SENZA INTERNET
         CoreDataController.shared.addUser(user: myUser)
