@@ -16,9 +16,12 @@ class Shared: ObservableObject {
     @Published var viewToShow = "HomeView"
     @Published var locationManager = LocationManager()
     @Published var selectedCommitment = Commitment()
-    @Published var commitmentSet: [UUID:Commitment] = commitmentDict
-    @Published var discoverSet: [UUID:Commitment] = discoverDict
+    @Published var commitmentSet: [Int:Commitment] = commitmentDict
+    @Published var discoverSet: [Int:Commitment] = discoverDict
+    @Published var myIP: String = "10.24.48.197"
+    @Published var helperMode = true
     
+    @Published var neederInfo: UserInfo?
     @Published var image: URL? = URL(string: "")
     
     var darkMode: Bool{

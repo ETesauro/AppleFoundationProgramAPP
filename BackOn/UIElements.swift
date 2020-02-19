@@ -131,6 +131,7 @@ struct AddNeedButton: View {
             Spacer()
             Button(action: {
                 print("Need help!")
+                self.insertCommit(title: "titolo", description: "desc", date: Date(), latitude: 40.1, longitude: 40.1)
                 AddNeedView.show(self.shared)
             }) {
                 HStack{
@@ -152,6 +153,43 @@ struct AddNeedButton: View {
             }
             Spacer()
         }
+    }
+    
+    func insertCommit(title: String, description: String, date: Date, latitude: Double, longitude: Double) {
+        print("INSERT COMMIT")
+        let coreDataController: CoreDataController = CoreDataController()
+        
+        let userEmail: String = coreDataController.getLoggedUser().1.email!
+        
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd HH:mm"
+        let formattedDate = format.string(from: date)
+        print(formattedDate)
+        
+        let parameters: [String: String] = ["title":"\(title)", "description": "\(description)", "email": userEmail, "date":"\(formattedDate)","latitude":"\(latitude)", "longitude":"\(longitude)"]
+        
+        //create the url with URL
+        let url = URL(string: "http://\(shared.myIP):8080/NewBackOn-0.0.1-SNAPSHOT/InsertCommit")! //change the url
+        
+        //now create the URLRequest object using the url object
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST" //set http method as POST
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted) // pass dictionary to nsdata object and set it as request body
+            
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        //create dataTask using the session object to send data to the server
+        
+        //SE VOGLIO LEGGERE I DATI DAL SERVER
+        URLSession.shared.dataTask(with: request) { data, response, error in
+        }.resume()
     }
 }
 

@@ -39,11 +39,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         shared.image = image!
         
+//        LO AGGIUNGO ANCHE A CORE DATA PER DELLE RICHIESTE SENZA INTERNET
+        CoreDataController.shared.addUser(user: myUser)
+        
 //        FUNZIONE CHE REGISTRA L'UTENTE NEL DATABASE LOCALE (IMPORTANTE AGGIORNARE L'INDIRIZZO IP)
         DatabaseController.registerUser(user: myUser)
         
-//        LO AGGIUNGO ANCHE A CORE DATA PER DELLE RICHIESTE SENZA INTERNET
-        CoreDataController.shared.addUser(user: myUser)
         HomeView.show(self.shared)
     }
     

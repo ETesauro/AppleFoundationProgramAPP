@@ -11,6 +11,7 @@ import MapKit
 
 struct CommitmentView: View {
     @EnvironmentObject var shared: Shared
+    
     var commitment: Commitment
     
     var body: some View {
@@ -43,6 +44,8 @@ struct CommitmentView: View {
 
 struct CommitmentRow: View {
     @EnvironmentObject var shared: Shared
+    @State private var results = [Result]()
+    @State private var myCommits = Dictionary<Int, Commitment>()
     
     var body: some View {
         VStack (alignment: .leading){
@@ -70,7 +73,61 @@ struct CommitmentRow: View {
                 }
                 .padding(20)
             }.offset(x: 0, y: -20)
+        }.onAppear(perform: getCommitByUser)
+    }
+    
+    
+    //MARK: GetCommitByUser
+    func getCommitByUser() {
+        let coreDataController: CoreDataController = CoreDataController()
+        let userEmail: String = coreDataController.getLoggedUser().1.email!
+        let parameters: [String: String] = ["email": userEmail]
+        
+        //create the url with URL
+        let url = URL(string: "http://10.24.48.197:8080/NewBackOn-0.0.1-SNAPSHOT/GetCommitByUserEmail")! //change the url
+        
+        //now create the URLRequest object using the url object
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST" //set http method as POST
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted) // pass dictionary to nsdata object and set it as request body
+            
+        } catch let error {
+            print(error.localizedDescription)
         }
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        //create dataTask using the session object to send data to the server
+        
+        //SE VOGLIO LEGGERE I DATI DAL SERVER
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let data = data {
+                DispatchQueue.main.async {
+                    
+                    guard let json = try? JSONSerialization.jsonObject(with: data, options: []) else{
+                        print("Error!")
+                        return
+                    }
+                    
+                    if let array = json as? NSArray {
+                        for obj in array {
+                            if let dict = obj as? NSDictionary {
+                                // Now reference the data you need using:
+                                let id = dict.value(forKey: "id")
+                                let descrizione = dict.value(forKey: "descrizione")
+                                print(id!)
+                                print(descrizione!)
+                                let tmp: Result = Result(id: "\(id!)", descrizione: "\(descrizione!)")
+                                self.results.append(tmp)
+                            }
+                        }
+                    }
+                }
+            }
+        }.resume()
     }
 }
 
@@ -79,6 +136,15 @@ struct CommitmentsListView: View {
     @EnvironmentObject var shared: Shared
     
     var body: some View {
+//        List(results, id: \.id) { item in
+//            VStack(alignment: .leading) {
+//                Text(item.id)
+//                    .font(.headline)
+//                Text("\(item.descrizione)")
+//            }
+//        }.onAppear(perform: getCommitByUser)
+        
+        
         VStack (alignment: .leading, spacing: 10){
             HStack {
                 Text("Your commitments")
@@ -111,6 +177,11 @@ struct CommitmentsListView: View {
         .background(Color("background"))
         .edgesIgnoringSafeArea(.all)
     }
+}
+
+struct Result: Codable {
+    var id: String
+    var descrizione: String
 }
 
 

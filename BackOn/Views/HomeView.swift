@@ -27,7 +27,7 @@ struct HomeView: View {
                                 
                                 //              Imposto la notifica 30 min prima della scadenza
                                 let trigger = UNTimeIntervalNotificationTrigger(timeInterval: nextCommitment!.timeRemaining() - 30*60, repeats: false)
-                                let request = UNNotificationRequest(identifier: nextCommitment!.ID.uuidString, content: notification, trigger: trigger)
+                                let request = UNNotificationRequest(identifier: "\(nextCommitment!.ID)", content: notification, trigger: trigger)
                                 //              Aggiungo la richiesta di notifica al notification center (sembra una InvokeLater per le notifiche)
                                 UNUserNotificationCenter.current().add(request)
                             }

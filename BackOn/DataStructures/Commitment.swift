@@ -15,19 +15,20 @@ class Commitment: ObservableObject{
     let title: String
     let descr: String
     let date: Date
-    let ID: UUID
+    let ID: Int
     @Published var eta = 0.0
     @Published var etaText = "Calculating..."
     
     var position: CLLocation
     var textAddress: String?
 
+    
     init() {
         self.userInfo = UserInfo(photo: URL(string: "tim")!, name: "Tim", surname: "Cook")
         self.title = "Default title"
         self.descr = "Default description"
         self.date = Date()
-        ID = UUID()
+        ID = Int()
         position = CLLocation(latitude: 40.675293, longitude: 14.772105)
     }
     
@@ -36,11 +37,11 @@ class Commitment: ObservableObject{
         self.title = title
         self.descr = descr
         self.date = date
-        ID = UUID()
+        ID = Int()
         self.position = position
     }
     
-    init(userInfo: UserInfo, title: String, descr: String, date: Date, ID: UUID) {
+    init(userInfo: UserInfo, title: String, descr: String, date: Date, ID: Int) {
         self.userInfo = userInfo
         self.title = title
         self.descr = descr
@@ -49,7 +50,7 @@ class Commitment: ObservableObject{
         position = CLLocation(latitude: 40.675293, longitude: 14.772105)
     }
     
-    init(userInfo: UserInfo, title: String, descr: String, date: Date, position: CLLocation, ID: UUID) {
+    init(userInfo: UserInfo, title: String, descr: String, date: Date, position: CLLocation, ID: Int) {
         self.userInfo = userInfo
         self.title = title
         self.descr = descr
@@ -83,12 +84,12 @@ class Commitment: ObservableObject{
 }
 
 //class CommitmentSet {
-//    var commitmentSet: [UUID: Commitment] = [:]
+//    var commitmentSet: [Int: Commitment] = [:]
 //    func populate () {
-//        var id: UUID
+//        var id: Int
 //        var commitment: Commitment
 //        for _ in 0...5 {
-//            id = UUID()
+//            id = Int()
 //            commitment = Commitment(userInfo: sonoIo, title: "Prova", descr: "Prova", date: Date(), ID: id)
 //            commitmentSet[id] = commitment
 //        }
@@ -106,33 +107,33 @@ let me3 = UserInfo(photo: URL(string: "elon")!, name: "Elon", surname: "Musk")
 let me4 = UserInfo(photo: URL(string: "craig")!, name: "Craig", surname: "Cookss")
 
 
-let uuid1 = UUID()
-let uuid2 = UUID()
-let uuid3 = UUID()
-let uuid4 = UUID()
-let uuid5 = UUID()
-let uuid6 = UUID()
-let uuid7 = UUID()
-let uuid8 = UUID()
+let uuid1 = 1
+let uuid2 = 2
+let uuid3 = 3
+let uuid4 = 4
+let uuid5 = 5
+let uuid6 = 6
+let uuid7 = 7
+let uuid8 = 8
 
 let needsTitles = ["Carrying things", "Taking the dog for a walk", "Going home", "Withdrawing cash"]
 
-let commitmentDict: [UUID:Commitment] = [
+let commitmentDict: [Int:Commitment] = [
     uuid1: Commitment(userInfo: me1, title: "Spesa1", descr: "Descrizione di spesa1", date: Date().addingTimeInterval(TimeInterval(29*60)), position: CLLocation(latitude: 41.775293, longitude: 14.572105), ID: uuid1),
     uuid2: Commitment(userInfo: me2, title: "Pulizie1", descr: "Descrizione di pulizie1", date: Date().addingTimeInterval(TimeInterval(31*60)), position: CLLocation(latitude: 41.275293, longitude: 14.572105), ID: uuid2),
     uuid3: Commitment(userInfo: me3, title: "Soldi1", descr: "Descrizione di soldi1", date: Date().addingTimeInterval(TimeInterval(31*60)), position: CLLocation(latitude: 41.275293, longitude: 15.572105), ID: uuid3),
     uuid4: Commitment(userInfo: me4, title: "Uscita1", descr: "Descrizione di uscita1", date: Date().addingTimeInterval(TimeInterval(31*60)), position: CLLocation(latitude: 41.075293, longitude: 15.172105), ID: uuid4)
 ]
 
-let discoverDict: [UUID:Commitment] = [
-    uuid5: Commitment(userInfo: me1, title: "Spesa", descr: "Descrizione di spesa", date: Date(), position: CLLocation(latitude: 40.675293, longitude: 14.772105), ID: uuid5),
-    uuid6: Commitment(userInfo: me2, title: "Pulizie", descr: "Descrizione di pulizie", date: Date(), position: CLLocation(latitude: 41.675293, longitude: 14.772105), ID: uuid6),
-    uuid7: Commitment(userInfo: me3, title: "Soldi", descr: "Descrizione di soldi", date: Date(), position: CLLocation(latitude: 41.675293, longitude: 15.772105), ID: uuid7),
-    uuid8: Commitment(userInfo: me4, title: "Uscita", descr: "Descrizione di uscita", date: Date(), position: CLLocation(latitude: 41.275293, longitude: 15.172105), ID: uuid8)
+let discoverDict: [Int:Commitment] = [
+    uuid5: Commitment(userInfo: me1, title: "Spesa", descr: "Descrizione di spesa", date: Date(), position: CLLocation(latitude: 40.675293, longitude: 14.772105), ID: uuid5)
+//    uuid6: Commitment(userInfo: me2, title: "Pulizie", descr: "Descrizione di pulizie", date: Date(), position: CLLocation(latitude: 41.675293, longitude: 14.772105), ID: uuid6),
+//    uuid7: Commitment(userInfo: me3, title: "Soldi", descr: "Descrizione di soldi", date: Date(), position: CLLocation(latitude: 41.675293, longitude: 15.772105), ID: uuid7),
+//    uuid8: Commitment(userInfo: me4, title: "Uscita", descr: "Descrizione di uscita", date: Date(), position: CLLocation(latitude: 41.275293, longitude: 15.172105), ID: uuid8)
 ]
 
 //  Questo metodo da un array di commitment restituisce il più imminente assumendo che:
-func getNextCommitment(dataDictionary: [UUID:Commitment]) -> Commitment? {
+func getNextCommitment(dataDictionary: [Int:Commitment]) -> Commitment? {
     if(dataDictionary.count == 0){
         return nil
     }
@@ -146,7 +147,7 @@ func getNextCommitment(dataDictionary: [UUID:Commitment]) -> Commitment? {
      return toReturn
  }
 
-func getNextNotificableCommitment(dataDictionary: [UUID:Commitment]) -> Commitment? {
+func getNextNotificableCommitment(dataDictionary: [Int:Commitment]) -> Commitment? {
     if(dataDictionary.count == 0){
         return nil
     }
@@ -163,7 +164,7 @@ func getNextNotificableCommitment(dataDictionary: [UUID:Commitment]) -> Commitme
     return toReturn
 }
  
- func getNextFive(dataDictionary: [UUID: Commitment]) -> [Commitment]{
+ func getNextFive(dataDictionary: [Int: Commitment]) -> [Commitment]{
       let data = Array(dataDictionary.values)
       var toReturn: [Commitment] = [data[0]]
  //   Mi serve a sapere se non ho ancora inserito i primi 5 elementi ordinatamente
