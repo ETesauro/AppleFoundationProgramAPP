@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14162AE723FD4A6400C0D634 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14162AE623FD4A6400C0D634 /* OverlayView.swift */; };
 		14817F8723F82BB00051A89A /* NeederView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14817F8523F82BB00051A89A /* NeederView.swift */; };
 		2F0AA70323FBD53E008DA6E3 /* DatabaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0AA70223FBD53E008DA6E3 /* DatabaseController.swift */; };
 		2F575FF723F686F7001D97F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F575FF623F686F7001D97F6 /* AppDelegate.swift */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		01877A788D3892A7C4FC0E62 /* Pods-BackOn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BackOn.debug.xcconfig"; path = "Target Support Files/Pods-BackOn/Pods-BackOn.debug.xcconfig"; sourceTree = "<group>"; };
+		14162AE623FD4A6400C0D634 /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		14817F8523F82BB00051A89A /* NeederView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NeederView.swift; sourceTree = "<group>"; };
 		2F0AA70223FBD53E008DA6E3 /* DatabaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseController.swift; sourceTree = "<group>"; };
 		2F575FF323F686F7001D97F6 /* BackOn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BackOn.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,6 +182,7 @@
 				2F57602423F6B467001D97F6 /* HomeView.swift */,
 				2F575FFD23F686F7001D97F6 /* LoginPageView.swift */,
 				14817F8523F82BB00051A89A /* NeederView.swift */,
+				14162AE623FD4A6400C0D634 /* OverlayView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 				14817F8723F82BB00051A89A /* NeederView.swift in Sources */,
 				81571FBF23FC46EA00FAF25A /* MapViewDiscoverDetailed.swift in Sources */,
 				81571FC123FC46EA00FAF25A /* MapViewCommitmentDetailed.swift in Sources */,
+				14162AE723FD4A6400C0D634 /* OverlayView.swift in Sources */,
 				2F0AA70323FBD53E008DA6E3 /* DatabaseController.swift in Sources */,
 				2F57602E23F6B467001D97F6 /* HomeView.swift in Sources */,
 				2F57603723F6B4D1001D97F6 /* Commitment.swift in Sources */,

@@ -8,15 +8,11 @@
 
 import SwiftUI
 
-class PickerSelection: ObservableObject {
-    var array = ["a", "b", "c", "d", "e", "f"]
-    @Published var show = false
-    @Published var value = -1
-}
-
-
 struct AddNeedView: View {
-    @ObservedObject var pickerSelection = PickerSelection()
+    @ObservedObject var titlePickerData = TitlePickerData()
+    @State var toggleRepeat = false
+    @State var toggleVerified = false
+    @State var needDescription = ""
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -24,78 +20,64 @@ struct AddNeedView: View {
                 Text("Add Need")
                     .font(.title)
                     .fontWeight(.bold)
-                    .padding(.bottom, 10)
                 Spacer()
                 CloseButton()
-            }
+            }.padding(.bottom, 10)
             Text("Type of your need")
                 .font(.headline)
-            Text(self.pickerSelection.value == -1 ? "Click to select your need" : "\(self.pickerSelection.array[Int(self.pickerSelection.value)])")
+            Text(titlePickerData.titlePickerValue == -1 ? "Click to select your need" : titlePickerData.titles[self.titlePickerData.titlePickerValue])
                 .onTapGesture {
-                    withAnimation {self.pickerSelection.show.toggle()}
+                    withAnimation {self.titlePickerData.showTitlePicker.toggle()}
                 }
-            HStack{
-                Text("Description (optional)")
-                    .font(.headline)
+            Text("Description (optional)")
+                .font(.headline)
+            
+            TextField("", text: self.$needDescription)
+                .padding(7)
+                .frame(minHeight: 30)
+                .background(Color(.systemGray3).opacity(0.35))
+                .cornerRadius(5)
+                .font(.callout)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 5)
+                        .stroke(Color(.systemGray3), lineWidth: 1)
+                )
+            Toggle(isOn: $toggleRepeat) {
+                Text("Repeat each week at the same hour")
             }
-//            TextField("", text: self.$needDescription)
-//                .background(Color(.systemGray5))
-//                .font(.callout)
+            Toggle(isOn: $toggleVerified) {
+                Text("Do you want only verified helpers?")
+            }
             Spacer()
+            ConfirmAddNeedButton()
         }
         .padding(.horizontal, 20)
         .padding(.vertical, 10)
         .frame(width: UIScreen.main.bounds.width, alignment: .leading)
-        .overlay(PickerOverlay(isPresented: self.$pickerSelection.show, selectedValue: self.$pickerSelection.value, pickerElements: pickerSelection.array))
+        .overlay(myOverlay(isPresented: self.$titlePickerData.showTitlePicker, toOverlay: AnyView(TitlePicker(pickerElements: self.titlePickerData.titles, selectedValue: self.$titlePickerData.titlePickerValue))))
  
     }
 }
 
+class TitlePickerData: ObservableObject {
+    var titles = ["a","b","c","d","e","f"]
+    @Published var showTitlePicker = false
+    @Published var titlePickerValue = -1
+}
 
-struct PickerOverlay: View {
-    @Binding var isPresented: Bool
-    @Binding var selectedValue: Int
+struct TitlePicker: View {
     var pickerElements: [String]
- 
+    @Binding var selectedValue: Int
     var body: some View {
-        VStack {
-            if self.isPresented {
-                    Color
-                        .black
-                        .opacity(0.7)
-                        .edgesIgnoringSafeArea(.all)
-                        .onTapGesture {
-                            withAnimation() {
-                                self.isPresented = false
-                            }
-                        }
-                        .overlay(
-                            Picker("Select your need", selection: self.$selectedValue) {
-                                ForEach(0 ..< self.pickerElements.count) {
-                                    Text(self.pickerElements[$0])
-                                        .font(.headline)
-                                        .fontWeight(.medium)
-                                }
-                            }.labelsHidden()
-                            .frame(width: UIScreen.main.bounds.width, height: 250)
-                            .background(Color.primary.colorInvert()),
-                            alignment: .bottom
-                        )
-                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-                .animation(.easeInOut)
-            } else {
-                EmptyView()
-                    .animation(.easeInOut)
+        Picker("Select your need", selection: self.$selectedValue) {
+            ForEach(0 ..< self.pickerElements.count) {
+                Text(self.pickerElements[$0])
+                    .font(.headline)
+                    .fontWeight(.medium)
             }
-        }
-        
+        }.labelsHidden()
+        .frame(width: UIScreen.main.bounds.width, height: 250)
+        .background(Color.primary.colorInvert())
     }
 }
 
-#if DEBUG
-struct AddNeedView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddNeedView()
-    }
-}
-#endif
