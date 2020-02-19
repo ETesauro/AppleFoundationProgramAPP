@@ -60,7 +60,7 @@ struct AddNeedView: View {
 }
 
 class TitlePickerData: ObservableObject {
-    var titles = ["a","b","c","d","e","f"]
+    var titles = ["Getting groceries","Shopping","Pet Caring","Houseworks","Sharing time","Wheelchair transport"]
     @Published var showTitlePicker = false
     @Published var titlePickerValue = -1
 }
