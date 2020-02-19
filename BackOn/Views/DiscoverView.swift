@@ -18,7 +18,7 @@ struct DiscoverView: View {
         Button(action: {
             withAnimation {
                 self.shared.selectedCommitment = self.commitment
-                DiscoverDetailedView.show(self.shared)
+                DiscoverDetailedView.show()
             }
         }) {
             VStack (alignment: .leading, spacing: 5){
@@ -57,7 +57,7 @@ struct DiscoverRow: View {
         VStack (alignment: .leading) {
             Button(action: {
                 withAnimation {
-                    FullDiscoverView.show(self.shared)
+                    FullDiscoverView.show()
                 }
             }) {
                 HStack {
@@ -99,7 +99,7 @@ struct FullDiscoverView: View {
                     ForEach(shared.discoverArray(), id: \.ID) { currentDiscover in
                         Button(action: {
                             self.shared.selectedCommitment = currentDiscover
-                            DiscoverDetailedView.show(self.shared)
+                            DiscoverDetailedView.show()
                         }) {
                             HStack {
                                 UserPreview(user: currentDiscover.userInfo, description: currentDiscover.title, whiteText: self.shared.darkMode)

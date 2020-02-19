@@ -9,7 +9,8 @@
 import SwiftUI
 
 extension View {
-    static func show(_ shared: Shared) {
+    static func show() {
+        let shared = (UIApplication.shared.delegate as! AppDelegate).shared
         shared.viewToShow = String(describing: self)
     }
 }
