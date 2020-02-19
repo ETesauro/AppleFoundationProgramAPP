@@ -31,6 +31,8 @@ struct CommitmentView: View {
                         .foregroundColor(Color.primary)
                     Spacer()
                     Text(self.commitment.title).foregroundColor(Color.primary)
+                    Spacer()
+                    Text(self.shared.dateFormatter.string(from: self.commitment.date)).foregroundColor(Color.secondary).padding(.horizontal, 10).offset(y:15).frame(width: 320, alignment: .trailing)
                 }.offset(x: 0, y: -30)
             }.buttonStyle(PlainButtonStyle())
         }

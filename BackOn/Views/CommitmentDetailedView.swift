@@ -25,6 +25,7 @@ struct CommitmentDetailedView: View {
                         .offset(x:173, y:-265)
                 }
                 HStack {
+                    Text(self.shared.dateFormatter.string(from: self.selectedCommitment.date)).foregroundColor(Color.secondary)
                     Spacer()
                     Button(action: {
                         let request = MKDirections.Request()
@@ -47,10 +48,17 @@ struct CommitmentDetailedView: View {
                     .font(.subheadline)
                     .fontWeight(.light)
                     .bold()
-//                    .frame(width: .none, height: 60, alignment: .leading)
+                
                 Spacer()
+                
+//                HStack{
+//                    Spacer()
+//                    Text(self.shared.dateFormatter.string(from: self.selectedCommitment.date)).foregroundColor(Color.secondary)
+//                }.padding(.bottom, 5)
+                
                 CantDoItButton()
-            }.padding(.horizontal)
+                
+            }.padding()
         }.onAppear {
             if self.shared.locationManager.lastLocation != nil {
                 self.selectedCommitment.requestETA(source: self.shared.locationManager.lastLocation!)

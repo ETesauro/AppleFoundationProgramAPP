@@ -20,6 +20,13 @@ class Shared: ObservableObject {
     @Published var commitmentSet: [UUID:Commitment] = commitmentDict
     @Published var discoverSet: [UUID:Commitment] = discoverDict
     @Published var helperMode = true
+    private static var formatter = DateFormatter()
+    var dateFormatter: DateFormatter{
+        get{
+            Shared.formatter.dateFormat = "MMM dd, yyyy  HH:mm"
+            return Shared.formatter
+        }
+    }
     
     @Published var image: URL? = URL(string: "")
     
