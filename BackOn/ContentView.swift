@@ -13,6 +13,7 @@ extension View {
         let shared = (UIApplication.shared.delegate as! AppDelegate).shared
         shared.previousView = shared.viewToShow
         shared.viewToShow = String(describing: self)
+    }
 }
 
 struct ContentView: View {

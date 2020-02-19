@@ -81,19 +81,16 @@ struct CommitmentsListView: View {
     var body: some View {
         VStack (alignment: .leading, spacing: 10){
             
-            Button(action: {
-                withAnimation{
-                    HomeView.show(self.shared)
-                }}){
-            HStack {
-                Image(systemName: "chevron.left")
-                .font(.headline).foregroundColor(Color(UIColor.systemBlue))
-                
-                Text("Your commitments")
-                    .fontWeight(.bold)
-                    .font(.title)
-                    .padding(.leading, 5)
-            }.padding([.top,.horizontal])
+            Button(action: {withAnimation{HomeView.show()}}) {
+                HStack {
+                    Image(systemName: "chevron.left")
+                        .font(.headline).foregroundColor(Color(UIColor.systemBlue))
+                    
+                    Text("Your commitments")
+                        .fontWeight(.bold)
+                        .font(.title)
+                        .padding(.leading, 5)
+                }.padding([.top,.horizontal])
             }.buttonStyle(PlainButtonStyle())
             ScrollView(.vertical, showsIndicators: false) {
                 VStack (alignment: .center, spacing: 25){
@@ -101,33 +98,33 @@ struct CommitmentsListView: View {
                         Button(action: {withAnimation{
                             self.shared.selectedCommitment = currentCommitment
                             CommitmentDetailedView.show()
-                        }) {
-                            HStack {
-                                UserPreview(user: currentCommitment.userInfo, description: currentCommitment.title, whiteText: self.shared.darkMode)
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .font(.headline)
-                                    .foregroundColor(Color(UIColor.systemBlue))
-                            }.padding(.horizontal, 15)
-                        }.buttonStyle(PlainButtonStyle())
-                    }
-                }.padding(.top,20)
+                            }}) {
+                                HStack {
+                                    UserPreview(user: currentCommitment.userInfo, description: currentCommitment.title, whiteText: self.shared.darkMode)
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .font(.headline)
+                                        .foregroundColor(Color(UIColor.systemBlue))
+                                }.padding(.horizontal, 15)
+                                }.buttonStyle(PlainButtonStyle())
+                        }
+                    }.padding(.top,20)
+                }
+                Spacer()
             }
-            Spacer()
+            .padding(.top, 40)
+            .background(Color("background"))
+            .edgesIgnoringSafeArea(.all)
         }
-        .padding(.top, 40)
-        .background(Color("background"))
-        .edgesIgnoringSafeArea(.all)
     }
-}
+    
 
-
-#if DEBUG
-struct CommitmentRow_Previews: PreviewProvider {
-    static var previews: some View {
-        CommitmentRow()
+    #if DEBUG
+    struct CommitmentRow_Previews: PreviewProvider {
+        static var previews: some View {
+            CommitmentRow()
+        }
     }
-}
 #endif
 
 

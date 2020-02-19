@@ -89,7 +89,7 @@ struct FullDiscoverView: View {
         VStack (alignment: .leading, spacing: 10){
              Button(action: {
                           withAnimation{
-                              HomeView.show(self.shared)
+                              HomeView.show()
                           }}){
                       HStack {
                           Image(systemName: "chevron.left")
@@ -110,7 +110,7 @@ struct FullDiscoverView: View {
                         ForEach(shared.discoverArray(), id: \.ID) { currentDiscover in
                             Button(action: {
                                 self.shared.selectedCommitment = currentDiscover
-                                DiscoverDetailedView.show(self.shared)
+                                DiscoverDetailedView.show()
                             }) {
                                 HStack {
                                     UserPreview(user: currentDiscover.userInfo, description: "\(currentDiscover.title)\nCasa", whiteText: self.shared.darkMode)
