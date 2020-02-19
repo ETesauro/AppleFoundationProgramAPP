@@ -11,6 +11,7 @@ import MapKit
 
 struct CommitmentView: View {
     @EnvironmentObject var shared: Shared
+    
     var commitment: Commitment
     
     var body: some View {
@@ -20,19 +21,17 @@ struct CommitmentView: View {
             Button(action: {
                 withAnimation {
                     self.shared.selectedCommitment = self.commitment
-                    CommitmentDetailedView.show()
+                    CommitmentDetailedView.show(self.shared)
                 }
             }) {
                 VStack{
-                    Avatar(image: commitment.userInfo.profilePic)
+                    Avatar(image: "\(commitment.userInfo.photo)", size: 60)
                     Spacer()
                     Text(self.commitment.userInfo.identity)
                         .font(.title)
                         .foregroundColor(Color.primary)
                     Spacer()
                     Text(self.commitment.title).foregroundColor(Color.primary)
-                    Spacer()
-                    Text(self.shared.dateFormatter.string(from: self.commitment.date)).foregroundColor(Color.secondary).padding(.horizontal, 10).offset(y:15).frame(width: 320, alignment: .trailing)
                 }.offset(x: 0, y: -30)
             }.buttonStyle(PlainButtonStyle())
         }
@@ -45,12 +44,14 @@ struct CommitmentView: View {
 
 struct CommitmentRow: View {
     @EnvironmentObject var shared: Shared
+    @State private var results = [Result]()
+    @State private var myCommits = Dictionary<Int, Commitment>()
     
     var body: some View {
         VStack (alignment: .leading){
             Button(action: {
                 withAnimation{
-                    CommitmentsListView.show()
+                    CommitmentsListView.show(self.shared)
                 }
             }) {
                 HStack {
@@ -72,7 +73,61 @@ struct CommitmentRow: View {
                 }
                 .padding(20)
             }.offset(x: 0, y: -20)
+        }.onAppear(perform: getCommitByUser)
+    }
+    
+    
+    //MARK: GetCommitByUser
+    func getCommitByUser() {
+        let coreDataController: CoreDataController = CoreDataController()
+        let userEmail: String = coreDataController.getLoggedUser().1.email!
+        let parameters: [String: String] = ["email": userEmail]
+        
+        //create the url with URL
+        let url = URL(string: "http://10.24.48.197:8080/NewBackOn-0.0.1-SNAPSHOT/GetCommitByUserEmail")! //change the url
+        
+        //now create the URLRequest object using the url object
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST" //set http method as POST
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted) // pass dictionary to nsdata object and set it as request body
+            
+        } catch let error {
+            print(error.localizedDescription)
         }
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        //create dataTask using the session object to send data to the server
+        
+        //SE VOGLIO LEGGERE I DATI DAL SERVER
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let data = data {
+                DispatchQueue.main.async {
+                    
+                    guard let json = try? JSONSerialization.jsonObject(with: data, options: []) else{
+                        print("Error!")
+                        return
+                    }
+                    
+                    if let array = json as? NSArray {
+                        for obj in array {
+                            if let dict = obj as? NSDictionary {
+                                // Now reference the data you need using:
+                                let id = dict.value(forKey: "id")
+                                let descrizione = dict.value(forKey: "descrizione")
+                                print(id!)
+                                print(descrizione!)
+                                let tmp: Result = Result(id: "\(id!)", descrizione: "\(descrizione!)")
+                                self.results.append(tmp)
+                            }
+                        }
+                    }
+                }
+            }
+        }.resume()
     }
 }
 
@@ -81,52 +136,61 @@ struct CommitmentsListView: View {
     @EnvironmentObject var shared: Shared
     
     var body: some View {
+//        List(results, id: \.id) { item in
+//            VStack(alignment: .leading) {
+//                Text(item.id)
+//                    .font(.headline)
+//                Text("\(item.descrizione)")
+//            }
+//        }.onAppear(perform: getCommitByUser)
+        
+        
         VStack (alignment: .leading, spacing: 10){
-            
-            Button(action: {withAnimation{HomeView.show()}}) {
-                HStack {
-                    Image(systemName: "chevron.left")
-                        .font(.headline).foregroundColor(Color(UIColor.systemBlue))
-                    
-                    Text("Your commitments")
-                        .fontWeight(.bold)
-                        .font(.title)
-                        .padding(.leading, 5)
-                }.padding([.top,.horizontal])
-            }.buttonStyle(PlainButtonStyle())
+            HStack {
+                Text("Your commitments")
+                    .fontWeight(.bold)
+                    .font(.title)
+                Spacer()
+                CloseButton()
+            }.padding([.top,.horizontal])
             ScrollView(.vertical, showsIndicators: false) {
                 VStack (alignment: .center, spacing: 25){
                     ForEach(shared.commitmentArray(), id: \.ID) { currentCommitment in
-                        Button(action: {withAnimation{
+                        Button(action: {
                             self.shared.selectedCommitment = currentCommitment
-                            CommitmentDetailedView.show()
-                            }}) {
-                                HStack {
-                                    UserPreview(user: currentCommitment.userInfo, description: currentCommitment.title, whiteText: self.shared.darkMode)
-                                    Spacer()
-                                    Image(systemName: "chevron.right")
-                                        .font(.headline)
-                                        .foregroundColor(Color(UIColor.systemBlue))
-                                }.padding(.horizontal, 15)
-                                }.buttonStyle(PlainButtonStyle())
-                        }
-                    }.padding(.top,20)
-                }
-                Spacer()
+                            CommitmentDetailedView.show(self.shared)
+                        }) {
+                            HStack {
+                                UserPreview(user: currentCommitment.userInfo, description: currentCommitment.title, whiteText: self.shared.darkMode)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .font(.headline)
+                                    .foregroundColor(Color(UIColor.systemBlue))
+                            }.padding(.horizontal, 15)
+                        }.buttonStyle(PlainButtonStyle())
+                    }
+                }.padding(.top,20)
             }
-            .padding(.top, 40)
-            .background(Color("background"))
-            .edgesIgnoringSafeArea(.all)
+            Spacer()
         }
+        .padding(.top, 40)
+        .background(Color("background"))
+        .edgesIgnoringSafeArea(.all)
     }
-    
+}
 
-    #if DEBUG
-    struct CommitmentRow_Previews: PreviewProvider {
-        static var previews: some View {
-            CommitmentRow()
-        }
+struct Result: Codable {
+    var id: String
+    var descrizione: String
+}
+
+
+#if DEBUG
+struct CommitmentRow_Previews: PreviewProvider {
+    static var previews: some View {
+        CommitmentRow()
     }
+}
 #endif
 
 

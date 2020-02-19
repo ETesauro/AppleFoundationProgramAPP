@@ -15,17 +15,6 @@ struct HomeView: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack{
                 //          Bottone per notificare il prossimo commitment
-                Text("Hi Andy!")
-                .font(.largeTitle)
-                .bold()
-                .fontWeight(.heavy)
-                    .padding(.top, 10)
-                
-           
-                CommitmentRow()
-                DiscoverRow().offset(x: 0, y: -20)
-                NeederButton()
-                Spacer()
                 Button("Schedule Notification") {
                     let nextCommitment = getNextNotificableCommitment(dataDictionary: self.shared.commitmentSet)
                     if nextCommitment != nil {
@@ -38,21 +27,26 @@ struct HomeView: View {
                                 
                                 //              Imposto la notifica 30 min prima della scadenza
                                 let trigger = UNTimeIntervalNotificationTrigger(timeInterval: nextCommitment!.timeRemaining() - 30*60, repeats: false)
-                                let request = UNNotificationRequest(identifier: nextCommitment!.ID.uuidString, content: notification, trigger: trigger)
+                                let request = UNNotificationRequest(identifier: "\(nextCommitment!.ID)", content: notification, trigger: trigger)
                                 //              Aggiungo la richiesta di notifica al notification center (sembra una InvokeLater per le notifiche)
                                 UNUserNotificationCenter.current().add(request)
                             }
                         }
                     }
                 }
+                Spacer()
                 Button(action: {
-                               print("Logout!")
-                               GIDSignIn.sharedInstance()?.disconnect()
-                           }) {
-                               Text("Logout")
-                                   .bold()
-                                   .foregroundColor(.black)
-                           }
+                    print("Logout!")
+                    GIDSignIn.sharedInstance()?.disconnect()
+                }) {
+                    Text("Logout")
+                        .bold()
+                        .foregroundColor(.black)
+                }
+                CommitmentRow()
+                DiscoverRow().offset(x: 0, y: -20)
+                NeederButton()
+                Spacer()
             }
         }
         .padding(.top, 40)

@@ -17,7 +17,7 @@ struct CommitmentDetailedView: View {
         VStack {
             VStack {
                 ZStack {
-                    MapViewCommitmentDetailed(key: selectedCommitment.ID)
+                    MapViewCommitment(key: selectedCommitment.ID)
                         .statusBar(hidden: true)
                         .edgesIgnoringSafeArea(.all)
                         .frame(height: 515)
@@ -25,7 +25,6 @@ struct CommitmentDetailedView: View {
                         .offset(x:173, y:-265)
                 }
                 HStack {
-                    Text(self.shared.dateFormatter.string(from: self.selectedCommitment.date)).foregroundColor(Color.secondary)
                     Spacer()
                     Button(action: {
                         let request = MKDirections.Request()
@@ -39,7 +38,7 @@ struct CommitmentDetailedView: View {
                 }.padding(.horizontal)
             }
             VStack (alignment: .leading, spacing: 10){
-                UserPreview(user: selectedCommitment.userInfo, description: shared.locationManager.lastLocation != nil ? selectedCommitment.etaText : "Location services disabled" , whiteText: shared.darkMode)
+                UserPreview(user: selectedCommitment.userInfo, description: selectedCommitment.etaText, whiteText: shared.darkMode)
                     .offset(x: 0, y: -10)
                 Text(selectedCommitment.title)
                     .font(.headline)
@@ -48,17 +47,10 @@ struct CommitmentDetailedView: View {
                     .font(.subheadline)
                     .fontWeight(.light)
                     .bold()
-                
+//                    .frame(width: .none, height: 60, alignment: .leading)
                 Spacer()
-                
-//                HStack{
-//                    Spacer()
-//                    Text(self.shared.dateFormatter.string(from: self.selectedCommitment.date)).foregroundColor(Color.secondary)
-//                }.padding(.bottom, 5)
-                
                 CantDoItButton()
-                
-            }.padding()
+            }.padding(.horizontal)
         }.onAppear {
             if self.shared.locationManager.lastLocation != nil {
                 self.selectedCommitment.requestETA(source: self.shared.locationManager.lastLocation!)

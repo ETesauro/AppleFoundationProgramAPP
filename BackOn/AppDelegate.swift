@@ -39,12 +39,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         shared.image = image!
         
+//        LO AGGIUNGO ANCHE A CORE DATA PER DELLE RICHIESTE SENZA INTERNET
+        CoreDataController.shared.addUser(user: myUser)
+        
 //        FUNZIONE CHE REGISTRA L'UTENTE NEL DATABASE LOCALE (IMPORTANTE AGGIORNARE L'INDIRIZZO IP)
         DatabaseController.registerUser(user: myUser)
         
-//        LO AGGIUNGO ANCHE A CORE DATA PER DELLE RICHIESTE SENZA INTERNET
-        CoreDataController.shared.addUser(user: myUser)
-        HomeView.show()
+        HomeView.show(self.shared)
     }
     
     
@@ -56,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         print("*** User disconnected ***\n")
         let coreDatacontroller = CoreDataController()
         coreDatacontroller.deleteUser(user: coreDatacontroller.getLoggedUser().1)
-        LoginPageView.show()
+        LoginPageView.show(self.shared)
         shared.authentication = false
     }
     

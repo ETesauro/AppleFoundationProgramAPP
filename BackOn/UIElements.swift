@@ -29,32 +29,8 @@ struct CloseButton: View {
                 .foregroundColor(Color(.systemGroupedBackground))
             Button(action: {
                 withAnimation{
-                    if self.shared.previousView == "HomeView" {
-                    //                shared.previousView = self
-                        HomeView.show()
-                    //                    .transition(.move(edge: .bottom))
-                    //                    .animation(.spring())
-                    } else if self.shared.previousView == "LoginPageView"{
-                                    LoginPageView.show()
-                    } else if self.shared.previousView == "CommitmentDetailedView"{
-                                    CommitmentDetailedView.show()
-                    //                    .transition(.move(edge: .bottom))
-                    //                    .animation(.spring())
-                    } else if self.shared.previousView == "DiscoverDetailedView"{
-                                    DiscoverDetailedView.show()
-                    //            } else if shared.previousView == "DiscoverListView"{
-                    //                DiscoverListView()
-                                } else if self.shared.previousView == "CommitmentsListView"{
-                                    CommitmentsListView.show()
-                                } else if self.shared.previousView == "AddNeedView"{
-                                    AddNeedView.show()
-                                } else if self.shared.previousView == "NeederView"{
-                                    NeederView.show()
-                                } else if self.shared.previousView == "FullDiscoverView"{
-                                    FullDiscoverView.show()
-                                }
-                    }
-                }){
+                    HomeView.show(self.shared)
+                }}){
                     Image(systemName: "xmark.circle.fill")
                         .font(.largeTitle)
                         .foregroundColor(Color(#colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.8, alpha: 1)))
@@ -69,8 +45,7 @@ struct NeederButton: View {
     var body: some View {
             Button(action: {
                 withAnimation{
-                    NeederView.show()
-                    self.shared.helperMode = false
+                    NeederView.show(self.shared)
                 }}){
                     Image(systemName: "person")
                         .font(.largeTitle)
@@ -88,7 +63,7 @@ struct DoItButton: View {
             Spacer()
             Button(action: {
                 print("I'll do it")
-                NeederView.show()
+                NeederView.show(self.shared)
             }) {
                 HStack{
                     Text("I'll do it ")
@@ -119,7 +94,7 @@ struct CantDoItButton: View {
             Spacer()
             Button(action: {
                 print("Can't do it")
-                AddNeedView.show()
+                AddNeedView.show(self.shared)
             }) {
                 HStack{
                     Text("Can't do it ")
@@ -156,7 +131,8 @@ struct AddNeedButton: View {
             Spacer()
             Button(action: {
                 print("Need help!")
-                AddNeedView.show()
+                self.insertCommit(title: "titolo", description: "desc", date: Date(), latitude: 40.1, longitude: 40.1)
+                AddNeedView.show(self.shared)
             }) {
                 HStack{
                     Text("Add Need ")
@@ -178,6 +154,43 @@ struct AddNeedButton: View {
             Spacer()
         }
     }
+    
+    func insertCommit(title: String, description: String, date: Date, latitude: Double, longitude: Double) {
+        print("INSERT COMMIT")
+        let coreDataController: CoreDataController = CoreDataController()
+        
+        let userEmail: String = coreDataController.getLoggedUser().1.email!
+        
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd HH:mm"
+        let formattedDate = format.string(from: date)
+        print(formattedDate)
+        
+        let parameters: [String: String] = ["title":"\(title)", "description": "\(description)", "email": userEmail, "date":"\(formattedDate)","latitude":"\(latitude)", "longitude":"\(longitude)"]
+        
+        //create the url with URL
+        let url = URL(string: "http://\(shared.myIP):8080/NewBackOn-0.0.1-SNAPSHOT/InsertCommit")! //change the url
+        
+        //now create the URLRequest object using the url object
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST" //set http method as POST
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted) // pass dictionary to nsdata object and set it as request body
+            
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        //create dataTask using the session object to send data to the server
+        
+        //SE VOGLIO LEGGERE I DATI DAL SERVER
+        URLSession.shared.dataTask(with: request) { data, response, error in
+        }.resume()
+    }
 }
 
 struct AddNeedButton_Previews: PreviewProvider {
@@ -195,7 +208,7 @@ struct ConfirmAddNeedButton: View {
             Button(action: {
                 print("Add need!")
 //                IMPORTANTE SALVA NEED E INVIALO AL SERVER
-                NeederView.show()
+                NeederView.show(self.shared)
             }) {
                 HStack{
                     Text("Confirm ")

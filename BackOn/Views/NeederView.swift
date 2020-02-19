@@ -10,27 +10,25 @@ import SwiftUI
 
 struct NeederView: View {
     var body: some View {
-        ScrollView{
-            VStack(alignment: .leading){
-                Text("Hi Andy!")
-                    .font(.largeTitle)
-                    .bold()
-                    .fontWeight(.heavy)
-                    .padding(20)
-                DiscoverRow()
-                Spacer()
-                AddNeedButton()
-                Spacer()
-            }.padding(.top, 40)
-        }.background(Color("background"))
-        .edgesIgnoringSafeArea(.all)
+        VStack(alignment: .leading){
+            Text("Ciao Andy!")
+                .font(.largeTitle)
+                .bold()
+                .fontWeight(.heavy)
+                .padding(20)
+                
+            CommitmentRow()
+            Spacer()
+            AddNeedButton()
+            Spacer()
+        }
     }
 }
 
 #if DEBUG
 struct NeederView_Previews: PreviewProvider {
-    static var previews: some View {
-        NeederView()
-    }
+   static var previews: some View {
+      NeederView()
+   }
 }
 #endif

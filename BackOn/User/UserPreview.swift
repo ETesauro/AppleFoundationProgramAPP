@@ -33,7 +33,7 @@ struct UserPreview: View {
     
     var body: some View {
         HStack {
-            Avatar(image: user.profilePic)
+            Avatar(image: "\(user.photo)", size: 60)
             VStack (alignment: .leading){
                 Text(user.identity)
                     .font(.title)
@@ -47,7 +47,7 @@ struct UserPreview: View {
                         .fontWeight(.light)
                         .foregroundColor(textColor)
                         .offset(x: 0, y: 1)
-                        .lineLimit(2)
+                        .lineLimit(1)
                 }
             }.padding(.leading, 5)
             Spacer()

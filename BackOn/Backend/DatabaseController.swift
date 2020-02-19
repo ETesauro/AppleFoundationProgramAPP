@@ -10,6 +10,8 @@ import Foundation
 
 class DatabaseController {
     
+//    MARK: USER
+    
 //    Salvo l'utente nel database
     static func registerUser(user: UserInfo) {
         print("registerUser")
@@ -18,7 +20,7 @@ class DatabaseController {
         let parameters: [String: String] = ["name": user.name, "surname": user.surname, "email" : user.email!, "photo": "\(user.photo)"]
                 
         //create the url with URL
-        let url = URL(string: "http://172.19.186.161:8080/NewBackOn-0.0.1-SNAPSHOT/RegisterUser")! //change the url
+        let url = URL(string: "http://10.24.48.197:8080/NewBackOn-0.0.1-SNAPSHOT/RegisterUser")! //change the url
         
         //now create the URLRequest object using the url object
         var request = URLRequest(url: url)
@@ -33,27 +35,23 @@ class DatabaseController {
         
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
-        
-        //create dataTask using the session object to send data to the server
-        
+                
         //SE VOGLIO LEGGERE I DATI DAL SERVER
         URLSession.shared.dataTask(with: request) { data, response, error in
         }.resume()
     }
     
     
-    
-//    Prendo l'utente dal database tramite uuid (INUTILE?)
-//    DA COMPLETARE (RISOLVERE PROBLEMA ASINCRONIA)
-    static func getUserByUUID(id: UUID) -> UserInfo {
-        print("getUserByUUID")
+    static func getUserByEmail(email: String) {
+        
+        print("getUserByInt")
         
         var myUser: UserInfo?
         
-        let parameters: [String: String] = ["id": "\(id)"]
+        let parameters: [String: String] = ["email": "\(email)"]
         
         //create the url with URL
-        let url = URL(string: "http://172.19.216.105:8080/NewBackOn-0.0.1-SNAPSHOT/GetUserByUUID")! //change the url
+        let url = URL(string: "http://10.24.48.197:8080/NewBackOn-0.0.1-SNAPSHOT/GetUserByEmail")! //change the url
         
         //now create the URLRequest object using the url object
         var request = URLRequest(url: url)
@@ -69,26 +67,64 @@ class DatabaseController {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         
-        //create dataTask using the session object to send data to the server
-        
         //SE VOGLIO LEGGERE I DATI DAL SERVER
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let data = data {
-                DispatchQueue.main.async{
+                DispatchQueue.main.sync{
                     let json = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? Dictionary<String, String>
                     if json != nil {
                         if json!.count > 0 {
                             myUser = UserInfo(photo: URL(string: json!["photo"]!)!, name: json!["name"]!, surname: json!["surname"]!, email: json!["email"]!)
+                            
                         }
                     }
                 }
             }
         }.resume()
-        
-        return myUser!
     }
     
     
     
-//    FARE FUNZIONE DI GET TRAMITE EMAIL
+//    MARK: COMMIT
+    static func insertCommit(title: String, description: String, date: Date, latitude: Double, longitude: Double) {
+        let coreDataController: CoreDataController = CoreDataController()
+        
+        let userEmail: String = coreDataController.getLoggedUser().1.email!
+        
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd"
+        let formattedDate = format.string(from: date)
+        print(formattedDate)
+        
+        let parameters: [String: String] = ["title":"\(title)", "description": "\(description)", "email": userEmail, "date":"\(formattedDate)","latitude":"\(latitude)", "lognitude":"\(longitude)"]
+        
+        //create the url with URL
+        let url = URL(string: "http://10.24.48.197:8080/NewBackOn-0.0.1-SNAPSHOT/InsertCommit")! //change the url
+        
+        //now create the URLRequest object using the url object
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST" //set http method as POST
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted) // pass dictionary to nsdata object and set it as request body
+            
+        } catch let error {
+            print(error.localizedDescription)
+        }
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        //create dataTask using the session object to send data to the server
+        
+        //SE VOGLIO LEGGERE I DATI DAL SERVER
+        URLSession.shared.dataTask(with: request) { data, response, error in
+        }.resume()
+    }
+    
+    
+    
+    
+//    MARK: COMMITMENT
+//    To Do
 }

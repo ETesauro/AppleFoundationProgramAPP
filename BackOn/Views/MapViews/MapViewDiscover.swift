@@ -12,8 +12,8 @@ import MapKit
 struct MapViewDiscover: UIViewRepresentable {
     @EnvironmentObject var shared: Shared
     
-//    var key: UUID
-    private static var mapViewStore = [UUID : MKMapView]()
+    var key: Int
+    private static var mapViewStore = [Int : MKMapView]()
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)

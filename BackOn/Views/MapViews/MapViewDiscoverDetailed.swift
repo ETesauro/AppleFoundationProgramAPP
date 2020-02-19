@@ -11,8 +11,8 @@ import MapKit
 
 struct MapViewDiscoverDetailed: UIViewRepresentable {
     @EnvironmentObject var shared: Shared
-    var key: UUID
-    private static var mapViewStore = [UUID : MKMapView]()
+    var key: Int
+    private static var mapViewStore = [Int : MKMapView]()
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -105,7 +105,7 @@ struct MapViewDiscoverDetailed: UIViewRepresentable {
             let region = MKCoordinateRegion(center: commitment!.position.coordinate, span: span)
             uiView.setRegion(region, animated: true)
         } else {
-            print(key.uuidString)
+//            print(key.uuidString)
         }
     }
     
