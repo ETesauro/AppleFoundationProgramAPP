@@ -29,8 +29,32 @@ struct CloseButton: View {
                 .foregroundColor(Color(.systemGroupedBackground))
             Button(action: {
                 withAnimation{
-                    HomeView.show(self.shared)
-                }}){
+                    if self.shared.previousView == "HomeView" {
+                    //                shared.previousView = self
+                        HomeView.show()
+                    //                    .transition(.move(edge: .bottom))
+                    //                    .animation(.spring())
+                    } else if self.shared.previousView == "LoginPageView"{
+                                    LoginPageView.show()
+                    } else if self.shared.previousView == "CommitmentDetailedView"{
+                                    CommitmentDetailedView.show()
+                    //                    .transition(.move(edge: .bottom))
+                    //                    .animation(.spring())
+                    } else if self.shared.previousView == "DiscoverDetailedView"{
+                                    DiscoverDetailedView.show()
+                    //            } else if shared.previousView == "DiscoverListView"{
+                    //                DiscoverListView()
+                                } else if self.shared.previousView == "CommitmentsListView"{
+                                    CommitmentsListView.show()
+                                } else if self.shared.previousView == "AddNeedView"{
+                                    AddNeedView.show()
+                                } else if self.shared.previousView == "NeederView"{
+                                    NeederView.show()
+                                } else if self.shared.previousView == "FullDiscoverView"{
+                                    FullDiscoverView.show()
+                                }
+                    }
+                }){
                     Image(systemName: "xmark.circle.fill")
                         .font(.largeTitle)
                         .foregroundColor(Color(#colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.8, alpha: 1)))
@@ -45,7 +69,8 @@ struct NeederButton: View {
     var body: some View {
             Button(action: {
                 withAnimation{
-                    NeederView.show(self.shared)
+                    NeederView.show()
+                    self.shared.helperMode = false
                 }}){
                     Image(systemName: "person")
                         .font(.largeTitle)
@@ -63,7 +88,7 @@ struct DoItButton: View {
             Spacer()
             Button(action: {
                 print("I'll do it")
-                NeederView.show(self.shared)
+                NeederView.show()
             }) {
                 HStack{
                     Text("I'll do it ")
@@ -94,7 +119,7 @@ struct CantDoItButton: View {
             Spacer()
             Button(action: {
                 print("Can't do it")
-                AddNeedView.show(self.shared)
+                AddNeedView.show()
             }) {
                 HStack{
                     Text("Can't do it ")
@@ -131,7 +156,7 @@ struct AddNeedButton: View {
             Spacer()
             Button(action: {
                 print("Need help!")
-                AddNeedView.show(self.shared)
+                AddNeedView.show()
             }) {
                 HStack{
                     Text("Add Need ")
@@ -170,7 +195,7 @@ struct ConfirmAddNeedButton: View {
             Button(action: {
                 print("Add need!")
 //                IMPORTANTE SALVA NEED E INVIALO AL SERVER
-                NeederView.show(self.shared)
+                NeederView.show()
             }) {
                 HStack{
                     Text("Confirm ")

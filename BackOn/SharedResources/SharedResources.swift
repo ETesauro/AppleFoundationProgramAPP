@@ -10,14 +10,18 @@ import Foundation
 import CoreLocation
 import MapKit
 
+
 class Shared: ObservableObject {
-    @Published var activeView = "HomeView"
+    @Published var previousView = "HomeView"
     @Published var authentication = false
     @Published var viewToShow = "HomeView"
     @Published var locationManager = LocationManager()
     @Published var selectedCommitment = Commitment()
     @Published var commitmentSet: [UUID:Commitment] = commitmentDict
     @Published var discoverSet: [UUID:Commitment] = discoverDict
+    @Published var helperMode = true
+    
+    @Published var image: URL? = URL(string: "")
     
     var darkMode: Bool{
         get{

@@ -18,11 +18,11 @@ struct DiscoverView: View {
         Button(action: {
             withAnimation {
                 self.shared.selectedCommitment = self.commitment
-                DiscoverDetailedView.show(self.shared)
+                DiscoverDetailedView.show()
             }
         }) {
             VStack (alignment: .leading, spacing: 5){
-                UserPreview(user: commitment.userInfo, description: "\(commitment.etaText)", whiteText: shared.darkMode)
+                UserPreview(user: commitment.userInfo, description: shared.locationManager.lastLocation != nil ? commitment.etaText : "Location services disabled", whiteText: shared.darkMode)
                 Text(commitment.title)
                     .font(.headline)
                     .fontWeight(.regular)
@@ -57,11 +57,11 @@ struct DiscoverRow: View {
         VStack (alignment: .leading) {
             Button(action: {
                 withAnimation {
-                    CommitmentsListView.show(self.shared)
+                    FullDiscoverView.show()
                 }
             }) {
                 HStack {
-                    Text("Around you")
+                    Text(self.shared.helperMode ? "Around you" : "Your requests")
                         .fontWeight(.bold)
                         .font(.title)
                     Spacer()
@@ -82,10 +82,63 @@ struct DiscoverRow: View {
     }
 }
 
-#if DEBUG
-struct DiscoverRow_Previews: PreviewProvider {
-    static var previews: some View {
-        DiscoverRow()
+struct FullDiscoverView: View {
+    @EnvironmentObject var shared: Shared
+    @State private var selectedView = 0
+    var body: some View {
+        VStack (alignment: .leading, spacing: 10){
+             Button(action: {
+                          withAnimation{
+                              HomeView.show()
+                          }}){
+                      HStack {
+                          Image(systemName: "chevron.left")
+                          .font(.largeTitle)
+                          
+                          Text("Around you")
+                              .fontWeight(.bold)
+                              .font(.title).foregroundColor(.primary)
+                      }.padding([.top,.horizontal])
+                      }
+            
+            Picker(selection: $selectedView, label: Text("What is your favorite color?")) {
+                Text("List").tag(0)
+                Text("Map").tag(1)
+                }.pickerStyle(SegmentedPickerStyle()).labelsHidden().padding(.horizontal)
+            if selectedView == 0 {ScrollView(.vertical, showsIndicators: false) {
+                    VStack (alignment: .center, spacing: 25){
+                        ForEach(shared.discoverArray(), id: \.ID) { currentDiscover in
+                            Button(action: {
+                                self.shared.selectedCommitment = currentDiscover
+                                DiscoverDetailedView.show()
+                            }) {
+                                HStack {
+                                    UserPreview(user: currentDiscover.userInfo, description: "\(currentDiscover.title)\nCasa", whiteText: self.shared.darkMode)
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .font(.headline)
+                                        .foregroundColor(Color(UIColor.systemBlue))
+                                }.padding(.horizontal, 15)
+                            }.buttonStyle(PlainButtonStyle())
+                        }
+                    }.padding(.top,20)
+                }
+        }
+            else{
+                MapViewDiscover().cornerRadius(20)
+            }
+        }
+        .padding(.top, 40)
+        .background(Color("background"))
+        .edgesIgnoringSafeArea(.all)
     }
 }
+
+#if DEBUG
+struct DiscoverView_Previews: PreviewProvider {
+    static var previews: some View {
+        FullDiscoverView()
+    }
+}
+
 #endif

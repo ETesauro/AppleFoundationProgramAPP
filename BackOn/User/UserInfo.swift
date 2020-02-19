@@ -7,28 +7,39 @@
 //
 
 import Foundation
+import SwiftUI
 
 class UserInfo {
-    var photo: String
+    var photo: URL
     var name: String
     var surname: String
     var identity: String {
         return "\(name) \(surname)"
     }
-    var userID = UUID()
     var email: String?
+    var profilePic: Image?
     
-    init(photo: String, name: String, surname: String) {
+    init(photo: URL, name: String, surname: String) {
         self.photo = photo
         self.name = name
         self.surname = surname
     }
     
-//    Costruttore aggiuntivo utilizzato al momento dell'accesso con Google
-    init(photo: String, name: String, surname: String, email: String) {
+    //    Costruttore aggiuntivo utilizzato al momento dell'accesso con Google
+    init(photo: URL, name: String, surname: String, email: String) {
         self.photo = photo
         self.name = name
         self.surname = surname
         self.email = email
+    }
+    
+    init(photo: String, name: String, surname: String, email: String, url: URL) {
+        self.photo = url
+        self.name = name
+        self.surname = surname
+        self.email = email
+        do {
+            profilePic = try Image(uiImage: UIImage(data: Data(contentsOf: url))!)
+        } catch {}
     }
 }

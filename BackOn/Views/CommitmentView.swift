@@ -20,11 +20,11 @@ struct CommitmentView: View {
             Button(action: {
                 withAnimation {
                     self.shared.selectedCommitment = self.commitment
-                    CommitmentDetailedView.show(self.shared)
+                    CommitmentDetailedView.show()
                 }
             }) {
                 VStack{
-                    Avatar(image: commitment.userInfo.photo, size: 60)
+                    Avatar(image: commitment.userInfo.profilePic)
                     Spacer()
                     Text(self.commitment.userInfo.identity)
                         .font(.title)
@@ -48,7 +48,7 @@ struct CommitmentRow: View {
         VStack (alignment: .leading){
             Button(action: {
                 withAnimation{
-                    CommitmentsListView.show(self.shared)
+                    CommitmentsListView.show()
                 }
             }) {
                 HStack {
@@ -80,46 +80,51 @@ struct CommitmentsListView: View {
     
     var body: some View {
         VStack (alignment: .leading, spacing: 10){
-            HStack {
-                Text("Your commitments")
-                    .fontWeight(.bold)
-                    .font(.title)
-                Spacer()
-                CloseButton()
-            }.padding([.top,.horizontal])
+            
+            Button(action: {withAnimation{HomeView.show()}}) {
+                HStack {
+                    Image(systemName: "chevron.left")
+                        .font(.headline).foregroundColor(Color(UIColor.systemBlue))
+                    
+                    Text("Your commitments")
+                        .fontWeight(.bold)
+                        .font(.title)
+                        .padding(.leading, 5)
+                }.padding([.top,.horizontal])
+            }.buttonStyle(PlainButtonStyle())
             ScrollView(.vertical, showsIndicators: false) {
                 VStack (alignment: .center, spacing: 25){
                     ForEach(shared.commitmentArray(), id: \.ID) { currentCommitment in
-                        Button(action: {
+                        Button(action: {withAnimation{
                             self.shared.selectedCommitment = currentCommitment
-                            CommitmentDetailedView.show(self.shared)
-                        }) {
-                            HStack {
-                                UserPreview(user: currentCommitment.userInfo, description: currentCommitment.title, whiteText: self.shared.darkMode)
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .font(.headline)
-                                    .foregroundColor(Color(UIColor.systemBlue))
-                            }.padding(.horizontal, 15)
-                        }.buttonStyle(PlainButtonStyle())
-                    }
-                }.padding(.top,20)
+                            CommitmentDetailedView.show()
+                            }}) {
+                                HStack {
+                                    UserPreview(user: currentCommitment.userInfo, description: currentCommitment.title, whiteText: self.shared.darkMode)
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .font(.headline)
+                                        .foregroundColor(Color(UIColor.systemBlue))
+                                }.padding(.horizontal, 15)
+                                }.buttonStyle(PlainButtonStyle())
+                        }
+                    }.padding(.top,20)
+                }
+                Spacer()
             }
-            Spacer()
+            .padding(.top, 40)
+            .background(Color("background"))
+            .edgesIgnoringSafeArea(.all)
         }
-        .padding(.top, 40)
-        .background(Color("background"))
-        .edgesIgnoringSafeArea(.all)
     }
-}
+    
 
-
-#if DEBUG
-struct CommitmentRow_Previews: PreviewProvider {
-    static var previews: some View {
-        CommitmentRow()
+    #if DEBUG
+    struct CommitmentRow_Previews: PreviewProvider {
+        static var previews: some View {
+            CommitmentRow()
+        }
     }
-}
 #endif
 
 

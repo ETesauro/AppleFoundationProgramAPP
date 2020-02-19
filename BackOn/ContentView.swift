@@ -9,7 +9,9 @@
 import SwiftUI
 
 extension View {
-    static func show(_ shared: Shared) {
+    static func show() {
+        let shared = (UIApplication.shared.delegate as! AppDelegate).shared
+        shared.previousView = shared.viewToShow
         shared.viewToShow = String(describing: self)
     }
 }
@@ -20,6 +22,7 @@ struct ContentView: View {
     var body: some View {
         VStack{
             if shared.viewToShow == "HomeView" {
+//                shared.previousView = self
                 HomeView()
 //                    .transition(.move(edge: .bottom))
 //                    .animation(.spring())
@@ -39,6 +42,8 @@ struct ContentView: View {
                 AddNeedView()
             } else if shared.viewToShow == "NeederView"{
                 NeederView()
+            } else if shared.viewToShow == "FullDiscoverView"{
+                FullDiscoverView()
             }
             else {
                 Text("Vista sbagliata :(")

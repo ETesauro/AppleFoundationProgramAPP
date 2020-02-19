@@ -13,7 +13,7 @@ struct MapViewCommitment: UIViewRepresentable {
     @EnvironmentObject var shared: Shared
     
     var key: UUID
-//    private static var mapViewStore = [UUID : MKMapView]()
+    private static var mapViewStore = [UUID : MKMapView]()
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -47,14 +47,14 @@ struct MapViewCommitment: UIViewRepresentable {
     }
 
     func makeUIView(context: Context) -> MKMapView {
-//        if let mapView = MapViewCommitment.mapViewStore[key] {
-//           return mapView
-//        }
+        if let mapView = MapViewCommitment.mapViewStore[key] {
+           return mapView
+        }
         let mapView = MKMapView(frame: UIScreen.main.bounds)
         mapView.delegate = context.coordinator
         mapView.showsUserLocation = true
         mapView.showsCompass = false
-//        MapViewCommitment.mapViewStore[key] = mapView
+        MapViewCommitment.mapViewStore[key] = mapView
 //        print(mapView)
         return mapView
     }
@@ -62,9 +62,8 @@ struct MapViewCommitment: UIViewRepresentable {
     func updateUIView(_ uiView: MKMapView, context: Context) {
         let commitment = shared.commitmentSet[key]
         if commitment != nil {
-            //https://stackoverflow.com/questions/51010956/how-can-i-know-if-an-annotation-is-already-on-the-mapview
-            
-//            if uiView.annotations.isEmpty {
+            let count = uiView.isUserLocationVisible ? 2:1 //https://stackoverflow.com/questions/51010956/how-can-i-know-if-an-annotation-is-already-on-the-mapview
+            if uiView.annotations.count < count {
                 let annotation = MKPointAnnotation()
                 annotation.title = commitment!.userInfo.name
                 annotation.subtitle = commitment!.title
@@ -82,23 +81,6 @@ struct MapViewCommitment: UIViewRepresentable {
                     }
                 })
                 uiView.addAnnotation(annotation)
-//            }
-            if shared.viewToShow == "CommitmentDetailedView"{
-                let request = MKDirections.Request()
-                request.source = MKMapItem(placemark: MKPlacemark(coordinate: uiView.userLocation.coordinate, addressDictionary: nil))
-                request.destination = MKMapItem(placemark: MKPlacemark(coordinate: commitment!.position.coordinate, addressDictionary: nil))
-                request.requestsAlternateRoutes = false
-                request.transportType = .walking
-                MKDirections(request: request).calculate { (response, error) in
-                    guard error == nil, let response = response else {print(error!.localizedDescription);return}
-                    var fastestRoute: MKRoute = response.routes[0]
-                    for route in response.routes {
-                        if route.expectedTravelTime < fastestRoute.expectedTravelTime {
-                            fastestRoute = route
-                        }
-                    }
-                    uiView.addOverlay(fastestRoute.polyline, level: .aboveRoads)
-                }
             }
 //            else{
 //                uiView.removeOverlays(uiView.overlays)

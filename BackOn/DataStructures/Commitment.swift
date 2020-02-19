@@ -23,7 +23,7 @@ class Commitment: ObservableObject{
     var textAddress: String?
 
     init() {
-        self.userInfo = UserInfo(photo: "tim", name: "Tim", surname: "Cook")
+        self.userInfo = UserInfo(photo: URL(string: "tim")!, name: "Tim", surname: "Cook")
         self.title = "Default title"
         self.descr = "Default description"
         self.date = Date()
@@ -100,10 +100,10 @@ class Commitment: ObservableObject{
 //}
 
 
-let me1 = UserInfo(photo: "tim", name: "Tim", surname: "Cook")
-let me2 = UserInfo(photo: "steve", name: "Steve", surname: "Jobs")
-let me3 = UserInfo(photo: "elon", name: "Elon", surname: "Musk")
-let me4 = UserInfo(photo: "craig", name: "Craig", surname: "Cookss")
+let me1 = UserInfo(photo: URL(string: "tim")!, name: "Tim", surname: "Cook")
+let me2 = UserInfo(photo: URL(string: "steve")!, name: "Steve", surname: "Jobs")
+let me3 = UserInfo(photo: URL(string: "elon")!, name: "Elon", surname: "Musk")
+let me4 = UserInfo(photo: URL(string: "craig")!, name: "Craig", surname: "Cookss")
 
 
 let uuid1 = UUID()

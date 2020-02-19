@@ -9,17 +9,31 @@
 import SwiftUI
 
 struct Avatar: View {
-    let image: String
-    let size: CGFloat
+    let image: Image?
+    let size: CGFloat = 60
 
     var body: some View {
-        Image(image)
+        if image == nil {
+            return Image(systemName: "questionmark.circle.fill")
             .renderingMode(.original)
             .resizable()
             .frame(width: size, height: size)
+            .background(Color.white)
             .clipShape(Circle())
             .overlay(Circle().stroke(Color.white, lineWidth: 2))
             .shadow(radius: 7)
+        } else {
+            return image!
+            .renderingMode(.original)
+            .resizable()
+            .frame(width: size, height: size)
+            .background(Color.white)
+            .clipShape(Circle())
+            .overlay(Circle().stroke(Color.white, lineWidth: 2))
+            .shadow(radius: 7)
+        }
+        
+
     }
     
 }
