@@ -34,18 +34,18 @@ struct LoginPageView: View {
             GoogleButton()
                 .frame(width: 200, height: 30, alignment: .center)
                 .padding(.bottom, 20)
-            Button(action: {
-                HomeView.show()
-            }) {
-                Text("Home")
-                    .bold()
-                    .foregroundColor(.black)
-            }
+//            Button(action: {
+//                HomeView.show()
+//            }) {
+//                Text("Home")
+//                    .bold()
+//                    .foregroundColor(.black)
+//            }
 //          MyAppleIDButton().frame(width: 200, height: 30, alignment: .center)
 //              .padding(.bottom, 20)
             Spacer()
         }
-        .background(LinearGradient(gradient: Gradient(colors: [.purple, .blue]), startPoint: .top, endPoint: .bottom)
+        .background(LinearGradient(gradient: Gradient(colors: [.red, .orange]), startPoint: .top, endPoint: .bottom)
         .edgesIgnoringSafeArea(.all))
     }
 }
@@ -60,7 +60,7 @@ struct GoogleButton: UIViewRepresentable {
     
     func makeUIView(context: UIViewRepresentableContext<GoogleButton>) -> GIDSignInButton {
         let button = GIDSignInButton()
-        button.colorScheme = .dark
+        button.colorScheme = .light
         GIDSignIn.sharedInstance()?.presentingViewController = UIApplication.shared.windows.last?.rootViewController
         
         return button

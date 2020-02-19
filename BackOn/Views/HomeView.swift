@@ -15,6 +15,17 @@ struct HomeView: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack{
                 //          Bottone per notificare il prossimo commitment
+                Text("Hi Andy!")
+                .font(.largeTitle)
+                .bold()
+                .fontWeight(.heavy)
+                    .padding(.top, 10)
+                
+           
+                CommitmentRow()
+                DiscoverRow().offset(x: 0, y: -20)
+                NeederButton()
+                Spacer()
                 Button("Schedule Notification") {
                     let nextCommitment = getNextNotificableCommitment(dataDictionary: self.shared.commitmentSet)
                     if nextCommitment != nil {
@@ -34,19 +45,14 @@ struct HomeView: View {
                         }
                     }
                 }
-                Spacer()
                 Button(action: {
-                    print("Logout!")
-                    GIDSignIn.sharedInstance()?.disconnect()
-                }) {
-                    Text("Logout")
-                        .bold()
-                        .foregroundColor(.black)
-                }
-                CommitmentRow()
-                DiscoverRow().offset(x: 0, y: -20)
-                NeederButton()
-                Spacer()
+                               print("Logout!")
+                               GIDSignIn.sharedInstance()?.disconnect()
+                           }) {
+                               Text("Logout")
+                                   .bold()
+                                   .foregroundColor(.black)
+                           }
             }
         }
         .padding(.top, 40)
