@@ -31,27 +31,27 @@ struct CloseButton: View {
                 withAnimation{
                     if self.shared.previousView == "HomeView" {
                     //                shared.previousView = self
-                        HomeView.show(self.shared)
+                        HomeView.show()
                     //                    .transition(.move(edge: .bottom))
                     //                    .animation(.spring())
                     } else if self.shared.previousView == "LoginPageView"{
-                                    LoginPageView.show(self.shared)
+                                    LoginPageView.show()
                     } else if self.shared.previousView == "CommitmentDetailedView"{
-                                    CommitmentDetailedView.show(self.shared)
+                                    CommitmentDetailedView.show()
                     //                    .transition(.move(edge: .bottom))
                     //                    .animation(.spring())
                     } else if self.shared.previousView == "DiscoverDetailedView"{
-                                    DiscoverDetailedView.show(self.shared)
+                                    DiscoverDetailedView.show()
                     //            } else if shared.previousView == "DiscoverListView"{
                     //                DiscoverListView()
                                 } else if self.shared.previousView == "CommitmentsListView"{
-                                    CommitmentsListView.show(self.shared)
+                                    CommitmentsListView.show()
                                 } else if self.shared.previousView == "AddNeedView"{
-                                    AddNeedView.show(self.shared)
+                                    AddNeedView.show()
                                 } else if self.shared.previousView == "NeederView"{
-                                    NeederView.show(self.shared)
+                                    NeederView.show()
                                 } else if self.shared.previousView == "FullDiscoverView"{
-                                    FullDiscoverView.show(self.shared)
+                                    FullDiscoverView.show()
                                 }
                     }
                 }){
@@ -69,7 +69,7 @@ struct NeederButton: View {
     var body: some View {
             Button(action: {
                 withAnimation{
-                    NeederView.show(self.shared)
+                    NeederView.show()
                     self.shared.helperMode = false
                 }}){
                     Image(systemName: "person")
@@ -88,7 +88,7 @@ struct DoItButton: View {
             Spacer()
             Button(action: {
                 print("I'll do it")
-                NeederView.show(self.shared)
+                NeederView.show()
             }) {
                 HStack{
                     Text("I'll do it ")
@@ -119,7 +119,7 @@ struct CantDoItButton: View {
             Spacer()
             Button(action: {
                 print("Can't do it")
-                AddNeedView.show(self.shared)
+                AddNeedView.show()
             }) {
                 HStack{
                     Text("Can't do it ")
@@ -156,7 +156,7 @@ struct AddNeedButton: View {
             Spacer()
             Button(action: {
                 print("Need help!")
-                AddNeedView.show(self.shared)
+                AddNeedView.show()
             }) {
                 HStack{
                     Text("Add Need ")
@@ -195,7 +195,7 @@ struct ConfirmAddNeedButton: View {
             Button(action: {
                 print("Add need!")
 //                IMPORTANTE SALVA NEED E INVIALO AL SERVER
-                NeederView.show(self.shared)
+                NeederView.show()
             }) {
                 HStack{
                     Text("Confirm ")

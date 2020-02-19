@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
 //        LO AGGIUNGO ANCHE A CORE DATA PER DELLE RICHIESTE SENZA INTERNET
         CoreDataController.shared.addUser(user: myUser)
-        HomeView.show(self.shared)
+        HomeView.show()
     }
     
     
@@ -56,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         print("*** User disconnected ***\n")
         let coreDatacontroller = CoreDataController()
         coreDatacontroller.deleteUser(user: coreDatacontroller.getLoggedUser().1)
-        LoginPageView.show(self.shared)
+        LoginPageView.show()
         shared.authentication = false
     }
     

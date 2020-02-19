@@ -18,7 +18,7 @@ struct DiscoverView: View {
         Button(action: {
             withAnimation {
                 self.shared.selectedCommitment = self.commitment
-                DiscoverDetailedView.show(self.shared)
+                DiscoverDetailedView.show()
             }
         }) {
             VStack (alignment: .leading, spacing: 5){
@@ -57,7 +57,7 @@ struct DiscoverRow: View {
         VStack (alignment: .leading) {
             Button(action: {
                 withAnimation {
-                    FullDiscoverView.show(self.shared)
+                    FullDiscoverView.show()
                 }
             }) {
                 HStack {

@@ -9,10 +9,10 @@
 import SwiftUI
 
 extension View {
-    static func show(_ shared: Shared) {
+    static func show() {
+        let shared = (UIApplication.shared.delegate as! AppDelegate).shared
         shared.previousView = shared.viewToShow
         shared.viewToShow = String(describing: self)
-    }
 }
 
 struct ContentView: View {

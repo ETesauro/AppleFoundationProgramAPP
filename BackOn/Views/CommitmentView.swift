@@ -20,7 +20,7 @@ struct CommitmentView: View {
             Button(action: {
                 withAnimation {
                     self.shared.selectedCommitment = self.commitment
-                    CommitmentDetailedView.show(self.shared)
+                    CommitmentDetailedView.show()
                 }
             }) {
                 VStack{
@@ -48,7 +48,7 @@ struct CommitmentRow: View {
         VStack (alignment: .leading){
             Button(action: {
                 withAnimation{
-                    CommitmentsListView.show(self.shared)
+                    CommitmentsListView.show()
                 }
             }) {
                 HStack {
@@ -100,8 +100,8 @@ struct CommitmentsListView: View {
                     ForEach(shared.commitmentArray(), id: \.ID) { currentCommitment in
                         Button(action: {withAnimation{
                             self.shared.selectedCommitment = currentCommitment
-                            CommitmentDetailedView.show(self.shared)
-                            }}) {
+                            CommitmentDetailedView.show()
+                        }) {
                             HStack {
                                 UserPreview(user: currentCommitment.userInfo, description: currentCommitment.title, whiteText: self.shared.darkMode)
                                 Spacer()
