@@ -29,8 +29,32 @@ struct CloseButton: View {
                 .foregroundColor(Color(.systemGroupedBackground))
             Button(action: {
                 withAnimation{
-                    HomeView.show(self.shared)
-                }}){
+                    if self.shared.previousView == "HomeView" {
+                    //                shared.previousView = self
+                        HomeView.show(self.shared)
+                    //                    .transition(.move(edge: .bottom))
+                    //                    .animation(.spring())
+                    } else if self.shared.previousView == "LoginPageView"{
+                                    LoginPageView.show(self.shared)
+                    } else if self.shared.previousView == "CommitmentDetailedView"{
+                                    CommitmentDetailedView.show(self.shared)
+                    //                    .transition(.move(edge: .bottom))
+                    //                    .animation(.spring())
+                    } else if self.shared.previousView == "DiscoverDetailedView"{
+                                    DiscoverDetailedView.show(self.shared)
+                    //            } else if shared.previousView == "DiscoverListView"{
+                    //                DiscoverListView()
+                                } else if self.shared.previousView == "CommitmentsListView"{
+                                    CommitmentsListView.show(self.shared)
+                                } else if self.shared.previousView == "AddNeedView"{
+                                    AddNeedView.show(self.shared)
+                                } else if self.shared.previousView == "NeederView"{
+                                    NeederView.show(self.shared)
+                                } else if self.shared.previousView == "FullDiscoverView"{
+                                    FullDiscoverView.show(self.shared)
+                                }
+                    }
+                }){
                     Image(systemName: "xmark.circle.fill")
                         .font(.largeTitle)
                         .foregroundColor(Color(#colorLiteral(red: 0.7803921569, green: 0.7803921569, blue: 0.8, alpha: 1)))

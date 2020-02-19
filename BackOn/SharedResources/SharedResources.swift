@@ -12,7 +12,7 @@ import MapKit
 
 
 class Shared: ObservableObject {
-    @Published var activeView = "HomeView"
+    @Published var previousView = "HomeView"
     @Published var authentication = false
     @Published var viewToShow = "HomeView"
     @Published var locationManager = LocationManager()

@@ -10,6 +10,7 @@ import SwiftUI
 
 extension View {
     static func show(_ shared: Shared) {
+        shared.previousView = shared.viewToShow
         shared.viewToShow = String(describing: self)
     }
 }
@@ -20,6 +21,7 @@ struct ContentView: View {
     var body: some View {
         VStack{
             if shared.viewToShow == "HomeView" {
+//                shared.previousView = self
                 HomeView()
 //                    .transition(.move(edge: .bottom))
 //                    .animation(.spring())

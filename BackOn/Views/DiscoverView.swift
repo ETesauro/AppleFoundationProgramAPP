@@ -84,36 +84,49 @@ struct DiscoverRow: View {
 
 struct FullDiscoverView: View {
     @EnvironmentObject var shared: Shared
-    
+    @State private var selectedView = 0
     var body: some View {
         VStack (alignment: .leading, spacing: 10){
-            HStack {
-                Text("Around you")
-                    .fontWeight(.bold)
-                    .font(.title)
-                Spacer()
-                CloseButton()
-            }.padding([.top,.horizontal])
-            ScrollView(.vertical, showsIndicators: false) {
-                VStack (alignment: .center, spacing: 25){
-                    ForEach(shared.discoverArray(), id: \.ID) { currentDiscover in
-                        Button(action: {
-                            self.shared.selectedCommitment = currentDiscover
-                            DiscoverDetailedView.show(self.shared)
-                        }) {
-                            HStack {
-                                UserPreview(user: currentDiscover.userInfo, description: currentDiscover.title, whiteText: self.shared.darkMode)
-                                Spacer()
-                                Image(systemName: "chevron.right")
-                                    .font(.headline)
-                                    .foregroundColor(Color(UIColor.systemBlue))
-                            }.padding(.horizontal, 15)
-                        }.buttonStyle(PlainButtonStyle())
-                    }
-                }.padding(.top,20)
+             Button(action: {
+                          withAnimation{
+                              HomeView.show(self.shared)
+                          }}){
+                      HStack {
+                          Image(systemName: "chevron.left")
+                          .font(.largeTitle)
+                          
+                          Text("Around you")
+                              .fontWeight(.bold)
+                              .font(.title).foregroundColor(.primary)
+                      }.padding([.top,.horizontal])
+                      }
+            
+            Picker(selection: $selectedView, label: Text("What is your favorite color?")) {
+                Text("List").tag(0)
+                Text("Map").tag(1)
+                }.pickerStyle(SegmentedPickerStyle()).labelsHidden().padding(.horizontal)
+            if selectedView == 0 {ScrollView(.vertical, showsIndicators: false) {
+                    VStack (alignment: .center, spacing: 25){
+                        ForEach(shared.discoverArray(), id: \.ID) { currentDiscover in
+                            Button(action: {
+                                self.shared.selectedCommitment = currentDiscover
+                                DiscoverDetailedView.show(self.shared)
+                            }) {
+                                HStack {
+                                    UserPreview(user: currentDiscover.userInfo, description: "\(currentDiscover.title)\nCasa", whiteText: self.shared.darkMode)
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .font(.headline)
+                                        .foregroundColor(Color(UIColor.systemBlue))
+                                }.padding(.horizontal, 15)
+                            }.buttonStyle(PlainButtonStyle())
+                        }
+                    }.padding(.top,20)
+                }
+        }
+            else{
+                MapViewDiscover().cornerRadius(20)
             }
-            Spacer()
-            MapViewDiscover()
         }
         .padding(.top, 40)
         .background(Color("background"))
@@ -122,9 +135,10 @@ struct FullDiscoverView: View {
 }
 
 #if DEBUG
-struct DiscoverRow_Previews: PreviewProvider {
+struct DiscoverView_Previews: PreviewProvider {
     static var previews: some View {
-        DiscoverRow()
+        FullDiscoverView()
     }
 }
+
 #endif

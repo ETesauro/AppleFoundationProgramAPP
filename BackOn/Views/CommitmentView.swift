@@ -80,20 +80,28 @@ struct CommitmentsListView: View {
     
     var body: some View {
         VStack (alignment: .leading, spacing: 10){
+            
+            Button(action: {
+                withAnimation{
+                    HomeView.show(self.shared)
+                }}){
             HStack {
+                Image(systemName: "chevron.left")
+                .font(.headline).foregroundColor(Color(UIColor.systemBlue))
+                
                 Text("Your commitments")
                     .fontWeight(.bold)
                     .font(.title)
-                Spacer()
-                CloseButton()
+                    .padding(.leading, 5)
             }.padding([.top,.horizontal])
+            }.buttonStyle(PlainButtonStyle())
             ScrollView(.vertical, showsIndicators: false) {
                 VStack (alignment: .center, spacing: 25){
                     ForEach(shared.commitmentArray(), id: \.ID) { currentCommitment in
-                        Button(action: {
+                        Button(action: {withAnimation{
                             self.shared.selectedCommitment = currentCommitment
                             CommitmentDetailedView.show(self.shared)
-                        }) {
+                            }}) {
                             HStack {
                                 UserPreview(user: currentCommitment.userInfo, description: currentCommitment.title, whiteText: self.shared.darkMode)
                                 Spacer()
